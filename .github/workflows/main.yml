@@ -1,14 +1,11 @@
 name: Pipeline CI/CD
 on: push
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build das dependências
         run: docker-compose -f integration/docker-compose-integration-tests.yml build
-  test:
-    runs-on: ubuntu-latest
-    steps:
       - name: Testes E2E do sistema
         run: make run-integration-tests
