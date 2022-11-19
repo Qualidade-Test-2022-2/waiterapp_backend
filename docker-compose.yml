@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_PASSWORD: fred
       POSTGRES_USERNAME: postgres
-      POSTGRES_URL: jdbc:postgresql://postgres:5432/postgres
+      POSTGRES_HOST: jdbc:postgresql://postgres:5432/postgres
       APP_PORT: 8080
 
   postgres:
