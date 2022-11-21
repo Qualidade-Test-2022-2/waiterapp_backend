@@ -26,7 +26,7 @@ class WebsiteUser(HttpUser):
     def static_js_files(self):
         self.client.get("/runtime.30d3abde38193756.js")
         self.client.get("/polyfills.20a1820151dac3ff.js")
-        self.client.get("/main.b1f8c0f54dcfccf8.js")
+        self.client.get("/main.4f84963720bcbb31.js")
         self.client.get("/786.060bc2b94c417f61.js")
     #
     # @task
