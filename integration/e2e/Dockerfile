@@ -1,4 +1,4 @@
-FROM cypress/base:14
+FROM cypress/base:16
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
@@ -13,4 +13,5 @@ RUN npm ci
 # verify that Cypress has been installed correctly.
 # running this command separately from "cypress run" will also cache its result
 # to avoid verifying again when running the tests
+RUN npm install cypress@11.1.0 -g
 RUN npx cypress verify
