@@ -21,4 +21,4 @@ The load tests for this project are present inside the `locust` folder, to execu
 make run-load-tests # docker-compose -f ./locust/docker-compose-load-tests.yml up
 ```
 
-The command above should open the locust web interface on the following urk: http://localhost:8089
+The command above should open the locust web interface on the following url: http://localhost:8089

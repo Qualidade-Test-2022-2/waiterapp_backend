@@ -3,8 +3,6 @@ services:
   web:
     container_name: waiterapp_backend
     build: ../.
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
     environment:
@@ -12,6 +10,8 @@ services:
       POSTGRES_USERNAME: postgres
       POSTGRES_HOST: jdbc:postgresql://postgres:5432/postgres
       APP_PORT: 8080
+    ports:
+      - "8080:8080"
 
   postgres:
     container_name: postgres_db
