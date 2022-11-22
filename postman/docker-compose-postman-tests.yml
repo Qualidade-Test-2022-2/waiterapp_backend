@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  web:
+    container_name: waiterapp_backend
+    build: ../.
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_PASSWORD: fred
+      POSTGRES_USERNAME: postgres
+      POSTGRES_HOST: jdbc:postgresql://postgres:5432/postgres
+      APP_PORT: 8080
+
+  postgres:
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "fred"
+    image: "postgres:alpine"
+
+  postman:
+    build: .
+    container_name: postman
+    command: run colletions/waiterapp_backend_env.postman_collection.json
+      --environment env.json
+    volumes:
+      - ./colletions:/etc/newman/colletions
+      - ./env.json:/etc/newman/env.json
+    depends_on:
+      - web
