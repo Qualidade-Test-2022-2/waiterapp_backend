@@ -1,18 +1,26 @@
 name: Pipeline CI/CD
 on: push
 jobs:
-  build:
-    name: Build de dependências
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build das dependências
-        run: docker-compose -f integration/docker-compose-integration-tests.yml build
-  test:
+  test-e2e:
     name: Testes E2E do sistema
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Testes E2E do sistema
         run: make run-integration-tests
+
+#  test-load:
+#    name: Testes de desempenho
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Testes de desempenho
+#        run: make run-load-headless-tests
+#
+#  test-postman:
+#    name: Testes Postman na API
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Testes Postman na API
+#        run: make run-postman-tests

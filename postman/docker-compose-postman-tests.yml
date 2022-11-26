@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
   web:
     container_name: waiterapp_backend
@@ -15,20 +15,19 @@ services:
 
   postgres:
     container_name: postgres_db
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: "fred"
     image: "postgres:alpine"
-    ports:
-      - "5432:5432"
 
-  e2e:
-    build: ./e2e
-    container_name: cypress
+  postman:
+    build: .
+    container_name: postman
+    command: run colletions/waiterapp_backend_env.postman_collection.json
+      --environment env.json
+    volumes:
+      - ./colletions:/etc/newman/colletions
+      - ./env.json:/etc/newman/env.json
     depends_on:
       - web
-    environment:
-      - CYPRESS_baseUrl=http://web:8080
-    command: npx cypress run
-    volumes:
-      - ./e2e/cypress:/app/cypress
-      - ./e2e/cypress.config.js:/app/cypress.config.js

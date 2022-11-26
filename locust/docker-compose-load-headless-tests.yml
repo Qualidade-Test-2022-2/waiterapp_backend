@@ -3,8 +3,6 @@ services:
   web:
     container_name: waiterapp_backend
     build: ../.
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
     environment:
@@ -12,9 +10,11 @@ services:
       POSTGRES_USERNAME: postgres
       POSTGRES_HOST: jdbc:postgresql://postgres:5432/postgres
       APP_PORT: 8080
+    ports:
+      - "8080:8080"
 
   postgres:
-    container_name: postgres_db
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
@@ -25,16 +25,12 @@ services:
     container_name: locust_master
     image: locustio/locust
     ports:
+      - "5557:5557"
       - "8089:8089"
     volumes:
       - ../locust:/mnt/locust
-    command: -f /mnt/locust/homepage_locust.py --master -H http://web:8080
+    command: -f /mnt/locust/homepage_locust.py --headless --users 10 --spawn-rate 1 -H http://web:8080 --run-time 10s
     environment:
       TARGET_HOST: web
-
-  locust_worker:
-    container_name: locust_worker
-    image: locustio/locust
-    volumes:
-      - ../locust:/mnt/locust
-    command: -f /mnt/locust/homepage_locust.py --worker --master-host locust_master
+    depends_on:
+      - web

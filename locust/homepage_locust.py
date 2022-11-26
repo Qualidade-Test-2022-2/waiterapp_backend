@@ -1,4 +1,5 @@
 import json
+import time
 from locust import HttpUser, between, task
 
 
@@ -6,6 +7,7 @@ class WebsiteUser(HttpUser):
     wait_time = between(5, 15)
 
     def on_start(self):
+        time.sleep(5)
         self.client.post(
             "/api/clientes/",
             data=json.dumps({
