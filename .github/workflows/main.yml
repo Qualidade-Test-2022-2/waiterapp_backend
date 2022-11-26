@@ -9,18 +9,18 @@ jobs:
       - name: Testes E2E do sistema
         run: make run-integration-tests
 
-  test-load:
-    name: Testes de desempenho
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Testes de desempenho
-        run: make run-load-headless-tests
-
-  test-postman:
-    name: Testes Postman na API
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Testes Postman na API
-        run: make run-postman-tests
+#  test-load:
+#    name: Testes de desempenho
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Testes de desempenho
+#        run: make run-load-headless-tests
+#
+#  test-postman:
+#    name: Testes Postman na API
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Testes Postman na API
+#        run: make run-postman-tests
