@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "939aa287-4ea0-4b29-9a2c-213c93f3f233",
+		"name": "WaiterApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cardapios",
+			"item": [
+				{
+					"name": "Retorna cardápios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios cardápios\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos cardapios\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var cardapio1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(cardapio1).to.include(\"titulo\");",
+									"    pm.expect(cardapio1).to.include(\"dataCriacao\");",
+									"    pm.expect(cardapio1).to.include(\"descricao\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cardapio\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.titulo).to.eq('Promoção do dia');",
+									"    pm.expect(jsonData.descricao).to.eq('Os pratos mais pedidos com desconto');",
+									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T15:16:45.421885');",
+									"});",
+									"pm.test(\"Retorna itens do cardápio\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items.length).to.eq(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas 2\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Retorna clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios usuários\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos usuários\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var cliente1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(cliente1).to.include(\"nome\");",
+									"    pm.expect(cliente1).to.include(\"email\");",
+									"    pm.expect(cliente1).to.include(\"cpf\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/clientes",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cliente\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Fernando');",
+									"    pm.expect(jsonData.email).to.eq(null);",
+									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/clientes/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cliente por CPF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cliente\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Fernando');",
+									"    pm.expect(jsonData.email).to.eq(null);",
+									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"123.123.123-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/clientes/cpf",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"cpf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"pm.test(\"Retorna o cliente alterado\", function () {",
+									"    var requestBody = JSON.parse(pm.request.body.raw)",
+									"    var user = pm.response.json() ",
+									"    pm.expect(user.cpf).to.eq(requestBody.cpf);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Rafael 2\",\n    \"cpf\": \"100.100.100-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/clientes",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas 2\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 100ms\", () => {",
+					"  pm.expect(pm.response.responseTime).to.be.below(100);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": ""
+		}
+	]
+}
