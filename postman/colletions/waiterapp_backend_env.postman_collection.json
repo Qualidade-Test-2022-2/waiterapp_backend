@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "dd4296b2-2f8a-4742-98c2-94109ecefe79",
+		"name": "Waiterapp Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18968497"
+	},
+	"item": [
+		{
+			"name": "Data fetching",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get a list of clients\", function() {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test(\"Check if body response has initial user\", function() {",
+							"    pm.expect(pm.response.text()).to.include(\"Fernando\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://web:8080/api/clientes",
+					"protocol": "http",
+					"host": [
+						"web"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
