@@ -45,8 +45,9 @@ public class PedidoController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Pedido> inserePedido(@Valid @RequestBody Pedido pedido){
-        logger.log(Level.FINE,"Pedido enviado pelo request-{}", pedido);
+    public ResponseEntity<Pedido> inserePedido(@Valid @RequestBody PedidoDTO pedidoDTO){
+        logger.log(Level.FINE,"Pedido enviado pelo request-{}", pedidoDTO);
+        Pedido pedido = pedidoService.transformarDTO(pedidoDTO);
         pedido = pedidoService.inserePedido(pedido);
 
         URI uri = ServletUriComponentsBuilder
@@ -59,7 +60,8 @@ public class PedidoController {
     }
 
     @PutMapping(value = "/{idPedido}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaPedido(@Valid @RequestBody Pedido pedido, @PathVariable Long idPedido){
+    public ResponseEntity<Void> atualizaPedido(@Valid @RequestBody PedidoDTO pedidoDTO, @PathVariable Long idPedido){
+        Pedido pedido = pedidoService.transformarDTO(pedidoDTO);
         pedido.setId(idPedido);
         pedidoService.atualizaPedido(pedido);
 
