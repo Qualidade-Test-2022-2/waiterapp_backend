@@ -37,6 +37,16 @@ public class PedidoService {
         this.clienteService = clienteService;
     }
 
+    public Pedido transformarDTO(PedidoDTO pedidoDTO){
+        Pedido pedido = new Pedido(pedidoDTO.getId(), pedidoDTO.getDataCriacao(), pedidoDTO.getEstado(),
+                pedidoDTO.getPrecoTotal(), pedidoDTO.getNotaAtendimento(), pedidoDTO.getNotaPedido(), pedidoDTO.getOpcoesExtras());
+        pedido.setGarcom(pedidoDTO.getGarcom());
+        pedido.setPagamento(pedidoDTO.getPagamento());
+        pedido.setCliente(pedidoDTO.getCliente());
+        pedido.setItems(pedidoDTO.getItems());
+        return pedido;
+    }
+
     @Transactional
     public List<Pedido> listaPedidosByIdCliente(Long idCliente){
         return pedidoRepository.findallByIdCliente(idCliente);
