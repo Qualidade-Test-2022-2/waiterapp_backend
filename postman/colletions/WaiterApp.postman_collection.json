@@ -1,0 +1,1101 @@
+{
+	"info": {
+		"_postman_id": "1298e9c1-882a-4d68-8248-21b0845495e9",
+		"name": "WaiterApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cardapios",
+			"item": [
+				{
+					"name": "Retorna cardápios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios cardápios\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos cardapios\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var cardapio1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(cardapio1).to.include(\"titulo\");",
+									"    pm.expect(cardapio1).to.include(\"dataCriacao\");",
+									"    pm.expect(cardapio1).to.include(\"descricao\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cardapio\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.titulo).to.eq('Promoção do dia');",
+									"    pm.expect(jsonData.descricao).to.eq('Os pratos mais pedidos com desconto');",
+									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T15:16:45.421885');",
+									"});",
+									"pm.test(\"Retorna itens do cardápio\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.items.length).to.eq(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas 2\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Garçons",
+			"item": [
+				{
+					"name": "Retorna garçons",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios garçons\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos garçons\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var garcom1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(garcom1).to.include(\"nome\");",
+									"    pm.expect(garcom1).to.include(\"dataCriacao\");",
+									"    pm.expect(garcom1).to.include(\"cpf\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/garcons",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna garçom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do garçom\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('João');",
+									"    pm.expect(jsonData.cpf).to.eq(null);",
+									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T17:42:18.757837');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/garcons/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar garçom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Alan\",\n    \"cpf\": \"145.145.147-13\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/garcons",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita garçom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Alan da Silva\",\n    \"cpf\": \"144.144.144-00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/garcons/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga garçom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/itens/5",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"itens",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Retorna pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna vários pedidos\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos pedidos\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var pedido1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(pedido1).to.include(\"dataCriacao\");",
+									"    pm.expect(pedido1).to.include(\"estado\");",
+									"    pm.expect(pedido1).to.include(\"precoTotal\");",
+									"    pm.expect(pedido1).to.include(\"notaAtendimento\");",
+									"    pm.expect(pedido1).to.include(\"notaPedido\");",
+									"    pm.expect(pedido1).to.include(\"opcoesExtras\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/pedidos",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do pedido\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataCriacao).to.eq(\"2022-11-27T17:42:18.757837\");",
+									"    pm.expect(jsonData.estado).to.eq(\"FECHADO\");",
+									"    pm.expect(jsonData.precoTotal).to.eq(149.98000000000002);",
+									"    pm.expect(jsonData.notaAtendimento).to.eq(10);",
+									"    pm.expect(jsonData.notaPedido).to.eq(10);",
+									"    pm.expect(jsonData.opcoesExtras).to.eq(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/pedidos/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cliente\": {\n        \"id\": 1\n    },\n    \"garcom\": {\n        \"id\": 1\n    },\n    \"items\": [\n    {\n        \"quantidade\": 1,\n        \"item\": {\n            \"id\": 1\n        }\n},\n{\n        \"quantidade\": 1,\n        \"item\": {\n            \"id\": 2\n    }\n}\n]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/pedidos",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"precoTotal\": 160.98000000000002\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/pedidos/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"pedidos",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/pedidos/6",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"pedidos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Itens",
+			"item": [
+				{
+					"name": "Retorna itens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios itens\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos itens\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var item1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(item1).to.include(\"nome\");",
+									"    pm.expect(item1).to.include(\"descricao\");",
+									"    pm.expect(item1).to.include(\"dataCriacao\");",
+									"    pm.expect(item1).to.include(\"preco\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/itens",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"itens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do item\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Coca Cola');",
+									"    pm.expect(jsonData.descricao).to.eq(null);",
+									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T17:42:18.662833');",
+									"    pm.expect(jsonData.preco).to.eq(15.0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/itens/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"itens",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Feijoada\",\n    \"descricao\": \"Feijoada com linguicinha\",\n    \"preco\": 40.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/itens",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"itens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Feijoada Marroquina\",\n    \"descricao\": \"Feijoada com linguicinha e calabresa\",\n    \"preco\": 45.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/itens/5",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"itens",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/garcons/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Retorna garçons",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna varios usuários\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"pm.test(\"Retorna informações dos usuários\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var cliente1 = JSON.stringify(jsonData[0]);",
+									"    pm.expect(cliente1).to.include(\"nome\");",
+									"    pm.expect(cliente1).to.include(\"email\");",
+									"    pm.expect(cliente1).to.include(\"cpf\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/garcons",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"garcons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cliente\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Fernando');",
+									"    pm.expect(jsonData.email).to.eq(null);",
+									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/clientes/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna cliente por CPF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Retorna informações do cliente\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Fernando');",
+									"    pm.expect(jsonData.email).to.eq(null);",
+									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"123.123.123-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/clientes/cpf",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"cpf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"pm.test(\"Retorna o cliente alterado\", function () {",
+									"    var requestBody = JSON.parse(pm.request.body.raw)",
+									"    var user = pm.response.json() ",
+									"    pm.expect(user.cpf).to.eq(requestBody.cpf);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Rafael 2\",\n    \"cpf\": \"100.100.100-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/clientes",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Cardápio de batatas 2\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apaga cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/cardapios/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"cardapios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 100ms\", () => {",
+					"  pm.expect(pm.response.responseTime).to.be.below(100);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": ""
+		}
+	]
+}
