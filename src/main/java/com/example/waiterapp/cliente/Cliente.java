@@ -1,5 +1,6 @@
 package com.example.waiterapp.cliente;
 
+import com.example.waiterapp.interfaces.Identifiable;
 import com.example.waiterapp.pedido.Pedido;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cliente implements Serializable {
+public class Cliente implements Serializable,Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

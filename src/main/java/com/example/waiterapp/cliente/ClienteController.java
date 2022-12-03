@@ -64,13 +64,13 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/{idCliente}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaCliente(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Long idCliente){
+    public ResponseEntity<Cliente> atualizaCliente(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Long idCliente){
         Cliente cliente = clienteService.transformarDTO(clienteDTO);
 
         cliente.setId(idCliente);
         clienteService.atualizaCliente(cliente);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(cliente);
     }
 
     @DeleteMapping(value = "/{idCliente}")
@@ -83,5 +83,5 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
 }
