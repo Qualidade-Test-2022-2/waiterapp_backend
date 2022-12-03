@@ -70,7 +70,7 @@ public class WaiterAppApplication implements CommandLineRunner {
         Cardapio cardapio1 = new Cardapio(null, LocalDateTime.now(), "Promoção do dia", "Os pratos mais pedidos com desconto");
         Cardapio cardapio2 = new Cardapio(null, LocalDateTime.now(), "Comida brasileira", "Coletanea com os pratos mais tipicos do brasil");
 
-        //cardapioRepository.saveAll(Arrays.asList(cardapio1, cardapio2));
+        // cardapioRepository.saveAll(Arrays.asList(cardapio1, cardapio2));
 
         Item bebida1 = new Bebida(null, "Coca Cola", null, LocalDateTime.now(), 15.0D, "2L");
         Item bebida2 = new Bebida(null, "Guarana Antartica", "Melhor refrigerante brasileiro", LocalDateTime.now(), 15.0D, "2,5L");
