@@ -1,24 +1,24 @@
 package com.example.waiterapp;
 
-import com.example.waiterapp.Cardapio.Cardapio;
-import com.example.waiterapp.Cardapio.CardapioRepository;
-import com.example.waiterapp.Cliente.Cliente;
-import com.example.waiterapp.Cliente.ClienteRepository;
-import com.example.waiterapp.Garcom.Garcom;
-import com.example.waiterapp.Garcom.GarcomRepository;
-import com.example.waiterapp.Ingrediente.Ingrediente;
-import com.example.waiterapp.Ingrediente.IngredienteRepository;
-import com.example.waiterapp.Item.Bebida.Bebida;
-import com.example.waiterapp.Item.Item;
-import com.example.waiterapp.Item.ItemRepository;
-import com.example.waiterapp.Item.Prato.Prato;
-import com.example.waiterapp.ItemPedido.ItemPedido;
-import com.example.waiterapp.ItemPedido.ItemPedidoRepository;
-import com.example.waiterapp.Pagamento.PagamentoComCartao.PagamentoComCartao;
-import com.example.waiterapp.Pagamento.Pagamento;
-import com.example.waiterapp.Pagamento.PagamentoRepository;
-import com.example.waiterapp.Pedido.Pedido;
-import com.example.waiterapp.Pedido.PedidoRepository;
+import com.example.waiterapp.cardapio.Cardapio;
+import com.example.waiterapp.cardapio.CardapioRepository;
+import com.example.waiterapp.cliente.Cliente;
+import com.example.waiterapp.cliente.ClienteRepository;
+import com.example.waiterapp.garcom.Garcom;
+import com.example.waiterapp.garcom.GarcomRepository;
+import com.example.waiterapp.ingrediente.Ingrediente;
+import com.example.waiterapp.ingrediente.IngredienteRepository;
+import com.example.waiterapp.item.bebida.Bebida;
+import com.example.waiterapp.item.Item;
+import com.example.waiterapp.item.ItemRepository;
+import com.example.waiterapp.item.prato.Prato;
+import com.example.waiterapp.itempedido.ItemPedido;
+import com.example.waiterapp.itempedido.ItemPedidoRepository;
+import com.example.waiterapp.pagamento.pagamentocomcartao.PagamentoComCartao;
+import com.example.waiterapp.pagamento.Pagamento;
+import com.example.waiterapp.pagamento.PagamentoRepository;
+import com.example.waiterapp.pedido.Pedido;
+import com.example.waiterapp.pedido.PedidoRepository;
 import com.example.waiterapp.enums.Estado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,7 +26,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -70,7 +69,6 @@ public class WaiterAppApplication implements CommandLineRunner {
         Cardapio cardapio1 = new Cardapio(null, LocalDateTime.now(), "Promoção do dia", "Os pratos mais pedidos com desconto");
         Cardapio cardapio2 = new Cardapio(null, LocalDateTime.now(), "Comida brasileira", "Coletanea com os pratos mais tipicos do brasil");
 
-        // cardapioRepository.saveAll(Arrays.asList(cardapio1, cardapio2));
 
         Item bebida1 = new Bebida(null, "Coca Cola", null, LocalDateTime.now(), 15.0D, "2L");
         Item bebida2 = new Bebida(null, "Guarana Antartica", "Melhor refrigerante brasileiro", LocalDateTime.now(), 15.0D, "2,5L");
@@ -117,7 +115,6 @@ public class WaiterAppApplication implements CommandLineRunner {
         Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), null);
         Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), null);
 
-        //public Pedido(Long id, LocalDateTime dataCriacao, Estado estado, Double precoTotal, Integer notaAtendimento, Integer notaPedido, String opcoesExtras) {
         Pedido pedido1 = new Pedido(null, LocalDateTime.now(), Estado.FECHADO, null, 10, 10, null);
         pedido1.setCliente(cliente1);
         pedido1.setGarcom(garcom1);
