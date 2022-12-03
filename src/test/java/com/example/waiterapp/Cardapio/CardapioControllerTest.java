@@ -2,7 +2,10 @@ package com.example.waiterapp.Cardapio;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -55,10 +58,15 @@ public class CardapioControllerTest {
     @Test
     @DisplayName("should return a list of cardapios")
     public void returnListOfCardapios() {
-      assertAll(
-        () -> assertEquals(cardapioController.listaCardapios().getBody().get(0), cardapio1),
-        () -> assertEquals(cardapioController.listaCardapios().getBody().get(1), cardapio2)
-      );
+      List<Cardapio> cardapios = cardapioController.listaCardapios().getBody();
+      if(cardapios != null) {
+        assertAll(
+          () -> assertEquals(cardapios.get(0), cardapio1),
+          () -> assertEquals(cardapios.get(1), cardapio2)
+        );
+      } else {
+        fail("Cardapios is null");
+      }
     }
   }
 
@@ -118,27 +126,32 @@ public class CardapioControllerTest {
   class AtualizaCardapioTest {
     CardapioDTO cardapioDTO = mock(CardapioDTO.class);
 
-    @Nested
-    @DisplayName("when cardapio exists")
-    class WhenCardapiosExists {
-      @BeforeEach
-      public void mockCardapioServiceAtualizaCardapio() {
-        when(cardapioService.transformarDTO(any(CardapioDTO.class))).thenReturn(cardapio1);
-        when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenReturn(cardapio1);
-      }
-
-      @Test
-      @DisplayName("should return 200")
-      public void statusCode200() {
-        assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 200);
-      }
-
-      @Test
-      @DisplayName("should return the cardapio - method must be refactored to pass this test")
-      public void returnCardapio() {
-        assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getBody(), cardapio1);
-      }
+    @BeforeEach
+    public void mockCardapioServiceAtualizaCardapio() {
+      when(cardapioService.transformarDTO(any(CardapioDTO.class))).thenReturn(cardapio1);
     }
+
+    @Test
+    @DisplayName("should return 200 when cardapio exists")
+    public void statusCode200_WhenCardapiosExists() {
+      when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenReturn(cardapio1);
+      assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 200);
+    }
+
+    @Test
+    @DisplayName("should return the cardapio")
+    public void returnCardapio_WhenCardapiosExists() {
+      when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenReturn(cardapio1);
+      assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getBody(), cardapio1);
+    }
+
+    @Test
+    @DisplayName("should return 404")
+    public void statusCode404_WhenCardapiosDoesntExists() {
+      when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenThrow(ObjectNotFoundException.class);
+      assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 404);
+    }
+  }
 
   @Nested
   @DisplayName("CardapioController#deletaCardapio")
