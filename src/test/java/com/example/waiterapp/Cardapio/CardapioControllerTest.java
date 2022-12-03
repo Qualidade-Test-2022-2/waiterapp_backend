@@ -2,12 +2,10 @@ package com.example.waiterapp.Cardapio;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +16,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.waiterapp.cardapio.Cardapio;
 import com.example.waiterapp.cardapio.CardapioController;
 import com.example.waiterapp.cardapio.CardapioDTO;
-import com.example.waiterapp.cardapio.CardapioRepository;
 import com.example.waiterapp.cardapio.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
