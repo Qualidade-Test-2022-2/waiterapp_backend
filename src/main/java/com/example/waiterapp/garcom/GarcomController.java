@@ -23,7 +23,7 @@ public class GarcomController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<Garcom>> listaGarcoms() {
+    public ResponseEntity<List<Garcom>> listaGarcons() {
         List<Garcom> garcons = garcomService.listaGarcons();
         return ResponseEntity.ok().body(garcons);
     }

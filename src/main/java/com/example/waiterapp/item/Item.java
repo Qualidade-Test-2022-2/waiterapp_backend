@@ -1,6 +1,7 @@
 package com.example.waiterapp.item;
 
 import com.example.waiterapp.cardapio.Cardapio;
+import com.example.waiterapp.interfaces.Identifiable;
 import com.example.waiterapp.itempedido.ItemPedido;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,7 +12,7 @@ import java.util.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Item implements Serializable {
+public class Item implements Serializable, Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

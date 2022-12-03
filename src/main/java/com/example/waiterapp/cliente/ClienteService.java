@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ClienteService {
-    
+
     private ClienteRepository clienteRepository;
 
     @Autowired
@@ -44,7 +44,7 @@ public class ClienteService {
 
     public void inserePedidosCliente(Long idCliente, List<Pedido> pedidos){
         Cliente cliente = retornaClienteById(idCliente);
-        
+
         cliente.setPedidos(pedidos);
     }
 
@@ -58,7 +58,7 @@ public class ClienteService {
         retornaClienteById(cliente.getId());
         return clienteRepository.save(cliente);
     }
-    
+
     public void apagaCliente(long idCliente) throws DataIntegrityViolationException{
         try{
             clienteRepository.deleteById(idCliente);
