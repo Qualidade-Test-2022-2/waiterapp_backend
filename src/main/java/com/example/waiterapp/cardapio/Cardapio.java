@@ -1,5 +1,6 @@
 package com.example.waiterapp.cardapio;
 
+import com.example.waiterapp.interfaces.Identifiable;
 import com.example.waiterapp.item.Item;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cardapio implements Serializable {
+public class Cardapio implements Serializable,Identifiable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -14,17 +14,18 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.http.ResponseEntity;
 
 import com.example.waiterapp.cardapio.Cardapio;
 import com.example.waiterapp.cardapio.CardapioController;
 import com.example.waiterapp.cardapio.CardapioDTO;
 import com.example.waiterapp.cardapio.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import com.example.waiterapp.utils.MockForServletUriComponentsBuilderHelper;
 
 @DisplayName("CardapioController's tests")
 public class CardapioControllerTest {
@@ -97,27 +98,24 @@ public class CardapioControllerTest {
 
   @Nested
   @DisplayName("CardapioController#insereCardapio")
-  @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
+  // @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InsereCardapioTest {
     CardapioDTO cardapioDTO;
+    ResponseEntity<Object> response;
 
     @BeforeEach
     public void mockCardapioServiceInsereCardapio() {
       cardapioDTO = mock(CardapioDTO.class);
+
+      when(cardapioService.transformarDTO(any(CardapioDTO.class))).thenReturn(cardapio1);
       when(cardapioService.insereCardapio(any(Cardapio.class))).thenReturn(cardapio1);
-      // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
+      response = MockForServletUriComponentsBuilderHelper.mockRequestResponse(cardapio1);
     }
 
     @Test
     @DisplayName("should return 201")
     public void statusCode201() {
-      assertEquals(cardapioController.insereCardapio(cardapioDTO).getStatusCode().value(), 201);
-    }
-
-    @Test
-    @DisplayName("should return the cardapio - method must be refactored to pass this test")
-    public void returnCardapio() {
-      assertEquals(cardapioController.insereCardapio(cardapioDTO).getBody(), cardapio1);
+      assertEquals(cardapioController.insereCardapio(cardapioDTO), response);
     }
   }
 

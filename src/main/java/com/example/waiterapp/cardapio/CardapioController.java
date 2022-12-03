@@ -44,6 +44,7 @@ public class CardapioController {
         Cardapio cardapio = cardapioService.transformarDTO(cardapioDTO);
         cardapio = cardapioService.insereCardapio(cardapio);
 
+        System.out.println(cardapio);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

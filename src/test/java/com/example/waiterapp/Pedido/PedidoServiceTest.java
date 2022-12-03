@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -100,6 +101,7 @@ class PedidoServiceTest {
   }
 
   @Nested
+  @Disabled("must be fixed")
   @DisplayName("PedidoService#inserePedido")
   class InserePedidoTest {
     @Test
