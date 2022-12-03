@@ -54,13 +54,13 @@ public class CardapioController {
     }
 
     @PutMapping(value = "/{idCardapio}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaCardapio(@Valid @RequestBody CardapioDTO cardapioDTO, @PathVariable Long idCardapio){
+    public ResponseEntity<Cardapio> atualizaCardapio(@Valid @RequestBody CardapioDTO cardapioDTO, @PathVariable Long idCardapio){
         Cardapio cardapio = cardapioService.transformarDTO(cardapioDTO);
 
         cardapio.setId(idCardapio);
         try{
             cardapioService.atualizaCardapio(cardapio);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(cardapio);
         }catch (ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
