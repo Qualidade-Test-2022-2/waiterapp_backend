@@ -140,20 +140,21 @@ public class CardapioControllerTest {
       }
     }
 
-    @Nested
-    @DisplayName("when cardapio doesn't exists")
-    class WhenCardapiosDoesntExists {
-      @BeforeEach
-      public void mockCardapioServiceAtualizaCardapio() {
-        when(cardapioService.transformarDTO(any(CardapioDTO.class))).thenReturn(cardapio1);
-        when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenThrow(ObjectNotFoundException.class);
-      }
+  @Nested
+  @DisplayName("CardapioController#deletaCardapio")
+  class DeleteCardapioTest {
+    @Test
+    @DisplayName("should return 204 when cardapio exists")
+    public void statusCode204_WhenCardapioExists() {
+      doNothing().when(cardapioService).apagaCardapio(any(long.class));
+      assertEquals(cardapioController.deleteCardapio(1L).getStatusCode().value(), 204);
+    }
 
-      @Test
-      @DisplayName("should return 404")
-      public void statusCode404() {
-        assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 404);
-      }
+    @Test
+    @DisplayName("should return 404 when cardapio doesn't exists")
+    public void statusCode204_WhenCardapioDoesntExists() {
+      doThrow(ObjectNotFoundException.class).when(cardapioService).apagaCardapio(any(long.class));
+      assertEquals(cardapioController.deleteCardapio(1L).getStatusCode().value(), 404);
     }
   }
 }
