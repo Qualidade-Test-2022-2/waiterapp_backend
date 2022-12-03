@@ -72,7 +72,7 @@ public class CardapioController {
             cardapioService.apagaCardapio(idCardapio);
 
             return ResponseEntity.noContent().build();
-            
+
         }catch (DataIntegrityViolationException | ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
