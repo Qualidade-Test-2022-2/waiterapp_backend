@@ -30,7 +30,7 @@ public class ItemController {
     }
 
     @GetMapping(value = "/{idItem}", produces = "application/json")
-    public ResponseEntity<Item> retornItemById(@PathVariable Long idItem){
+    public ResponseEntity<Item> retornaItemById(@PathVariable Long idItem){
         try{
             Item item = itemService.retornaItemById(idItem);
 
