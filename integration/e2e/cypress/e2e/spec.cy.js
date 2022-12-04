@@ -15,7 +15,7 @@ describe("Funcionalidade de Login", () => {
     cy.get('#mat-input-1').type('000.000.000-01');
     confirmBtn.click();
   })
-  it('Deve ser possível ver a página a página logada', () => {
+  it('Deve ser possível ver a página logada', () => {
     cy.get('#formBtnSubmit').click();
     cy.wait(500)
     cy.contains('Nome: Juliana');
