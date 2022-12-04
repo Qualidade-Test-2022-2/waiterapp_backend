@@ -59,3 +59,8 @@ locust/__pycache__/
 venv
 
 __pycache__
+
+node_modules/
+integration/e2e/cypress/screenshots/
+integration/e2e/cypress/videos/
+integration/e2e/cypress/results
