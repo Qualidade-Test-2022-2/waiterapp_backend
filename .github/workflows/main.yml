@@ -9,13 +9,15 @@ jobs:
       - name: Testes E2E do sistema
         run: make run-integration-tests
   test-unit:
+    runs-on: ubuntu-latest
+    name: Testes Unitários do sistema
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Run the Maven verify phase
+      - name: Testes Unitários do sistema
         run: mvn test
 
 #  test-load:
