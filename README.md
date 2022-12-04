@@ -26,7 +26,7 @@ The command above should open the locust web interface on the following url: htt
 
 ### Sonarlint pictures
 Sonarlint analysis before correcting:
-![Imagem](sonarlint\sonarlint-print-Before.jpg)
+![Imagem](sonarlint/sonarlint-print-Before.jpg)
 
 Sonarlint analysis after correcting:
-![Imagem](sonarlint\sonarlint-print-Before.jpg)
+![Imagem](sonarlint/sonarlint-print-Before.jpg)
