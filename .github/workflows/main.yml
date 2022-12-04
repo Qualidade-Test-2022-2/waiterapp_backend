@@ -8,6 +8,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Testes E2E do sistema
         run: make run-integration-tests
+  test-unit:
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Run the Maven verify phase
+        run: mvn test
 
 #  test-load:
 #    name: Testes de desempenho
