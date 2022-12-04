@@ -29,4 +29,4 @@ Sonarlint analysis before correcting:
 ![Imagem](sonarlint/sonarlint-print-Before.jpg)
 
 Sonarlint analysis after correcting:
-![Imagem](sonarlint/sonarlint-print-Before.jpg)
+![Imagem](sonarlint/printSonarlint_after.jpg)
