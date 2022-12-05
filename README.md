@@ -16,6 +16,7 @@ make run-integration-tests # docker-compose -f integration/docker-compose-integr
 
 ### Locust load tests
 The load tests for this project are present inside the `locust` folder, to execute them you must have `docker` and `docker-compose` installed on your local machine.
+<img src="https://imgur.com/0CGVH62" />
 
 ```
 make run-load-tests # docker-compose -f ./locust/docker-compose-load-tests.yml up
