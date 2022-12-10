@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Headers;
 import org.mockito.Mock;
 
 import com.example.waiterapp.cliente.Cliente;
@@ -25,6 +27,8 @@ import com.example.waiterapp.cliente.ClienteController;
 import com.example.waiterapp.cliente.ClienteDTO;
 import com.example.waiterapp.cliente.ClienteService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import springfox.documentation.service.Header;
 
 @DisplayName("ClienteController's tests")
 public class ClienteControllerTest {
@@ -67,6 +71,29 @@ public class ClienteControllerTest {
       } else {
         fail("Clientes is null");
       }
+    }
+  }
+
+  @Nested
+  @DisplayName("ClienteController#authenticate")
+  class LoginClienteTest {
+    @Mock
+    Cliente cliente = mock(Cliente.class);
+
+    @Test
+    @DisplayName("should return 200 when cliente exists and isClientAuthorized return true")
+    void statusCode200_WhenClienteExistsAndisClientAuthorizedReturnTrue() {
+      when(clienteService.retornaClienteByCpf(anyString())).thenReturn(cliente);
+      when(clienteService.isClientAuthorized(any(Cliente.class), anyString(), anyString())).thenReturn(true);
+      assertEquals(200, clienteController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
+    }
+
+    @Test
+    @DisplayName("should return 400 when cliente exists and isClientAuthorized return false")
+    void statusCode404_WhenClienteExistsAndisClientAuthorizedReturnFalse() {
+      when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
+      when(clienteService.isClientAuthorized(any(Cliente.class), any(String.class), any(String.class))).thenReturn(false);
+      assertEquals(404, clienteController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
     }
   }
 
