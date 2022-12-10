@@ -54,16 +54,15 @@ table {
 	height: calc(100vh - 40px);
   background-color: #212121;
 }
-input[type='text'], input[type='password'] {
+input[type='text'], input[type='password'], select {
 	border: none;
 	border-bottom: 1px solid #ccc;
 	padding: 10px;
-	margin-bottom: 10px;
 	background-color: #666;
 	color: #fff;
 	font-size: 14px;
 }
-input[type='text']:focus, input[type='password']:focus {
+input[type='text']:focus, input[type='password']:focus, select:focus {
 	box-shadow: 0 0 0 0;
 	border-color: #fafafa;
 	background-color: #777;
@@ -89,4 +88,7 @@ a, .link {
 a:hover, .link:hover {
 	color: #4c54ec;
 }
-
+.loading {
+	font-weight: 700;
+	color: #2a8422;
+}

@@ -10,6 +10,7 @@ export default function AuthProvider({ children }) {
   const handleLogin = (cpf, password) => {
     Client.postLogin(cpf, password)
       .then((response) => {
+        if (!response.data) return
         setUser(response.data);
         setAuthenticated(true);
       });
@@ -23,8 +24,15 @@ export default function AuthProvider({ children }) {
       });
   }
 
+  const handleLogout = () => {
+    setAuthenticated(false);
+    setUser(null);
+  }
+
+  const value = { authenticated, user, handleLogin, handleSignup, handleLogout }
+
   return (
-    <AuthContext.Provider value={{ authenticated, user, handleLogin, handleSignup }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

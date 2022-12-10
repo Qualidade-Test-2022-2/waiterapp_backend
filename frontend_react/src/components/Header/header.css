@@ -1,9 +1,12 @@
 .header {
   height: 40px;
   background-color: #ec0789;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 16px;
 }
 .header__info {
-  margin-left: 10px;
   display: flex;
   column-gap: 8px;
   align-items: center;
@@ -16,4 +19,14 @@
 }
 .header__logo img {
   height: 40px;
+}
+.header__menu div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.header__menu p {
+  color: #fff;
+  font-weight: 700;
 }
