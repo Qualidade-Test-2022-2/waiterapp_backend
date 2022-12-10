@@ -14,6 +14,9 @@ import com.example.waiterapp.item.ItemRepository;
 import com.example.waiterapp.item.prato.Prato;
 import com.example.waiterapp.itempedido.ItemPedido;
 import com.example.waiterapp.itempedido.ItemPedidoRepository;
+import com.example.waiterapp.pagamento.pagamentocomcartao.PagamentoComCartao;
+import com.example.waiterapp.pagamento.Pagamento;
+import com.example.waiterapp.pagamento.PagamentoRepository;
 import com.example.waiterapp.pedido.Pedido;
 import com.example.waiterapp.pedido.PedidoRepository;
 import com.example.waiterapp.enums.Estado;
@@ -52,6 +55,9 @@ public class WaiterAppApplication implements CommandLineRunner {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(WaiterAppApplication.class, args);
@@ -123,9 +129,16 @@ public class WaiterAppApplication implements CommandLineRunner {
         garcom2.getPedidos().add(pedido2);
         cliente2.getPedidos().add(pedido2);
 
+        Pagamento pagamento1 = new PagamentoComCartao(null, Estado.CONCLUIDO, LocalDateTime.now());
+        pedido1.setPagamento(pagamento1);
+
+        Pagamento pagamento2 = new PagamentoComCartao(null, Estado.CONCLUIDO, LocalDateTime.now());
+        pedido2.setPagamento(pagamento2);
+
         clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
         garcomRepository.saveAll(Arrays.asList(garcom1, garcom2));
         pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
+        pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
 
         //ItemPedido(Pedido pedido, Item item, Integer quantidade, Double preco)
         ItemPedido item1 = new ItemPedido(pedido1, bebida1, 2);
