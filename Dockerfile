@@ -3,7 +3,7 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
 
-FROM openjdk:18-jre-slim
+FROM openjdk:18
 COPY --from=build /home/app/target/waiterapp.jar /usr/local/lib/waiterapp.jar
 COPY src /home/app/src
 EXPOSE 8080
