@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cliente implements Serializable,Identifiable {
+public class Cliente implements Serializable, Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +20,8 @@ public class Cliente implements Serializable,Identifiable {
     private String nome;
     @Column(unique=true)
     private String email;
+    @Column(unique=false)
+    private String password;
     @Column(unique=true)
     private String cpf;
     @Column(nullable = false, updatable = false)
@@ -29,8 +31,11 @@ public class Cliente implements Serializable,Identifiable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Cliente() {
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public Cliente() {}
 
     public Cliente(Long id, String nome, String email, String cpf, LocalDateTime dataCriacao) {
         this.id = id;

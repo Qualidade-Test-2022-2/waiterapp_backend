@@ -122,7 +122,7 @@ public class ClienteControllerTest {
 
     @BeforeEach
     public void mockClienteServiceInsereCliente() {
-      when(clienteService.insereCliente(any(Cliente.class))).thenReturn(cliente1);
+      when(clienteService.insereCliente(any(Cliente.class), "123")).thenReturn(cliente1);
       // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
     }
 

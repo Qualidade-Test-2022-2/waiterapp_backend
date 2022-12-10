@@ -3,6 +3,7 @@ package com.example.waiterapp.cliente;
 import com.example.waiterapp.pedido.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -48,9 +49,10 @@ public class ClienteService {
         cliente.setPedidos(pedidos);
     }
 
-    public Cliente insereCliente(Cliente cliente) {
+    public Cliente insereCliente(Cliente cliente, String password) {
         cliente.setId(null);
         cliente.setDataCriacao(LocalDateTime.now());
+        cliente.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         return clienteRepository.save(cliente);
     }
 

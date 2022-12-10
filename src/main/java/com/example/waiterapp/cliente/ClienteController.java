@@ -1,6 +1,8 @@
 package com.example.waiterapp.cliente;
 
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping({"/api/clientes"})
 public class ClienteController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
     private ClienteService clienteService;
 
@@ -44,15 +48,17 @@ public class ClienteController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO){
-        if(clienteDTO.getCpf() != null){
+    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+
+        if(clienteDTO.getCpf() != null) {
             Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
             if(cliente != null){
                 return ResponseEntity.ok().body(cliente);
             }
         }
+
         Cliente cliente = clienteService.transformarDTO(clienteDTO);
-        cliente = clienteService.insereCliente(cliente);
+        cliente = clienteService.insereCliente(cliente, clienteDTO.getPassword());
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -84,4 +90,13 @@ public class ClienteController {
         }
     }
 
+    @PostMapping(value = "/login")
+    public ResponseEntity<Void> authorise(@RequestHeader("Authorization") String basicAuth){
+        try{
+            logger.debug(basicAuth);
+            return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException | ObjectNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
