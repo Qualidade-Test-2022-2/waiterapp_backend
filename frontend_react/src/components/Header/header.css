@@ -1,0 +1,19 @@
+.header {
+  height: 40px;
+  background-color: #ec0789;
+}
+.header__info {
+  margin-left: 10px;
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+.header__info h1 {
+  color: #fafafa;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.header__logo img {
+  height: 40px;
+}
