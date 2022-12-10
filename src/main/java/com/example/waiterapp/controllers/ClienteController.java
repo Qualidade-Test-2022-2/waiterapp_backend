@@ -18,7 +18,7 @@ import java.net.URI;
 import java.util.Base64;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/api/clientes"})
 public class ClienteController {

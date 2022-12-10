@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = {"/api/pedidos"})
 public class PedidoController {
-    
+
     private PedidoService pedidoService;
     private Logger logger = Logger.getLogger(PedidoController.class.getName());
 
@@ -77,7 +77,7 @@ public class PedidoController {
             pedidoService.apagaPedido(idPedido);
 
             return ResponseEntity.noContent().build();
-            
+
         }catch (DataIntegrityViolationException | ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
