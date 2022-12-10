@@ -1,20 +1,27 @@
 package com.example.waiterapp.cliente;
 
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
 @RequestMapping({"/api/clientes"})
 public class ClienteController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
     private ClienteService clienteService;
 
@@ -44,15 +51,17 @@ public class ClienteController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO){
-        if(clienteDTO.getCpf() != null){
+    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+
+        if(clienteDTO.getCpf() != null) {
             Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
             if(cliente != null){
                 return ResponseEntity.ok().body(cliente);
             }
         }
+
         Cliente cliente = clienteService.transformarDTO(clienteDTO);
-        cliente = clienteService.insereCliente(cliente);
+        cliente = clienteService.insereCliente(cliente, clienteDTO.getPassword());
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -61,6 +70,24 @@ public class ClienteController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(cliente);
+    }
+
+    @PostMapping(value = "/auth")
+    public ResponseEntity<Cliente> authenticate(@RequestHeader("Authorization") String basicAuth) {
+
+        byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
+        String decodedString = new String(decodedBytes);
+
+        String cpf = decodedString.split(":")[0];
+        String password = decodedString.split(":")[1];
+
+        Cliente cliente = clienteService.retornaClienteByCpf(cpf);
+
+        if(clienteService.isClientAuthorized(cliente, password, cpf)) {
+            return ResponseEntity.ok().body(cliente);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping(value = "/{idCliente}", consumes = "application/json")
@@ -83,5 +110,4 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }
