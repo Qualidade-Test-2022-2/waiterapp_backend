@@ -6,12 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -69,6 +72,24 @@ public class ClienteController {
         return ResponseEntity.created(uri).body(cliente);
     }
 
+    @PostMapping(value = "/auth")
+    public ResponseEntity<Cliente> authenticate(@RequestHeader("Authorization") String basicAuth) {
+
+        byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
+        String decodedString = new String(decodedBytes);
+
+        String cpf = decodedString.split(":")[0];
+        String password = decodedString.split(":")[1];
+
+        Cliente cliente = clienteService.retornaClienteByCpf(cpf);
+
+        if(clienteService.isClientAuthorized(cliente, password, cpf)) {
+            return ResponseEntity.ok().body(cliente);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
     @PutMapping(value = "/{idCliente}", consumes = "application/json")
     public ResponseEntity<Cliente> atualizaCliente(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Long idCliente){
         Cliente cliente = clienteService.transformarDTO(clienteDTO);
@@ -86,16 +107,6 @@ public class ClienteController {
             return ResponseEntity.noContent().build();
 
         }catch (DataIntegrityViolationException | ObjectNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping(value = "/login")
-    public ResponseEntity<Void> authorise(@RequestHeader("Authorization") String basicAuth){
-        try{
-            logger.debug(basicAuth);
-            return ResponseEntity.noContent().build();
-        } catch (DataIntegrityViolationException | ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
     }

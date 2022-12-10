@@ -20,6 +20,7 @@ public class Cliente implements Serializable, Identifiable {
     private String nome;
     @Column(unique=true)
     private String email;
+    @JsonIgnore
     @Column(unique=false)
     private String password;
     @Column(unique=true)
@@ -33,6 +34,10 @@ public class Cliente implements Serializable, Identifiable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Cliente() {}
@@ -114,6 +119,7 @@ public class Cliente implements Serializable, Identifiable {
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", dataCriação=" + dataCriacao +
+                ", password=" + password +
                 '}';
     }
 }

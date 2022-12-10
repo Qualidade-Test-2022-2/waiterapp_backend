@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ClienteService {
@@ -17,6 +18,12 @@ public class ClienteService {
     @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
+    }
+
+    public boolean isClientAuthorized(Cliente cliente, String candidatePassword, String cpf) {
+        var isValiad = BCrypt.checkpw(candidatePassword, cliente.getPassword());
+        var isCPFCorrect = Objects.equals(cliente.getCpf(), cpf);
+        return isValiad && isCPFCorrect;
     }
 
     public Cliente transformarDTO(ClienteDTO clienteDTO){
