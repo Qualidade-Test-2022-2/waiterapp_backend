@@ -1,0 +1,33 @@
+.menus__container {
+  width: 80%;
+  margin: 0px auto;
+}
+.menus__container h2 {
+  color: #fff;
+  padding-top: 20px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.menus__items{
+  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.menus__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.menus__selector {
+  margin: 0;
+  background: none;
+}
+.menus__selector:focus {
+  background: none;
+}
+.menus__selector option {
+  background: #212121;
+  color: #fff;
+}

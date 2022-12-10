@@ -1,0 +1,37 @@
+.item {
+  background-color: #4b4b4b;
+  border-radius: 10px;
+  height: 140px;
+  color: #fff;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.item h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.item__description {
+  font-size: 14px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.item__container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+.item__price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #66ee5a;
+}
