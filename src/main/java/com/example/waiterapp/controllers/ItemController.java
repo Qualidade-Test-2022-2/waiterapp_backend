@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/api/itens"})
 public class ItemController {
