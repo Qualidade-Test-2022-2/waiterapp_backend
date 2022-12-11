@@ -1,5 +1,6 @@
 package com.example.waiterapp.cliente;
 
+import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ public class ClienteController {
         return ResponseEntity.created(uri).body(cliente);
     }
 
+    @RequireAuthentication
     @PostMapping(value = "/auth")
     public ResponseEntity<Cliente> authenticate(@RequestHeader("Authorization") String basicAuth) {
 
