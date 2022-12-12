@@ -3,10 +3,12 @@ package com.example.waiterapp.cliente;
 import com.example.waiterapp.pedido.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ClienteService {
@@ -16,6 +18,12 @@ public class ClienteService {
     @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
+    }
+
+    public boolean isClientAuthorized(Cliente cliente, String candidatePassword, String cpf) {
+        var isValiad = BCrypt.checkpw(candidatePassword, cliente.getPassword());
+        var isCPFCorrect = Objects.equals(cliente.getCpf(), cpf);
+        return isValiad && isCPFCorrect;
     }
 
     public Cliente transformarDTO(ClienteDTO clienteDTO){
@@ -48,9 +56,10 @@ public class ClienteService {
         cliente.setPedidos(pedidos);
     }
 
-    public Cliente insereCliente(Cliente cliente) {
+    public Cliente insereCliente(Cliente cliente, String password) {
         cliente.setId(null);
         cliente.setDataCriacao(LocalDateTime.now());
+        cliente.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         return clienteRepository.save(cliente);
     }
 

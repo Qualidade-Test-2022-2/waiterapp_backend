@@ -110,7 +110,7 @@ class ClienteServiceTest {
     @DisplayName("should insert a cliente")
     public void insertCliente() {
       when(clienteRepository.save(cliente1)).thenReturn(cliente1);
-      assertEquals(clienteService.insereCliente(cliente1), cliente1);
+      assertEquals(clienteService.insereCliente(cliente1, "123123213"), cliente1);
     }
   }
 
