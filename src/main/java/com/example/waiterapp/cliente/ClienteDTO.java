@@ -6,11 +6,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @NotEmpty
+    @Size(min=8, message="The field must be at least {min} characters")
     private String nome;
+    @NotEmpty
+	@Email(message = "email invalid")
     private String email;
     private String cpf;
     private LocalDateTime dataCriacao;

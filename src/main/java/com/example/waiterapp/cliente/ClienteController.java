@@ -4,6 +4,7 @@ import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -45,6 +46,10 @@ public class ClienteController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO){
+
+        System.out.println(clienteDTO.getCpf());
+              
+
         if(clienteDTO.getCpf() != null){
             Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
             if(cliente != null){
