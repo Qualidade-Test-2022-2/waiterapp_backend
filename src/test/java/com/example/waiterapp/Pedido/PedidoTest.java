@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -17,9 +15,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.example.waiterapp.pedido.Pedido;
+import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.enums.Estado;
-import com.example.waiterapp.itempedido.ItemPedido;
+import com.example.waiterapp.models.ItemPedido;
 import org.mockito.Mock;
 
 @DisplayName("Testes dos métodos da classe Pedido")

@@ -20,10 +20,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.example.waiterapp.cardapio.Cardapio;
-import com.example.waiterapp.cardapio.CardapioDTO;
-import com.example.waiterapp.cardapio.CardapioRepository;
-import com.example.waiterapp.cardapio.CardapioService;
+import com.example.waiterapp.models.Cardapio;
+import com.example.waiterapp.dto.CardapioDTO;
+import com.example.waiterapp.repositories.CardapioRepository;
+import com.example.waiterapp.services.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("CardapioService's tests")

@@ -1,7 +1,7 @@
 package com.example.waiterapp.config;
 
-import com.example.waiterapp.cliente.Cliente;
-import com.example.waiterapp.cliente.ClienteService;
+import com.example.waiterapp.models.Cliente;
+import com.example.waiterapp.services.ClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
