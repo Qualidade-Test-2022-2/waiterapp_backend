@@ -13,8 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.example.waiterapp.cardapio.Cardapio;
-import com.example.waiterapp.item.Item;
+import com.example.waiterapp.models.Cardapio;
+import com.example.waiterapp.models.Item;
 import org.mockito.Mock;
 
 @DisplayName("Testes dos métodos da classe Cardapio")

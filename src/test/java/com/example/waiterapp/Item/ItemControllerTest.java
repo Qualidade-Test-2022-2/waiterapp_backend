@@ -20,10 +20,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import com.example.waiterapp.item.Item;
-import com.example.waiterapp.item.ItemController;
-import com.example.waiterapp.item.ItemDTO;
-import com.example.waiterapp.item.ItemService;
+import com.example.waiterapp.models.Item;
+import com.example.waiterapp.controllers.ItemController;
+import com.example.waiterapp.dto.ItemDTO;
+import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("ItemController's tests")

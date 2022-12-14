@@ -21,15 +21,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.example.waiterapp.pedido.Pedido;
-import com.example.waiterapp.pedido.PedidoDTO;
-import com.example.waiterapp.pedido.PedidoRepository;
-import com.example.waiterapp.pedido.PedidoService;
-import com.example.waiterapp.cliente.ClienteService;
-import com.example.waiterapp.exceptions.ObjectNotFoundException;
-import com.example.waiterapp.item.ItemService;
-import com.example.waiterapp.itempedido.ItemPedidoRepository;
-import com.example.waiterapp.pagamento.PagamentoRepository;
+import com.example.waiterapp.models.Pedido;
+import com.example.waiterapp.dto.PedidoDTO;
+import com.example.waiterapp.repositories.PedidoRepository;
+import com.example.waiterapp.services.PedidoService;
+import com.example.waiterapp.services.ClienteService;
+import com.example.waiterapp.services.ItemService;
+import com.example.waiterapp.repositories.ItemPedidoRepository;
+import com.example.waiterapp.repositories.PagamentoRepository;
 
 @DisplayName("PedidoService's tests")
 class PedidoServiceTest {
