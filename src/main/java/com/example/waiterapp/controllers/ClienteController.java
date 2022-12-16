@@ -1,5 +1,6 @@
 package com.example.waiterapp.controllers;
 
+import com.example.waiterapp.config.GlobalExceptionHandler;
 import com.example.waiterapp.models.Cliente;
 import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
@@ -10,13 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -53,7 +57,11 @@ public class ClienteController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+
+        if (!ClienteService.valida(clienteDTO.getCpf())){
+            return ResponseEntity.status(422).body("CPF_NOT_VALID");
+        }
 
         if(clienteDTO.getCpf() != null) {
             Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
