@@ -85,7 +85,6 @@ public class ClienteController {
     @RequireAuthentication
     @PostMapping(value = "/auth")
     public ResponseEntity<Cliente> authenticate(@RequestHeader("Authorization") String basicAuth) {
-
         byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
         String decodedString = new String(decodedBytes);
 
