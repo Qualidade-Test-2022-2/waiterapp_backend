@@ -1,6 +1,7 @@
 import { useAuthentication } from '../../context/AuthContext'
 import logo from '../../images/logo-waiterapp.png'
 import logout from '../../images/logout.svg'
+import CartShow from './components/CartShow'
 import './header.css'
 
 export default function Header() {
@@ -17,7 +18,8 @@ export default function Header() {
 
       {authenticated && (
         <div className="header__menu">
-          <div onClick={handleLogout}>
+          <CartShow />
+          <div className='header__logout-button' onClick={handleLogout}>
             <p>{user.nome}</p>
             <img src={logout} alt="Sair" />
           </div>

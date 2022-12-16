@@ -1,0 +1,106 @@
+.product {
+  background-color: #4b4b4b;
+  border: 2px solid #4b4b4b;
+  border-radius: 10px;
+  height: 140px;
+  color: #fff;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.product:hover {
+  border: 2px solid #666;
+}
+.product h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.product__description {
+  font-size: 14px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.product__container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+.product__price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ed3da1;
+  cursor: default;
+}
+.product-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.product-modal__body {
+  color: #fafafa;
+}
+.product-modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.product-modal__actions {
+  display: flex;
+  gap: 16px;
+}
+.product-modal__body h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  line-height: 32px;
+}
+.product-modal__body p {
+  font-size: 14px;
+  margin-top: 16px;
+}
+.product-modal__count {
+  width: 50px;
+  background: none !important;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ed3da1 !important;
+  border-color: #ed3da1 !important;
+}
+.addCartButton path {
+  stroke: #fff;
+  /* fill: #fff; */
+}
+.addCartButton img {
+  width: 32px;
+  height: 32px;
+}
+.product-modal__form {
+  display: flex;
+  color: #fafafa;
+  align-items: center;
+  gap: 16px;
+}
+.product-modal__form {
+  color: #fafafa;
+  font-size: 18px;
+  font-weight: 600;
+}
