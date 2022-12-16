@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -67,6 +68,26 @@ public class GarcomControllerTest {
       } else {
         fail("Garcons is null");
       }
+    }
+  }
+
+  @Nested
+  @DisplayName("GarcomController#authenticate")
+  class LoginGarcomTest {
+    @Test
+    @DisplayName("should return 200 when cliente exists and isWaiterAuthorized return true")
+    void statusCode200_WhenGarcomExistsAndisWaiterAuthorizedReturnTrue() {
+      when(garcomService.retornaGarcomByCpf(anyString())).thenReturn(garcom1);
+      when(garcomService.isWaiterAuthorized(any(Garcom.class), anyString(), anyString())).thenReturn(true);
+      assertEquals(200, garcomController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
+    }
+
+    @Test
+    @DisplayName("should return 400 when cliente exists and isWaiterAuthorized return false")
+    void statusCode404_WhenGarcomExistsAndisWaiterAuthorizedReturnFalse() {
+      when(garcomService.retornaGarcomByCpf(any(String.class))).thenReturn(garcom1);
+      when(garcomService.isWaiterAuthorized(any(Garcom.class), anyString(), anyString())).thenReturn(false);
+      assertEquals(404, garcomController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
     }
   }
 

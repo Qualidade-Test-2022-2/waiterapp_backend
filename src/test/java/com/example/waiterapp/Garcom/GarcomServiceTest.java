@@ -3,6 +3,7 @@ package com.example.waiterapp.Garcom;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
@@ -11,6 +12,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +56,24 @@ class GarcomServiceTest {
     public void returnListOfGarcons() {
       assertEquals(garcomService.listaGarcons().get(0), garcom1);
       assertEquals(garcomService.listaGarcons().get(1), garcom2);
+    }
+  }
+
+  @Nested
+  @DisplayName("GarcomService#retornaGarcomByCpf")
+  class RetornaGarcomByCpfTest {
+    @Test
+    @DisplayName("should return a garcom by id when it exists")
+    public void returnGarcomWhenGarcomExist() {
+      when(garcomRepository.findByCpf(any(String.class))).thenReturn(java.util.Optional.of(garcom1));
+      assertEquals(garcomService.retornaGarcomByCpf("11111111111"), garcom1);
+    }
+
+    @Test
+    @DisplayName("should return a null when does not exists")
+    public void returnNullWhenGarcomDoesNotExists() {
+      when(garcomRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
+      assertEquals(garcomService.retornaGarcomByCpf("11111111111"), null);
     }
   }
 
