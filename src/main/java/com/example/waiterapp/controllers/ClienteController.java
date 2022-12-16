@@ -5,8 +5,6 @@ import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping({"/api/clientes"})
 public class ClienteController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
     private ClienteService clienteService;
 
@@ -77,13 +73,21 @@ public class ClienteController {
     @RequireAuthentication
     @PostMapping(value = "/auth")
     public ResponseEntity<Cliente> authenticate(@RequestHeader("Authorization") String basicAuth) {
+        System.out.println(basicAuth);
+        // return ResponseEntity.ok().build();
+
         byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
         String decodedString = new String(decodedBytes);
 
         String cpf = decodedString.split(":")[0];
         String password = decodedString.split(":")[1];
+        System.out.println(cpf + " | " + password);
 
         Cliente cliente = clienteService.retornaClienteByCpf(cpf);
+        System.out.println(cliente);
+        if(cliente == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         if(clienteService.isClientAuthorized(cliente, password, cpf)) {
             return ResponseEntity.ok().body(cliente);

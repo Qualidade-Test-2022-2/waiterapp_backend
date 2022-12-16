@@ -1,9 +1,9 @@
 import { api } from "./Api.service";
 
 async function postLogin (cpf, password) {
-  return api.post('/clientes/cpf', { cpf }, {
+  return api.post('/clientes/auth', {}, {
     headers: {
-      Authorization: btoa(`${cpf}:${password}`)
+      "Authorization": btoa(`${cpf.replace(/[.-]/g, '')}:${password}`)
     }
   })
   .then(() => api.defaults.headers.common['Authorization'] = btoa(cpf))

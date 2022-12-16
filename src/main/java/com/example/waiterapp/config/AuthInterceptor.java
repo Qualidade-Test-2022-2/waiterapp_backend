@@ -1,7 +1,10 @@
 package com.example.waiterapp.config;
 
 import com.example.waiterapp.models.Cliente;
+import com.example.waiterapp.models.Garcom;
 import com.example.waiterapp.services.ClienteService;
+import com.example.waiterapp.services.GarcomService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
