@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.example.waiterapp.garcom.Garcom;
+import com.example.waiterapp.models.Garcom;
 
 @DisplayName("Testes dos métodos da classe Garcom")
 public class GarcomTest {

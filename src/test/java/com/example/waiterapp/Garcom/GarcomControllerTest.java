@@ -20,10 +20,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import com.example.waiterapp.garcom.Garcom;
-import com.example.waiterapp.garcom.GarcomController;
-import com.example.waiterapp.garcom.GarcomDTO;
-import com.example.waiterapp.garcom.GarcomService;
+import com.example.waiterapp.models.Garcom;
+import com.example.waiterapp.controllers.GarcomController;
+import com.example.waiterapp.dto.GarcomDTO;
+import com.example.waiterapp.services.GarcomService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("GarcomController's tests")

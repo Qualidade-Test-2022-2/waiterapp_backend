@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.example.waiterapp.item.Item;
+import com.example.waiterapp.models.Item;
 
 @DisplayName("Testes dos métodos da classe Item")
 public class ItemTest {

@@ -20,10 +20,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.example.waiterapp.item.Item;
-import com.example.waiterapp.item.ItemDTO;
-import com.example.waiterapp.item.ItemRepository;
-import com.example.waiterapp.item.ItemService;
+import com.example.waiterapp.models.Item;
+import com.example.waiterapp.dto.ItemDTO;
+import com.example.waiterapp.repositories.ItemRepository;
+import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("ItemService's tests")

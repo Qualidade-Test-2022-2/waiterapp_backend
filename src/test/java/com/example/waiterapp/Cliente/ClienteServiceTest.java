@@ -23,11 +23,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.example.waiterapp.cliente.Cliente;
-import com.example.waiterapp.cliente.ClienteDTO;
-import com.example.waiterapp.cliente.ClienteRepository;
-import com.example.waiterapp.cliente.ClienteService;
-import com.example.waiterapp.pedido.Pedido;
+import com.example.waiterapp.models.Cliente;
+import com.example.waiterapp.dto.ClienteDTO;
+import com.example.waiterapp.repositories.ClienteRepository;
+import com.example.waiterapp.services.ClienteService;
+import com.example.waiterapp.models.Pedido;
 
 @DisplayName("ClienteService's tests")
 class ClienteServiceTest {
