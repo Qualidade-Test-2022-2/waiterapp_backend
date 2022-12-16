@@ -1,7 +1,7 @@
 import { api } from "./Api.service";
 
 async function postLogin (cpf, password) {
-  return api.post('/clientes/cpf', { cpf }, {
+  return api.post('/garcons/cpf', { cpf }, {
     headers: {
       Authorization: btoa(`${cpf}:${password}`)
     }
@@ -10,9 +10,9 @@ async function postLogin (cpf, password) {
 }
 
 async function postRegister (data) {
-  return api.post('/clientes', data)
+  return api.post('/garcons', data)
 }
 
-const Client = { postLogin, postRegister }
+const Waiter = { postLogin, postRegister }
 
-export default Client
+export default Waiter

@@ -1,14 +1,21 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useAuthentication } from "../../../context/AuthContext"
 import TypeSelector from "./TypeSelector"
 
-export default function LoginForm({ handleSubmit }) {
+export default function LoginForm() {
   const [cpf, setCpf] = useState('')
   const [password, setPassword] = useState('')
   const [type, setType] = useState('client')
+  const { handleLogin } = useAuthentication()
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleLogin(cpf, password, type);
+  }
 
   return (
-    <form onSubmit={handleSubmit(cpf, password, type)}>
+    <form onSubmit={handleSubmit}>
       <fieldset>
         <label>Desejo entrar como um:</label>
         <TypeSelector value={type} onChange={(value) => setType(value)} />
