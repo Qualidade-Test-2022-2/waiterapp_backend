@@ -19,6 +19,7 @@ public class Garcom implements Serializable,Identifiable {
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
     private String cpf;
+    private String password;
 
     @JsonIgnore
     @OneToMany(mappedBy = "garcom")
@@ -56,6 +57,14 @@ public class Garcom implements Serializable,Identifiable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDateTime getDataCriacao() {

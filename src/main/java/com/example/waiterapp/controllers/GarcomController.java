@@ -2,6 +2,7 @@ package com.example.waiterapp.controllers;
 
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import com.example.waiterapp.models.Garcom;
+import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.dto.GarcomDTO;
 import com.example.waiterapp.services.GarcomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -41,6 +43,24 @@ public class GarcomController {
         }catch (ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @RequireAuthentication
+    @PostMapping(value = "/auth")
+    public ResponseEntity<Garcom> authenticate(@RequestHeader("Authorization") String basicAuth) {
+        byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
+        String decodedString = new String(decodedBytes);
+
+        String cpf = decodedString.split(":")[0];
+        String password = decodedString.split(":")[1];
+
+        Garcom garcom = garcomService.retornaGarcomByCpf(cpf);
+
+        if(garcomService.isWaiterAuthorized(garcom, password, cpf)) {
+            return ResponseEntity.ok().body(garcom);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping(consumes = "application/json")

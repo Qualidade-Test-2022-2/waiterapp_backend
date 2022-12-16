@@ -111,9 +111,13 @@ public class WaiterAppApplication implements CommandLineRunner {
 
         Cliente cliente1 = new Cliente(null, "Fernando", null, "123.123.123-12", LocalDateTime.now());
         Cliente cliente2 = new Cliente(null, "Juliana", null, "000.000.000-01", LocalDateTime.now());
+        cliente1.setPassword("12345678");
+        cliente2.setPassword("12345678");
 
         Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), null);
         Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), null);
+        garcom1.setPassword("12345678");
+        garcom2.setPassword("12345678");
 
         Pedido pedido1 = new Pedido(null, LocalDateTime.now(), Estado.FECHADO, null, 10, 10, null);
         pedido1.setCliente(cliente1);

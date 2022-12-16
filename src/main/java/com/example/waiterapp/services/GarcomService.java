@@ -6,10 +6,12 @@ import com.example.waiterapp.models.Garcom;
 import com.example.waiterapp.repositories.GarcomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,6 +22,12 @@ public class GarcomService {
     @Autowired
     public GarcomService(GarcomRepository garcomRepository) {
         this.garcomRepository = garcomRepository;
+    }
+
+    public boolean isWaiterAuthorized(Garcom garcom, String candidatePassword, String cpf) {
+        var isValid = BCrypt.checkpw(candidatePassword, garcom.getPassword());
+        var isCPFCorrect = Objects.equals(garcom.getCpf(), cpf);
+        return isValid && isCPFCorrect;
     }
 
     public Garcom transformarDTO(GarcomDTO garcomDTO){
@@ -55,5 +63,9 @@ public class GarcomService {
         }catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(("Não é possível excluir esse garcom"));
         }
+    }
+
+    public Garcom retornaGarcomByCpf(String cpf) {
+        return garcomRepository.findByCpf(cpf).orElse(null);
     }
 }
