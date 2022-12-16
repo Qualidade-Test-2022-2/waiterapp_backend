@@ -54,15 +54,16 @@ table {
 	height: calc(100vh - 40px);
   background-color: #212121;
 }
-input[type='text'], input[type='password'], select {
+input, select {
 	border: none;
 	border-bottom: 1px solid #ccc;
+	border-radius: 4px 4px 0 0;
 	padding: 10px;
 	background-color: #666;
 	color: #fff;
 	font-size: 14px;
 }
-input[type='text']:focus, input[type='password']:focus, select:focus {
+input:focus, input:focus, select:focus {
 	box-shadow: 0 0 0 0;
 	border-color: #fafafa;
 	background-color: #777;
@@ -70,15 +71,17 @@ input[type='text']:focus, input[type='password']:focus, select:focus {
 	box-sizing: unset;
 	padding: 10px;
 }
-input[type='submit'] {
-	background-color: #1c8112;
+input[type='submit'], .button__primary {
+	background-color: #ec0789;
 	color: #fff;
-	padding: 15px 30px;
+	padding: 10px 20px;
+	font-weight: bold;
+	border-radius: 8px;
 	border: 0 none;
 	cursor: pointer;
 }
-input[type='submit']:hover {
-	background-color: #2a8422;
+input[type='submit']:hover, .button__primary:hover {
+	background-color: #930455;
 	color: #fff;
 }
 a, .link {
@@ -90,5 +93,5 @@ a:hover, .link:hover {
 }
 .loading {
 	font-weight: 700;
-	color: #2a8422;
+	color: #ec0789;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Item } from "../../components";
+import { Product } from "../../components";
 import useMenus from "./hooks/useMenus";
 import "./menu.css";
 
@@ -34,7 +34,7 @@ export default function Menu() {
 
             <div className="menus__items">
               {menu?.items?.map((item) => (
-                <Item item={item} />
+                <Product product={item} />
               ))}
             </div>
           </div>

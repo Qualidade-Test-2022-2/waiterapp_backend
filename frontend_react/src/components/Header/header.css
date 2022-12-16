@@ -20,13 +20,29 @@
 .header__logo img {
   height: 40px;
 }
-.header__menu div {
+.header__menu {
+  display: flex;
+  column-gap: 32px;
+  align-items: center;
+}
+.header__menu .header__cart-show {
   display: flex;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
+  gap: 8px;
 }
-.header__menu p {
+.header__menu .header__cart-show > p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fafafa;
+}
+.header__menu .header__logout-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px
+}
+.header__menu .header__logout-button > p {
   color: #fff;
   font-weight: 700;
 }
