@@ -15,21 +15,21 @@ public class ClienteDTO implements Serializable {
 
     private Long id;
     @NotBlank
-    @Size(min=3, message="The field must be at least {min} characters")
-    @Size(max=100, message="The field must be maximium {max} characters")
+    @Size(min=3, message="Name must be at least {min} characters")
+    @Size(max=100, message="Name must be maximium {max} characters")
     private String nome;
     @NotBlank
-    @Size(min=5, message="The field must be at least {min} characters")
-    @Size(max=100, message="The field must be maximium {max} characters")
+    @Size(min=5, message="Email must be at least {min} characters")
+    @Size(max=100, message="Email must be maximium {max} characters")
 	@Email(message = "email invalid")
     private String email;
     @NotBlank
-    @Size(min=11, message="The field must be at least {min} characters")
-    @Size(max=11, message="The field must be maximium {max} characters")
+    @Size(min=11, message="CPF must be at least {min} characters")
+    @Size(max=11, message="CPF field must be maximium {max} characters")
     private String cpf;
     @NotBlank
-    @Size(min=11, message="The field must be at least {min} characters")
-    @Size(max=11, message="The field must be maximium {max} characters")
+    @Size(min=5, message="Password must be at least {min} characters")
+    @Size(max=100, message="Password must be maximium {max} characters")
     private String password;
     private LocalDateTime dataCriacao;
     private List<Pedido> pedidos = new ArrayList<>();

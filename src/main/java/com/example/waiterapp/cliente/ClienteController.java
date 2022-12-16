@@ -1,5 +1,6 @@
 package com.example.waiterapp.cliente;
 
+import com.example.waiterapp.config.GlobalExceptionHandler;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Base64;
@@ -51,7 +53,11 @@ public class ClienteController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+
+        if (!ClienteService.valida(clienteDTO.getCpf())){
+            return ResponseEntity.status(422).body("CPF_NOT_VALID");
+        }
 
         if(clienteDTO.getCpf() != null) {
             Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
