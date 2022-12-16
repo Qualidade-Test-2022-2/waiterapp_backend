@@ -70,20 +70,24 @@ public class WaiterAppApplication implements CommandLineRunner {
         Cardapio cardapio2 = new Cardapio(null, LocalDateTime.now(), "Comida brasileira", "Coletanea com os pratos mais tipicos do brasil");
 
 
-        Item bebida1 = new Bebida(null, "Coca Cola", null, LocalDateTime.now(), 15.0D, "2L");
-        Item bebida2 = new Bebida(null, "Guarana Antartica", "Melhor refrigerante brasileiro", LocalDateTime.now(), 15.0D, "2,5L");
+        Item bebida1 = new Bebida(null, "Coca Cola", null, LocalDateTime.now(), 15.0D, 20, true,"2L");
+        Item bebida2 = new Bebida(null, "Guarana Antartica", "Melhor refrigerante brasileiro", LocalDateTime.now(), 15.0D, 20, true, "2,5L");
         Item prato1 = new Prato(
                 null,
                 "Frango com quiabo",
                 "A clássica receita com todos aqueles detalhes que fazem a diferença. As coxas e sobrecoxas são braseadas, cozinham com pouco líquido, para que a carne fique úmida e a pele dourada.",
                 LocalDateTime.now(),
-                59.99D);
+                59.99D,
+                10,
+                true);
         Item prato2 = new Prato(
                 null,
                 "Bobó de camarão ",
                 "O clássico baiano ganhou mais sabor com leite de coco caseiro e caldo de camarão, preparado com as cascas. Para ficar ainda mais arretado, sirva com farofa de coco, arroz branco e folhas de coentro.",
                 LocalDateTime.now(),
-                39.99D);
+                39.99D,
+                10,
+                true);
 
         cardapio1.getItems().addAll(Arrays.asList(bebida1, bebida2, prato1));
         cardapio2.getItems().addAll(Arrays.asList(bebida1, prato2));

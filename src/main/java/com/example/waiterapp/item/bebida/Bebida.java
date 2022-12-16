@@ -17,8 +17,8 @@ public class Bebida extends Item {
     public Bebida() {
     }
 
-    public Bebida(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco, String quantidade) {
-        super(id, nome, descricao, dataCriacao, preco);
+    public Bebida(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco, Integer qtdItem, Boolean disponivel,String quantidade) {
+        super(id, nome, descricao, dataCriacao, preco, qtdItem, disponivel);
         this.quantidade = quantidade;
     }
 

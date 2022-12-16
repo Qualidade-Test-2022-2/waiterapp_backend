@@ -25,8 +25,8 @@ public class Prato extends Item {
     public Prato() {
     }
 
-    public Prato(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco) {
-        super(id, nome, descricao, dataCriacao, preco);
+    public Prato(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco, Integer qtdItem, Boolean disponivel) {
+        super(id, nome, descricao, dataCriacao, preco, qtdItem, disponivel);
     }
 
     public List<Ingrediente> getIngredientes() {

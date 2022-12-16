@@ -2,6 +2,7 @@ package com.example.waiterapp.item;
 
 import com.example.waiterapp.cardapio.Cardapio;
 import com.example.waiterapp.itempedido.ItemPedido;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,6 +17,8 @@ public class ItemDTO implements Serializable {
     private String descricao;
     private LocalDateTime dataCriacao;
     private Double preco;
+    private Integer qtdItem;
+    private Boolean disponivel;
     private List<Cardapio> cardapios = new ArrayList<>();
     private Set<ItemPedido> items = new HashSet<>();
 
@@ -28,6 +31,8 @@ public class ItemDTO implements Serializable {
         this.descricao = item.getDescricao();
         this.dataCriacao = item.getDataCriacao();
         this.preco = item.getPreco();
+        this.qtdItem = item.getQtdItem();
+        this.disponivel = item.getDisponivel();
     }
 
     public Set<ItemPedido> getItems() {
@@ -85,5 +90,20 @@ public class ItemDTO implements Serializable {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
-    
+
+    public Integer getQtdItem() {
+        return qtdItem;
+    }
+
+    public void setQtdItem(Integer qtdItem) {
+        this.qtdItem = qtdItem;
+    }
+
+    public Boolean getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Boolean disponivel) {
+        this.disponivel = disponivel;
+    }
 }

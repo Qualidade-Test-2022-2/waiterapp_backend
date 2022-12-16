@@ -24,6 +24,12 @@ public class Item implements Serializable {
     @Column(nullable = false)
     private Double preco;
 
+    @Column(nullable = false)
+    private Integer qtdItem;
+
+    @Column(nullable = false)
+    private Boolean disponivel;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "items")
     private List<Cardapio> cardapios = new ArrayList<>();
@@ -35,12 +41,14 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco) {
+    public Item(Long id, String nome, String descricao, LocalDateTime dataCriacao, Double preco, Integer qtdItem, Boolean disponivel) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.dataCriacao = dataCriacao;
         this.preco = preco;
+        this.qtdItem = qtdItem;
+        this.disponivel = disponivel;
     }
 
     public Set<ItemPedido> getItems() {
@@ -99,6 +107,22 @@ public class Item implements Serializable {
         this.preco = preco;
     }
 
+    public Integer getQtdItem() {
+        return qtdItem;
+    }
+
+    public void setQtdItem(Integer qtdItem) {
+        this.qtdItem = qtdItem;
+    }
+
+    public Boolean getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,6 +144,8 @@ public class Item implements Serializable {
                 ", descricao='" + descricao + '\'' +
                 ", dataCriacao=" + dataCriacao +
                 ", preco=" + preco +
+                ", qtdItem=" + qtdItem +
+                ", disponivel=" + disponivel +
                 '}';
     }
 }

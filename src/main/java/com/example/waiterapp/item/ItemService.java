@@ -25,7 +25,7 @@ public class ItemService {
     }
 
     public Item transformarDTO(ItemDTO itemDTO){
-        Item item = new Item(itemDTO.getId(), itemDTO.getNome(), itemDTO.getDescricao(), itemDTO.getDataCriacao(), itemDTO.getPreco());
+        Item item = new Item(itemDTO.getId(), itemDTO.getNome(), itemDTO.getDescricao(), itemDTO.getDataCriacao(), itemDTO.getPreco(), itemDTO.getQtdItem(), itemDTO.getDisponivel());
         item.setCardapios(itemDTO.getCardapios());
         item.setItems(itemDTO.getItems());
 
@@ -44,6 +44,11 @@ public class ItemService {
     public Item insereItem(Item item){
         item.setId(null);
         item.setDataCriacao(LocalDateTime.now());
+        item.setDisponivel(false);
+
+        if(item.getQtdItem() > 0){
+            item.setDisponivel(true);
+        }
 
         return itemRepository.save(item);
     }

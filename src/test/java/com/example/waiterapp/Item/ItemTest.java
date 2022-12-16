@@ -14,20 +14,26 @@ import com.example.waiterapp.item.Item;
 public class ItemTest {
   private static Item item;
 
-  public static Item criaItem(int id, String name, String descrição, double preco) {
+  public static Item criaItem(int id, String name, String descrição, double preco, int qtdItem) {
     LocalDateTime dataCriacao = LocalDateTime.now();
-    return new Item((long) id, name, descrição, dataCriacao, preco);
+    boolean disponivel = false;
+
+    if(qtdItem > 0 ){
+      disponivel = true;
+    }
+
+    return new Item((long) id, name, descrição, dataCriacao, preco, qtdItem, disponivel);
   }
 
   @BeforeAll
   public static void inicializaItem() {
-    item = criaItem(1, "Batata", "Batata frita", 10.00);
+    item = criaItem(1, "Batata", "Batata frita", 10.00, 10);
   }
 
   @DisplayName("Item#equals deve ser falso com itens diferentes")
   @Test
   public void equals_ItensDiferentes_False() {
-    Item item2 = criaItem(2, "Abacaxi", "Abacaxi fatiado", 5.00);
+    Item item2 = criaItem(2, "Abacaxi", "Abacaxi fatiado", 5.00, 10);
 
     assertFalse(item.equals(item2));
   }
