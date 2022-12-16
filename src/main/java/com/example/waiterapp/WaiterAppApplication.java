@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -109,8 +110,11 @@ public class WaiterAppApplication implements CommandLineRunner {
         itemRepository.saveAll(Arrays.asList(bebida1, bebida2, prato1, prato2));
         cardapioRepository.saveAll(Arrays.asList(cardapio1, cardapio2));
 
-        Cliente cliente1 = new Cliente(null, "Fernando", null, "123.123.123-12", LocalDateTime.now());
-        Cliente cliente2 = new Cliente(null, "Juliana", null, "000.000.000-01", LocalDateTime.now());
+        Cliente cliente1 = new Cliente(null, "Fernando", null, "12312312312", LocalDateTime.now());
+        Cliente cliente2 = new Cliente(null, "Juliana", null, "00000000001", LocalDateTime.now());
+
+        cliente1.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
+        cliente2.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
 
         Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), null);
         Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), null);

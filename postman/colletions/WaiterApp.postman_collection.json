@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1298e9c1-882a-4d68-8248-21b0845495e9",
+		"_postman_id": "aef6c57a-d8fa-47bf-806f-e1680bce3ab9",
 		"name": "WaiterApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -65,7 +65,6 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.titulo).to.eq('Promoção do dia');",
 									"    pm.expect(jsonData.descricao).to.eq('Os pratos mais pedidos com desconto');",
-									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T15:16:45.421885');",
 									"});",
 									"pm.test(\"Retorna itens do cardápio\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -80,10 +79,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios/1",
+							"raw": "localhost:8080/api/cardapios/1",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"cardapios",
@@ -122,10 +122,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios",
+							"raw": "localhost:8080/api/cardapios",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"cardapios"
@@ -162,14 +163,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios/4",
+							"raw": "localhost:8080/api/cardapios/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"cardapios",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -194,14 +196,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios/4",
+							"raw": "localhost:8080/api/cardapios/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"cardapios",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -243,10 +246,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/garcons",
+							"raw": "localhost:8080/api/garcons",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"garcons"
@@ -269,7 +273,6 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.nome).to.eq('João');",
 									"    pm.expect(jsonData.cpf).to.eq(null);",
-									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T17:42:18.757837');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -280,10 +283,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/garcons/1",
+							"raw": "localhost:8080/api/garcons/1",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"garcons",
@@ -322,10 +326,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/garcons",
+							"raw": "localhost:8080/api/garcons",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"garcons"
@@ -362,10 +367,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/garcons/3",
+							"raw": "localhost:8080/api/garcons/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"garcons",
@@ -394,14 +400,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/itens/5",
+							"raw": "localhost:8080/api/garcons/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
-								"itens",
-								"5"
+								"garcons",
+								"3"
 							]
 						}
 					},
@@ -446,10 +453,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/pedidos",
+							"raw": "localhost:8080/api/pedidos",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"pedidos"
@@ -470,7 +478,6 @@
 									"});",
 									"pm.test(\"Retorna informações do pedido\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.dataCriacao).to.eq(\"2022-11-27T17:42:18.757837\");",
 									"    pm.expect(jsonData.estado).to.eq(\"FECHADO\");",
 									"    pm.expect(jsonData.precoTotal).to.eq(149.98000000000002);",
 									"    pm.expect(jsonData.notaAtendimento).to.eq(10);",
@@ -486,10 +493,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/pedidos/1",
+							"raw": "localhost:8080/api/pedidos/1",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"pedidos",
@@ -528,10 +536,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/pedidos",
+							"raw": "localhost:8080/api/pedidos",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"pedidos"
@@ -568,14 +577,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/pedidos/7",
+							"raw": "localhost:8080/api/pedidos/2",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"pedidos",
-								"7"
+								"2"
 							]
 						}
 					},
@@ -600,14 +610,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/pedidos/6",
+							"raw": "localhost:8080/api/pedidos/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"pedidos",
-								"6"
+								"3"
 							]
 						}
 					},
@@ -650,10 +661,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/itens",
+							"raw": "localhost:8080/api/itens",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"itens"
@@ -676,7 +688,6 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.nome).to.eq('Coca Cola');",
 									"    pm.expect(jsonData.descricao).to.eq(null);",
-									"    pm.expect(jsonData.dataCriacao).to.eq('2022-11-27T17:42:18.662833');",
 									"    pm.expect(jsonData.preco).to.eq(15.0);",
 									"});"
 								],
@@ -688,10 +699,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/itens/1",
+							"raw": "localhost:8080/api/itens/1",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"itens",
@@ -730,10 +742,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/itens",
+							"raw": "localhost:8080/api/itens",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"itens"
@@ -770,10 +783,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/itens/5",
+							"raw": "localhost:8080/api/itens/5",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"itens",
@@ -802,14 +816,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/garcons/3",
+							"raw": "localhost:8080/api/itens/5",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
-								"garcons",
-								"3"
+								"itens",
+								"5"
 							]
 						}
 					},
@@ -821,7 +836,7 @@
 			"name": "Clientes",
 			"item": [
 				{
-					"name": "Retorna garçons",
+					"name": "Retorna clientes",
 					"event": [
 						{
 							"listen": "test",
@@ -877,7 +892,7 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.nome).to.eq('Fernando');",
 									"    pm.expect(jsonData.email).to.eq(null);",
-									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"    pm.expect(jsonData.cpf).to.eq('12312312312');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -888,10 +903,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/clientes/1",
+							"raw": "localhost:8080/api/clientes/1",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"clientes",
@@ -915,7 +931,7 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.nome).to.eq('Fernando');",
 									"    pm.expect(jsonData.email).to.eq(null);",
-									"    pm.expect(jsonData.cpf).to.eq('123.123.123-12');",
+									"    pm.expect(jsonData.cpf).to.eq('12312312312');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -927,7 +943,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cpf\": \"123.123.123-12\"\n}",
+							"raw": "{\n    \"cpf\": \"12312312312\",\n    \"password\": 12345678\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -935,10 +951,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/clientes/cpf",
+							"raw": "localhost:8080/api/clientes/cpf",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"clientes",
@@ -974,7 +991,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Rafael 2\",\n    \"cpf\": \"100.100.100-12\"\n}",
+							"raw": "{\n    \"nome\": \"Tais 3\",\n    \"cpf\": \"10010010019\",\n    \"email\": \"tais@gmail.com\",\n    \"password\": 12345\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -982,13 +999,70 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/clientes",
+							"raw": "localhost:8080/api/clientes",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
 								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"pm.test(\"Retorna o cliente logado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eq('Fernando');",
+									"    pm.expect(jsonData.email).to.eq(null);",
+									"    pm.expect(jsonData.cpf).to.eq('12312312312');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MTIzMTIzMTIzMTI6MTIzNDU2Nzg=",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/clientes/auth/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"auth",
+								""
 							]
 						}
 					},
@@ -1014,7 +1088,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Cardápio de batatas 2\",\n    \"descricao\": \"Batatas muito bem feitas\"\n}",
+							"raw": "{\n    \"nome\": \"Tais 1\",\n    \"cpf\": \"10010010017\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1022,14 +1096,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios/4",
+							"raw": "localhost:8080/api/clientes/3",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
-								"cardapios",
-								"4"
+								"clientes",
+								"3"
 							]
 						}
 					},
@@ -1054,14 +1129,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/cardapios/4",
+							"raw": "localhost:8080/api/clientes/7",
 							"host": [
-								"{{API_URL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"api",
-								"cardapios",
-								"4"
+								"clientes",
+								"7"
 							]
 						}
 					},
@@ -1085,8 +1161,8 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"pm.test(\"Response time is less than 100ms\", () => {",
-					"  pm.expect(pm.response.responseTime).to.be.below(100);",
+					"pm.test(\"Response time is less than 200ms\", () => {",
+					"  pm.expect(pm.response.responseTime).to.be.below(200);",
 					"});"
 				]
 			}
