@@ -86,6 +86,8 @@ class GarcomServiceTest {
     @Test
     @DisplayName("should transform a GarcomDTO into a Garcom")
     public void transformGarcomDTOIntoGarcom() {
+
+      when(garcomDTO.getPassword()).thenReturn("123456");
       Garcom garcomTransformado = garcomService.transformarDTO(garcomDTO);
 
       assertAll(
