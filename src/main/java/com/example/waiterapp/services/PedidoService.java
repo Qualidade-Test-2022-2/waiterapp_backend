@@ -18,24 +18,21 @@ import java.util.Optional;
 
 @Service
 public class PedidoService {
-    
+
     private PedidoRepository pedidoRepository;
     private ItemPedidoRepository itemPedidoRepository;
     private ItemService itemService;
-    private ClienteService clienteService;
 
     @Autowired
     public PedidoService(
             PedidoRepository pedidoRepository,
             PagamentoRepository pagamentoRepository,
             ItemPedidoRepository itemPedidoRepository,
-            ItemService itemService,
-            ClienteService clienteService
+            ItemService itemService
     ) {
         this.pedidoRepository = pedidoRepository;
         this.itemPedidoRepository = itemPedidoRepository;
         this.itemService = itemService;
-        this.clienteService = clienteService;
     }
 
     public Pedido transformarDTO(PedidoDTO pedidoDTO){
@@ -70,8 +67,6 @@ public class PedidoService {
         pedido.setId(null);
         pedido.setDataCriacao(LocalDateTime.now());
         pedido.setEstado(Estado.EM_PREPARACAO);
-        pedido.setCliente(clienteService.retornaClienteById(pedido.getCliente().getId()));
-        pedido = pedidoRepository.save(pedido);
 
         for (ItemPedido ip : pedido.getItems()) {
             ip.setItem(itemService.retornaItemById(ip.getItem().getId()));

@@ -3,8 +3,8 @@ import com.example.waiterapp.interfaces.CpfValidatorContraint;
 import com.example.waiterapp.models.Pedido;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,15 +14,26 @@ public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank
+    @Size(min=3, message="Name must be at least {min} characters")
+    @Size(max=100, message="Name must be maximium {max} characters")
     private String nome;
+
+    @NotBlank
+    @Size(min=5, message="Email must be at least {min} characters")
+    @Size(max=100, message="Email must be maximium {max} characters")
     private String email;
 
+    @NotBlank
+    @Size(min=11, message="CPF must be at least {min} characters")
+    @Size(max=11, message="CPF field must be maximium {max} characters")
     @CpfValidatorContraint
     private String cpf;
 
-    @NotNull
-    @NotEmpty
     @NotBlank
+    @Size(min=5, message="Password must be at least {min} characters")
+    @Size(max=100, message="Password must be maximium {max} characters")
     private String password;
     private LocalDateTime dataCriacao;
     private List<Pedido> pedidos = new ArrayList<>();

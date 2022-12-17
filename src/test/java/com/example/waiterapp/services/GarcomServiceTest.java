@@ -96,6 +96,7 @@ class GarcomServiceTest {
     @Disabled
     @DisplayName("should transform a GarcomDTO into a Garcom")
     public void transformGarcomDTOIntoGarcom() {
+      when(garcomDTO.getPassword()).thenReturn("123456");
       Garcom garcomTransformado = garcomService.transformarDTO(garcomDTO);
       assertEquals(garcomDTO.getId(), garcomTransformado.getId());
       assertEquals(garcomDTO.getNome(), garcomTransformado.getNome());
@@ -103,7 +104,6 @@ class GarcomServiceTest {
       assertEquals(garcomDTO.getEmail(), garcomTransformado.getEmail());
       assertEquals(garcomDTO.getPedidos(), garcomTransformado.getPedidos());
       assertTrue(BCrypt.checkpw("123456", garcomTransformado.getPassword()));
-
     }
   }
 

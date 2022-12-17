@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,11 +36,6 @@ public class PedidoTest {
     Set<ItemPedido> items = new HashSet<ItemPedido>(Arrays.asList(batata, tomate));
     pedido.setItems(items);
   }
-
-  @DisplayName("Pedido#setPrecoTotal deve calcular o preço total do pedido")
-  @Disabled("must be implemented")
-  @Test
-  public void setPrecoTotalSomatoriaDosItens() {}
 
   @DisplayName("Pedido#equals deve ser falso com pedidos diferentes")
   @Test
