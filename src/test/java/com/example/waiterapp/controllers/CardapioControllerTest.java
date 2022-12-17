@@ -18,13 +18,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
 
 import com.example.waiterapp.models.Cardapio;
 import com.example.waiterapp.dto.CardapioDTO;
 import com.example.waiterapp.services.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
-import com.example.waiterapp.utils.MockForServletUriComponentsBuilderHelper;
 
 @DisplayName("CardapioController's tests")
 public class CardapioControllerTest {
@@ -97,10 +95,8 @@ public class CardapioControllerTest {
 
   @Nested
   @DisplayName("CardapioController#insereCardapio")
-  // @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InsereCardapioTest {
     CardapioDTO cardapioDTO;
-    ResponseEntity<Object> response;
 
     @BeforeEach
     public void mockCardapioServiceInsereCardapio() {
@@ -108,13 +104,18 @@ public class CardapioControllerTest {
 
       when(cardapioService.transformarDTO(any(CardapioDTO.class))).thenReturn(cardapio1);
       when(cardapioService.insereCardapio(any(Cardapio.class))).thenReturn(cardapio1);
-      response = MockForServletUriComponentsBuilderHelper.mockRequestResponse(cardapio1);
     }
 
     @Test
     @DisplayName("should return 201")
     public void statusCode201() {
-      assertEquals(cardapioController.insereCardapio(cardapioDTO), response);
+      assertEquals(201, cardapioController.insereCardapio(cardapioDTO).getStatusCode().value());
+    }
+
+    @Test
+    @DisplayName("should return created cardapio")
+    public void returnCardapio() {
+      assertEquals(cardapio1, cardapioController.insereCardapio(cardapioDTO).getBody());
     }
   }
 
