@@ -42,6 +42,7 @@ public class ClienteService {
                 clienteDTO.getDataCriacao()
         );
         cliente.setPedidos(clienteDTO.getPedidos());
+        cliente.setPassword(BCrypt.hashpw(clienteDTO.getPassword(), BCrypt.gensalt()));
         return cliente;
     }
 
@@ -59,14 +60,12 @@ public class ClienteService {
 
     public void inserePedidosCliente(Long idCliente, List<Pedido> pedidos){
         Cliente cliente = retornaClienteById(idCliente);
-
         cliente.setPedidos(pedidos);
     }
 
-    public Cliente insereCliente(Cliente cliente, String password) {
+    public Cliente insereCliente(Cliente cliente) {
         cliente.setId(null);
         cliente.setDataCriacao(LocalDateTime.now());
-        cliente.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         return clienteRepository.save(cliente);
     }
 
@@ -86,10 +85,10 @@ public class ClienteService {
     public Cliente retornaClienteByCpf(String cpf) {
         return clienteRepository.findByCpf(cpf).orElse(null);
     }
-    
-    public static boolean valida(String cpf) { 
-        CPFValidator cpfValidator = new CPFValidator(); 
-        List<ValidationMessage> erros = cpfValidator.invalidMessagesFor(cpf); 
+
+    public static boolean valida(String cpf) {
+        CPFValidator cpfValidator = new CPFValidator();
+        List<ValidationMessage> erros = cpfValidator.invalidMessagesFor(cpf);
         if(erros.size() > 0) return false;
         return true;
     }

@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Base64;
 import java.util.List;
 
@@ -49,33 +47,16 @@ public class ClienteController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
-
-        if (!ClienteService.valida(clienteDTO.getCpf())){
-            return ResponseEntity.status(422).body("CPF_NOT_VALID");
+    public ResponseEntity<Cliente> insereCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+        Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
+        if(cliente != null) {
+            return ResponseEntity.ok().body(cliente);
         }
 
-        if(clienteDTO.getCpf() != null) {
-            Cliente cliente = clienteService.retornaClienteByCpf(clienteDTO.getCpf());
-            if(cliente != null){
-                return ResponseEntity.ok().body(cliente);
-            }
-        }
+        cliente = clienteService.transformarDTO(clienteDTO);
+        cliente = clienteService.insereCliente(cliente);
 
-        if(!clienteDTO.getEmail().contains("@")) {
-            return ResponseEntity.badRequest().body("email invalid");
-        }
-
-        Cliente cliente = clienteService.transformarDTO(clienteDTO);
-        cliente = clienteService.insereCliente(cliente, clienteDTO.getPassword());
-
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(cliente.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).body(cliente);
+        return ResponseEntity.created(null).body(cliente);
     }
 
     @RequireAuthentication
