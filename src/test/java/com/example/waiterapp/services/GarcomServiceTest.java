@@ -1,8 +1,8 @@
 package com.example.waiterapp.services;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -10,6 +10,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.example.waiterapp.models.Garcom;
+import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.dto.GarcomDTO;
 import com.example.waiterapp.repositories.GarcomRepository;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
@@ -77,22 +80,33 @@ class GarcomServiceTest {
   }
 
   @Nested
-  @DisplayName("GarcomService#transformarDTO")
+  @DisplayName("ClienteService#transformarDTO")
   class TransformarDTOTest {
     @Mock
     GarcomDTO garcomDTO = mock(GarcomDTO.class);
+
+    @BeforeEach
+    public void mockGarcomDTO() {
+      when(garcomDTO.getId()).thenReturn(1L);
+      when(garcomDTO.getNome()).thenReturn("Garcom 1");
+      when(garcomDTO.getDataCriacao()).thenReturn(LocalDateTime.of(2022, 01, 01, 00, 00));
+      when(garcomDTO.getEmail()).thenReturn("cliente1@email.com");
+      when(garcomDTO.getCpf()).thenReturn("11111111111");
+      when(garcomDTO.getPedidos()).thenReturn(new ArrayList<Pedido>());
+      when(garcomDTO.getPassword()).thenReturn("123456");
+    }
 
     @Test
     @DisplayName("should transform a GarcomDTO into a Garcom")
     public void transformGarcomDTOIntoGarcom() {
       Garcom garcomTransformado = garcomService.transformarDTO(garcomDTO);
+      assertEquals(garcomDTO.getId(), garcomTransformado.getId());
+      assertEquals(garcomDTO.getNome(), garcomTransformado.getNome());
+      assertEquals(garcomDTO.getDataCriacao(), garcomTransformado.getDataCriacao());
+      assertEquals(garcomDTO.getEmail(), garcomTransformado.getEmail());
+      assertEquals(garcomDTO.getPedidos(), garcomTransformado.getPedidos());
+      assertTrue(BCrypt.checkpw("123456", garcomTransformado.getPassword()));
 
-      assertAll(
-        () -> assertEquals(garcomTransformado.getId(), garcomDTO.getId()),
-        () -> assertEquals(garcomTransformado.getNome(), garcomDTO.getNome()),
-        () -> assertEquals(garcomTransformado.getDataCriacao(), garcomDTO.getDataCriacao()),
-        () -> assertEquals(garcomTransformado.getCpf(), garcomDTO.getCpf())
-      );
     }
   }
 

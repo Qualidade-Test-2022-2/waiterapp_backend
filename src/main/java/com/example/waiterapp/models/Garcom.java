@@ -19,6 +19,7 @@ public class Garcom implements Serializable,Identifiable {
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
     private String cpf;
+    private String email;
     private String password;
 
     @JsonIgnore
@@ -28,11 +29,12 @@ public class Garcom implements Serializable,Identifiable {
     public Garcom() {
     }
 
-    public Garcom(Long id, String nome, LocalDateTime dataCriacao, String cpf) {
+    public Garcom(Long id, String nome, LocalDateTime dataCriacao, String cpf, String email) {
         this.id = id;
         this.nome = nome;
         this.dataCriacao = dataCriacao;
         this.cpf = cpf;
+        this.email = email;
     }
 
     public List<Pedido> getPedidos() {
@@ -57,6 +59,14 @@ public class Garcom implements Serializable,Identifiable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
