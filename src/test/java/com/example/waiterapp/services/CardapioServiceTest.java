@@ -1,6 +1,5 @@
 package com.example.waiterapp.services;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -9,6 +8,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,17 +62,25 @@ class CardapioServiceTest {
     @Mock
     CardapioDTO cardapioDTO = mock(CardapioDTO.class);
 
+    @BeforeEach
+    public void mockCardapioDTO() {
+      when(cardapioDTO.getId()).thenReturn(1L);
+      when(cardapioDTO.getTitulo()).thenReturn("Cardapio 1");
+      when(cardapioDTO.getDataCriacao()).thenReturn(LocalDateTime.of(2022, 01, 01, 00, 00));
+      when(cardapioDTO.getDescricao()).thenReturn("Cardapio 1 muito bom");
+      when(cardapioDTO.getItems()).thenReturn(new ArrayList<>());
+    }
+
     @Test
     @DisplayName("should transform a CardapioDTO into a Cardapio")
     public void transformCardapioDTOIntoCardapio() {
       Cardapio cardapioTransformado = cardapioService.transformarDTO(cardapioDTO);
 
-      assertAll(
-        () -> assertEquals(cardapioTransformado.getId(), cardapioDTO.getId()),
-        () -> assertEquals(cardapioTransformado.getTitulo(), cardapioDTO.getTitulo()),
-        () -> assertEquals(cardapioTransformado.getDataCriacao(), cardapioDTO.getDataCriacao()),
-        () -> assertEquals(cardapioTransformado.getDescricao(), cardapioDTO.getDescricao())
-      );
+      assertEquals(cardapioTransformado.getId(), cardapioDTO.getId());
+      assertEquals(cardapioTransformado.getTitulo(), cardapioDTO.getTitulo());
+      assertEquals(cardapioTransformado.getDataCriacao(), cardapioDTO.getDataCriacao());
+      assertEquals(cardapioTransformado.getDescricao(), cardapioDTO.getDescricao());
+      assertEquals(cardapioTransformado.getItems(), cardapioDTO.getItems());
     }
   }
 
