@@ -12,6 +12,17 @@ services:
       POSTGRES_HOST: jdbc:postgresql://postgres:5432/postgres
       APP_PORT: 8080
 
+  frontend:
+    container_name: frontend_react
+    build: ./frontend_react
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
   postgres:
     container_name: postgres
     ports:
