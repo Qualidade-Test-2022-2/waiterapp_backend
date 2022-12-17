@@ -30,6 +30,54 @@ describe("Funcionalidade de seleção de itens (Garçom)", () => {
   })
 })
 
+describe("Funcionalidade de cadastro (Garçom)", () => {
+  it('Deve ser possível carregar a página inicial', () => {
+    cy.visit('/');
+    cy.contains("Faça login");
+  })
+  it('Deve ser possível logar com um garçom já existente', () => {
+    cy.get("div[id$='waiter']").click();
+    cy.get("input[type='text']").type("11111111111");
+    cy.get("input[type='password']").type("12345678");
+    cy.get("input[type='submit']").click();
+  })
+  it('Deve ser possível para um garçom já existente cadastrar um novo colega de trabalho', () => {
+    cy.get("div[class='header__menu'] a").click();
+    cy.contains("Cadastre um novo garçom");
+    cy.get("html > body > div > div > div > form > fieldset:nth-of-type(1) > input")
+        .type("João Paulo");
+    cy.get("html > body > div > div > div > form > fieldset:nth-of-type(2) > input")
+        .type("yago@gmail.com");
+    cy.get("html > body > div > div > div > form > fieldset:nth-of-type(3) > input")
+        .type("44045252061");
+    cy.get("input[type='password']")
+        .type("87654321")
+    cy.get("input[type='submit']").click();
+  })
+
+  it('Deve ser possível para o garçom atual realizar o logout', () => {
+    cy.get("div[class$='logout-button']").click();
+  })
+
+  it('Deve ser possível logar com o usuário novo', () => {
+    cy.get("div[id$='waiter']").click();
+    cy.get("input[type='text']").type("44045252061");
+    cy.get("input[type='password']").type("87654321");
+    cy.get("input[type='submit']").click();
+    cy.contains("João Paulo")
+  })
+
+  it("NÃO deve ser possível para o novo garçom selecionar pedidos", () => {
+    cy.get('html > body > div > div > div > div > div > div:nth-of-type(1)')
+        .should('have.css', 'cursor','not-allowed');
+  })
+
+  it("Deve ser possíve para o novo garçom realizar o logout", () => {
+    cy.get("div[class$='logout-button']").click();
+    cy.contains("Faça login");
+  })
+});
+
 // Funcionalidades de Cliente
 describe("Funcionalidade de Login (Cliente)", () => {
   it('Deve ser possível carregar a página inicial', () => {
