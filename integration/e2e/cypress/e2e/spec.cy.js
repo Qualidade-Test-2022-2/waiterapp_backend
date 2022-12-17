@@ -37,7 +37,7 @@ describe("Funcionalidade de Login (Cliente)", () => {
   })
   it("Deve ser possível para o Cliente realizar o login", () => {
     cy.get("div[id$='login']").click();
-    cy.get("input[type='text']").type("11111111111");
+    cy.get("input[type='text']").type("12312312312");
     cy.get("input[type='password']").type("12345678");
     cy.get("input[type='submit']").click();
   })
