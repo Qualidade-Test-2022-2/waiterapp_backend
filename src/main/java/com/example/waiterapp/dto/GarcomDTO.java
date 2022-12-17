@@ -19,6 +19,7 @@ public class GarcomDTO implements Serializable {
     @Size(min=3, message="Name must be at least {min} characters")
     @Size(max=100, message="Name must be maximium {max} characters")
     private String nome;
+    private String email;
     private LocalDateTime dataCriacao;
 
     @CpfValidatorContraint
@@ -76,6 +77,14 @@ public class GarcomDTO implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Pedido> getPedidos() {

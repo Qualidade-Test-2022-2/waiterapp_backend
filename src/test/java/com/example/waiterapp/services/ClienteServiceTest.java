@@ -88,7 +88,6 @@ class ClienteServiceTest {
       assertEquals(clienteDTO.getEmail(), clienteTransformado.getEmail());
       assertEquals(clienteDTO.getPedidos(), clienteTransformado.getPedidos());
       assertTrue(BCrypt.checkpw("123456", clienteTransformado.getPassword()));
-
     }
   }
 
