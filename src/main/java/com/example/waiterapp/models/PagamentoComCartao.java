@@ -1,6 +1,5 @@
 package com.example.waiterapp.models;
 
-import com.example.waiterapp.models.Pagamento;
 import com.example.waiterapp.enums.Estado;
 
 import javax.persistence.Entity;

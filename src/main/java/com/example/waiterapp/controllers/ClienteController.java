@@ -1,26 +1,20 @@
 package com.example.waiterapp.controllers;
 
-import com.example.waiterapp.config.GlobalExceptionHandler;
 import com.example.waiterapp.models.Cliente;
 import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin(origins = "*")
 @RestController
