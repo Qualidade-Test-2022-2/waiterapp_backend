@@ -121,11 +121,4 @@ public class Cliente implements Serializable, Identifiable {
                 ", password=" + password +
                 '}';
     }
-
-    public static boolean valida(String cpf) {
-        CPFValidator cpfValidator = new CPFValidator();
-        List<ValidationMessage> erros = cpfValidator.invalidMessagesFor(cpf);
-        if(erros.size() > 0) return false;
-        return true;
-    }
 }

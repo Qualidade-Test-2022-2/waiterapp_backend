@@ -1,4 +1,5 @@
 package com.example.waiterapp.dto;
+import com.example.waiterapp.interfaces.CpfValidatorContraint;
 import com.example.waiterapp.models.Pedido;
 
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,8 @@ public class ClienteDTO implements Serializable {
     private Long id;
     private String nome;
     private String email;
+
+    @CpfValidatorContraint
     private String cpf;
 
     @NotNull
