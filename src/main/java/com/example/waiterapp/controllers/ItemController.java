@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -44,27 +42,20 @@ public class ItemController {
     }
 
     @PostMapping(produces = "application/json")
-    public ResponseEntity<Void> insereItem(@Valid @RequestBody ItemDTO itemDTO){
+    public ResponseEntity<Item> insereItem(@Valid @RequestBody ItemDTO itemDTO){
         Item item = itemService.transformarDTO(itemDTO);
         item = itemService.insereItem(item);
-
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(item.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(null).body(item);
     }
 
     @PutMapping(value = "/{idItem}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaItem(@Valid @RequestBody ItemDTO itemDTO, @PathVariable Long idItem){
+    public ResponseEntity<Item> atualizaItem(@Valid @RequestBody ItemDTO itemDTO, @PathVariable Long idItem){
         Item item = itemService.transformarDTO(itemDTO);
 
         item.setId(idItem);
         try{
             itemService.atualizaItem(item);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(item);
         }catch (ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }
