@@ -1,5 +1,6 @@
 package com.example.waiterapp.validators;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ class ValidCpfValidatorTest {
 
   @Test
   void isValid_False_InvalidCpf() {
-    String cpf = "71827073063";
-    assertTrue(validCpfValidator.isValid(cpf, null));
+    String cpf = "11111111112";
+    assertFalse(validCpfValidator.isValid(cpf, null));
   }
 }
