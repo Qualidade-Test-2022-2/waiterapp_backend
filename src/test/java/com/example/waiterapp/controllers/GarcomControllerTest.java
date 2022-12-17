@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -94,7 +93,6 @@ class GarcomControllerTest {
   @DisplayName("GarcomController#retornaGarcomById")
   class RetornaGarcomByIdTest {
     @Test
-    @Disabled("must be fixed")
     @DisplayName("should return 200 when garcom exists")
     void statusCode200_WhenGarconsExists() {
       when(garcomService.retornaGarcomById(1L)).thenReturn(garcom1);
