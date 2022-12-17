@@ -1,4 +1,4 @@
-package com.example.waiterapp.Item;
+package com.example.waiterapp.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import com.example.waiterapp.models.Item;
-import com.example.waiterapp.controllers.ItemController;
 import com.example.waiterapp.dto.ItemDTO;
 import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
@@ -105,7 +104,6 @@ public class ItemControllerTest {
     public void mockItemServiceInsereItem() {
       itemDTO = mock(ItemDTO.class);
       when(itemService.insereItem(any(Item.class))).thenReturn(item1);
-      // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
     }
 
     @Test

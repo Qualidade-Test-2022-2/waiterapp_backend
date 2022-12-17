@@ -1,4 +1,4 @@
-package com.example.waiterapp.Cliente;
+package com.example.waiterapp.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import com.example.waiterapp.models.Cliente;
-import com.example.waiterapp.controllers.ClienteController;
 import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;

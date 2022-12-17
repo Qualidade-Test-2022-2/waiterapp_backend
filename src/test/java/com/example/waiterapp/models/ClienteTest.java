@@ -1,5 +1,5 @@
 
-package com.example.waiterapp.Cliente;
+package com.example.waiterapp.models;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.example.waiterapp.models.Cliente;
 
 @DisplayName("Testes dos métodos da classe Cliente")
 public class ClienteTest {
