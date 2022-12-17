@@ -11,6 +11,6 @@ run-postman-tests:
 	docker-compose -f postman/docker-compose-postman-tests.yml run postman
 
 build-frontend:
-	cd frontend && ng build
-	rm -rf ./src/main/resources/static/*
-	mv ./frontend/dist/waiter-app/* ./src/main/static
+	cd frontend_react && yarn build
+	rm -rf ./src/main/resources/static
+	mv ./frontend_react/build ./src/main/resources/static
