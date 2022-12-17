@@ -13,20 +13,20 @@ import org.junit.jupiter.api.Test;
 public class GarcomTest {
   private static Garcom garcom;
 
-  public static Garcom criaGarcom(int id, String name, String cpf) {
+  public static Garcom criaGarcom(int id, String name, String cpf, String email) {
     LocalDateTime dataCriacao = LocalDateTime.now();
-    return new Garcom((long) id, name, dataCriacao, cpf);
+    return new Garcom((long) id, name, dataCriacao, cpf, email);
   }
 
   @BeforeAll
   public static void inicializaGarcom() {
-    garcom = criaGarcom(1, "Rafael", "12345678910");
+    garcom = criaGarcom(1, "Rafael", "12345678910", "rafael@email.com");
   }
 
   @DisplayName("Garcom#equals deve ser falso com garçons diferentes")
   @Test
   public void equals_GarconsDiferentes_False() {
-    Garcom garcom2 = criaGarcom(2, "Tais", "11111111111");
+    Garcom garcom2 = criaGarcom(2, "Tais", "11111111111", "tais@email.com");
 
     assertFalse(garcom.equals(garcom2));
   }
