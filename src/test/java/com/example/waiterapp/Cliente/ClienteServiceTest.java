@@ -1,33 +1,35 @@
 package com.example.waiterapp.Cliente;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import com.example.waiterapp.models.Cliente;
 import com.example.waiterapp.dto.ClienteDTO;
+import com.example.waiterapp.models.Cliente;
+import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.repositories.ClienteRepository;
 import com.example.waiterapp.services.ClienteService;
-import com.example.waiterapp.models.Pedido;
 
 @DisplayName("ClienteService's tests")
 class ClienteServiceTest {
@@ -66,18 +68,28 @@ class ClienteServiceTest {
     @Mock
     ClienteDTO clienteDTO = mock(ClienteDTO.class);
 
+    @BeforeEach
+    public void mockClienteDTO() {
+      when(clienteDTO.getId()).thenReturn(1L);
+      when(clienteDTO.getNome()).thenReturn("Cliente 1");
+      when(clienteDTO.getDataCriacao()).thenReturn(LocalDateTime.of(2022, 01, 01, 00, 00));
+      when(clienteDTO.getEmail()).thenReturn("cliente1@email.com");
+      when(clienteDTO.getCpf()).thenReturn("11111111111");
+      when(clienteDTO.getPedidos()).thenReturn(new ArrayList<Pedido>());
+      when(clienteDTO.getPassword()).thenReturn("123456");
+    }
+
     @Test
     @DisplayName("should transform a ClienteDTO into a Cliente")
     public void transformClienteDTOIntoCliente() {
       Cliente clienteTransformado = clienteService.transformarDTO(clienteDTO);
+      assertEquals(clienteDTO.getId(), clienteTransformado.getId());
+      assertEquals(clienteDTO.getNome(), clienteTransformado.getNome());
+      assertEquals(clienteDTO.getDataCriacao(), clienteTransformado.getDataCriacao());
+      assertEquals(clienteDTO.getEmail(), clienteTransformado.getEmail());
+      assertEquals(clienteDTO.getPedidos(), clienteTransformado.getPedidos());
+      assertTrue(BCrypt.checkpw("123456", clienteTransformado.getPassword()));
 
-      assertAll(
-        () -> assertEquals(clienteTransformado.getId(), clienteDTO.getId()),
-        () -> assertEquals(clienteTransformado.getNome(), clienteDTO.getNome()),
-        () -> assertEquals(clienteTransformado.getDataCriacao(), clienteDTO.getDataCriacao()),
-        () -> assertEquals(clienteTransformado.getEmail(), clienteDTO.getEmail()),
-        () -> assertEquals(clienteTransformado.getCpf(), clienteDTO.getCpf())
-      );
     }
   }
 
@@ -87,8 +99,15 @@ class ClienteServiceTest {
     @Test
     @DisplayName("should return a cliente by id when it exists")
     public void returnClienteWhenClienteExist() {
-      when(clienteRepository.findById(anyLong())).thenReturn(java.util.Optional.of(cliente1));
-      assertEquals(clienteService.retornaClienteById(1L), cliente1);
+      when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(cliente1));
+      assertEquals(cliente1, clienteService.retornaClienteById(1L));
+    }
+
+    @Test
+    @DisplayName("should return null if cliente does not exist")
+    public void returnClienteWhenClienteDoesNotExist() {
+      when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
+      assertEquals(null, clienteService.retornaClienteById(1L));
     }
   }
 
@@ -99,7 +118,14 @@ class ClienteServiceTest {
     @DisplayName("should return a cliente by id when it exists")
     public void returnClienteWhenClienteExist() {
       when(clienteRepository.findByCpf(any(String.class))).thenReturn(java.util.Optional.of(cliente1));
-      assertEquals(clienteService.retornaClienteByCpf("11111111111"), cliente1);
+      assertEquals(cliente1, clienteService.retornaClienteByCpf("11111111111"));
+    }
+
+    @Test
+    @DisplayName("should return null if cliente does not exist")
+    public void returnClienteWhenClienteDoesNotExist() {
+      when(clienteRepository.findByCpf(anyString())).thenReturn(Optional.empty());
+      assertEquals(null, clienteService.retornaClienteByCpf("11111111111"));
     }
   }
 
@@ -110,7 +136,7 @@ class ClienteServiceTest {
     @DisplayName("should insert a cliente")
     public void insertCliente() {
       when(clienteRepository.save(cliente1)).thenReturn(cliente1);
-      assertEquals(clienteService.insereCliente(cliente1, "123123213"), cliente1);
+      assertEquals(clienteService.insereCliente(cliente1), cliente1);
     }
   }
 
@@ -168,24 +194,6 @@ class ClienteServiceTest {
     public void returnPedidosOfTheCliente() {
       when(clienteRepository.findById(anyLong())).thenReturn(java.util.Optional.of(cliente1));
       assertEquals(clienteService.retornaPedidosCliente(1L), cliente1.getPedidos());
-    }
-  }
-
-  @Nested
-  @DisplayName("ClienteService#inserePedidosCliente")
-  class InserePedidosClienteTest {
-    @Mock
-    ArrayList<Pedido> pedidos = new ArrayList<>(List.of(mock(Pedido.class), mock(Pedido.class)));
-
-    @Test
-    @Disabled("must be fixed")
-    @DisplayName("should update the cliente's pedidos list")
-    public void updateClientePedidos() {
-      when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(cliente1));
-      when(clienteService.retornaClienteById(anyLong())).thenReturn(cliente1);
-
-      clienteService.inserePedidosCliente(1L, pedidos);
-      assertEquals(pedidos, cliente1.getPedidos());
     }
   }
 }
