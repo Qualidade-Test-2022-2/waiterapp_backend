@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>ClienteService.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.example.waiterapp.services;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.example.waiterapp.dto.ClienteDTO;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.example.waiterapp.models.Cliente;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.example.waiterapp.models.Pedido;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.example.waiterapp.repositories.ClienteRepository;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.beans.factory.annotation.Autowired;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.dao.DataIntegrityViolationException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.security.crypto.bcrypt.BCrypt;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.stereotype.Service;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.time.LocalDateTime;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@Service</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class ClienteService {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private ClienteRepository clienteRepository;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Autowired</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public ClienteService(ClienteRepository clienteRepository) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_24'/>
+24
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_24'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable clienteRepository &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        this.clienteRepository = clienteRepository;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isClientAuthorized(Cliente cliente, String candidatePassword, String cpf) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_28'/>
+28
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_28'>2</a>
+<span>
+1. isClientAuthorized : removed call to com/example/waiterapp/models/Cliente::getPassword &rarr; NO_COVERAGE<br/>
+2. isClientAuthorized : removed call to org/springframework/security/crypto/bcrypt/BCrypt::checkpw &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        var isValiad = BCrypt.checkpw(candidatePassword, cliente.getPassword());</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_29'/>
+29
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_29'>2</a>
+<span>
+1. isClientAuthorized : removed call to com/example/waiterapp/models/Cliente::getCpf &rarr; NO_COVERAGE<br/>
+2. isClientAuthorized : removed call to java/util/Objects::equals &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        var isCPFCorrect = Objects.equals(cliente.getCpf(), cpf);</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_30'/>
+30
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_30'>9</a>
+<span>
+1. isClientAuthorized : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+2. isClientAuthorized : Substituted 0 with 1 &rarr; NO_COVERAGE<br/>
+3. isClientAuthorized : negated conditional &rarr; NO_COVERAGE<br/>
+4. isClientAuthorized : negated conditional &rarr; NO_COVERAGE<br/>
+5. isClientAuthorized : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+6. isClientAuthorized : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+7. isClientAuthorized : removed conditional - replaced equality check with true &rarr; NO_COVERAGE<br/>
+8. isClientAuthorized : removed conditional - replaced equality check with true &rarr; NO_COVERAGE<br/>
+9. isClientAuthorized : replaced boolean return with true for com/example/waiterapp/services/ClienteService::isClientAuthorized &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return isValiad &#38;&#38; isCPFCorrect;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Cliente transformarDTO(ClienteDTO clienteDTO){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Cliente cliente = new Cliente(</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_35'/>
+35
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_35'>1</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getId &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                clienteDTO.getId(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_36'/>
+36
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_36'>1</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getNome &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                clienteDTO.getNome(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_37'>1</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getEmail &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                clienteDTO.getEmail(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_38'/>
+38
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_38'>1</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getCpf &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>                clienteDTO.getCpf(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_39'/>
+39
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_39'>2</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/models/Cliente::&#60;init&#62; &rarr; KILLED<br/>
+2. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getDataCriacao &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                clienteDTO.getDataCriacao()</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        );</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_41'/>
+41
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_41'>2</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/models/Cliente::setPedidos &rarr; SURVIVED<br/>
+2. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getPedidos &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        cliente.setPedidos(clienteDTO.getPedidos());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_42'/>
+42
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_42'>5</a>
+<span>
+1. transformarDTO : removed call to com/example/waiterapp/dto/ClienteDTO::getPassword &rarr; KILLED<br/>
+2. transformarDTO : removed call to org/springframework/security/crypto/bcrypt/BCrypt::gensalt &rarr; KILLED<br/>
+3. transformarDTO : removed call to org/springframework/security/crypto/bcrypt/BCrypt::hashpw &rarr; KILLED<br/>
+4. transformarDTO : removed call to com/example/waiterapp/models/Cliente::setPassword &rarr; KILLED<br/>
+5. transformarDTO : replaced call to org/springframework/security/crypto/bcrypt/BCrypt::hashpw with argument &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        cliente.setPassword(BCrypt.hashpw(clienteDTO.getPassword(), BCrypt.gensalt()));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_43'/>
+43
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_43'>1</a>
+<span>
+1. transformarDTO : replaced return value with null for com/example/waiterapp/services/ClienteService::transformarDTO &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return cliente;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public List&#60;Cliente&#62; listaClientes() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_47'>2</a>
+<span>
+1. listaClientes : removed call to com/example/waiterapp/repositories/ClienteRepository::findAll &rarr; KILLED<br/>
+2. listaClientes : replaced return value with Collections.emptyList for com/example/waiterapp/services/ClienteService::listaClientes &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return clienteRepository.findAll();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Cliente retornaClienteById(Long idCliente) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_51'/>
+51
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_51'>4</a>
+<span>
+1. retornaClienteById : removed call to com/example/waiterapp/repositories/ClienteRepository::findById &rarr; KILLED<br/>
+2. retornaClienteById : removed call to java/util/Optional::orElse &rarr; KILLED<br/>
+3. retornaClienteById : replaced call to java/util/Optional::orElse with argument &rarr; KILLED<br/>
+4. retornaClienteById : replaced return value with null for com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return clienteRepository.findById(idCliente).orElse(null);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public List&#60;Pedido&#62; retornaPedidosCliente(Long idCliente){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_55'/>
+55
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_55'>3</a>
+<span>
+1. retornaPedidosCliente : replaced return value with Collections.emptyList for com/example/waiterapp/services/ClienteService::retornaPedidosCliente &rarr; SURVIVED<br/>
+2. retornaPedidosCliente : removed call to com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; KILLED<br/>
+3. retornaPedidosCliente : removed call to com/example/waiterapp/models/Cliente::getPedidos &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return retornaClienteById(idCliente).getPedidos();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Cliente insereCliente(Cliente cliente) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_59'/>
+59
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_59'>1</a>
+<span>
+1. insereCliente : removed call to com/example/waiterapp/models/Cliente::setId &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        cliente.setId(null);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_60'/>
+60
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_60'>2</a>
+<span>
+1. insereCliente : removed call to java/time/LocalDateTime::now &rarr; SURVIVED<br/>
+2. insereCliente : removed call to com/example/waiterapp/models/Cliente::setDataCriacao &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        cliente.setDataCriacao(LocalDateTime.now());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_61'/>
+61
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_61'>3</a>
+<span>
+1. insereCliente : replaced call to com/example/waiterapp/repositories/ClienteRepository::save with argument &rarr; SURVIVED<br/>
+2. insereCliente : removed call to com/example/waiterapp/repositories/ClienteRepository::save &rarr; KILLED<br/>
+3. insereCliente : replaced return value with null for com/example/waiterapp/services/ClienteService::insereCliente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return clienteRepository.save(cliente);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Cliente atualizaCliente(Cliente cliente){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_65'/>
+65
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_65'>2</a>
+<span>
+1. atualizaCliente : removed call to com/example/waiterapp/models/Cliente::getId &rarr; SURVIVED<br/>
+2. atualizaCliente : removed call to com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        retornaClienteById(cliente.getId());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_66'/>
+66
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_66'>3</a>
+<span>
+1. atualizaCliente : replaced call to com/example/waiterapp/repositories/ClienteRepository::save with argument &rarr; SURVIVED<br/>
+2. atualizaCliente : removed call to com/example/waiterapp/repositories/ClienteRepository::save &rarr; KILLED<br/>
+3. atualizaCliente : replaced return value with null for com/example/waiterapp/services/ClienteService::atualizaCliente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return clienteRepository.save(cliente);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void apagaCliente(long idCliente) throws DataIntegrityViolationException{</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        try{</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_71'>2</a>
+<span>
+1. apagaCliente : removed call to java/lang/Long::valueOf &rarr; KILLED<br/>
+2. apagaCliente : removed call to com/example/waiterapp/repositories/ClienteRepository::deleteById &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            clienteRepository.deleteById(idCliente);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }catch(DataIntegrityViolationException e){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_73'>1</a>
+<span>
+1. apagaCliente : removed call to org/springframework/dao/DataIntegrityViolationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            throw new DataIntegrityViolationException(&#34;N&#227;o &#233; poss&#237;vel excluir esse cliente&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Cliente retornaClienteByCpf(String cpf) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_78'/>
+78
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_78'>4</a>
+<span>
+1. retornaClienteByCpf : removed call to com/example/waiterapp/repositories/ClienteRepository::findByCpf &rarr; KILLED<br/>
+2. retornaClienteByCpf : removed call to java/util/Optional::orElse &rarr; KILLED<br/>
+3. retornaClienteByCpf : replaced call to java/util/Optional::orElse with argument &rarr; KILLED<br/>
+4. retornaClienteByCpf : replaced return value with null for com/example/waiterapp/services/ClienteService::retornaClienteByCpf &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return clienteRepository.findByCpf(cpf).orElse(null);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_24'>24</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_24'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaPedidosClienteTest]/[method:returnPedidosOfTheCliente()]</span></span> Removed assignment to member variable clienteRepository &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_28'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::getPassword &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed call to org/springframework/security/crypto/bcrypt/BCrypt::checkpw &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_29'>29</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_29'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::getCpf &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed call to java/util/Objects::equals &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_30'>30</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_30'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> Substituted 0 with 1 &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with true &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with true &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>isClientAuthorized<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for com/example/waiterapp/services/ClienteService::isClientAuthorized &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_35'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getId &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_36'>36</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_36'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getNome &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getEmail &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_38'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getCpf &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_39'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/models/Cliente::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getDataCriacao &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_41'>41</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_41'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getPedidos &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::setPedidos &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_42'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/dto/ClienteDTO::getPassword &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to org/springframework/security/crypto/bcrypt/BCrypt::gensalt &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to org/springframework/security/crypto/bcrypt/BCrypt::hashpw &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> removed call to com/example/waiterapp/models/Cliente::setPassword &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> replaced call to org/springframework/security/crypto/bcrypt/BCrypt::hashpw with argument &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_43'>43</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_43'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>transformarDTO<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()]</span></span> replaced return value with null for com/example/waiterapp/services/ClienteService::transformarDTO &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>listaClientes<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ListaClientesTest]/[method:returnListOfClientes()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::findAll &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>listaClientes<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ListaClientesTest]/[method:returnListOfClientes()]</span></span> replaced return value with Collections.emptyList for com/example/waiterapp/services/ClienteService::listaClientes &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_51'>51</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_51'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>retornaClienteById<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteExist()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::findById &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>retornaClienteById<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteExist()]</span></span> removed call to java/util/Optional::orElse &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>retornaClienteById<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteExist()]</span></span> replaced call to java/util/Optional::orElse with argument &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>retornaClienteById<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteExist()]</span></span> replaced return value with null for com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>retornaPedidosCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaPedidosClienteTest]/[method:returnPedidosOfTheCliente()]</span></span> removed call to com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>retornaPedidosCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaPedidosClienteTest]/[method:returnPedidosOfTheCliente()]</span></span> removed call to com/example/waiterapp/models/Cliente::getPedidos &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>retornaPedidosCliente<br/><b>Killed by : </b>none</span></span> replaced return value with Collections.emptyList for com/example/waiterapp/services/ClienteService::retornaPedidosCliente &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_59'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::setId &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_60'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>none</span></span> removed call to java/time/LocalDateTime::now &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::setDataCriacao &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:InsereClienteTest]/[method:insertCliente()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::save &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>none</span></span> replaced call to com/example/waiterapp/repositories/ClienteRepository::save with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>insereCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:InsereClienteTest]/[method:insertCliente()]</span></span> replaced return value with null for com/example/waiterapp/services/ClienteService::insereCliente &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_65'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>atualizaCliente<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/models/Cliente::getId &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>atualizaCliente<br/><b>Killed by : </b>none</span></span> removed call to com/example/waiterapp/services/ClienteService::retornaClienteById &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_66'>66</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_66'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>atualizaCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:AtualizaClienteTest]/[method:updateCliente()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::save &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>atualizaCliente<br/><b>Killed by : </b>none</span></span> replaced call to com/example/waiterapp/repositories/ClienteRepository::save with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>atualizaCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:AtualizaClienteTest]/[method:updateCliente()]</span></span> replaced return value with null for com/example/waiterapp/services/ClienteService::atualizaCliente &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>apagaCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ApagaClienteTest]/[method:throwExceptionWhenCouldNotDeleteCliente()]</span></span> removed call to java/lang/Long::valueOf &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>apagaCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ApagaClienteTest]/[method:throwExceptionWhenCouldNotDeleteCliente()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::deleteById &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>apagaCliente<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ApagaClienteTest]/[method:throwExceptionWhenCouldNotDeleteCliente()]</span></span> removed call to org/springframework/dao/DataIntegrityViolationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_78'>78</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1ec7d8b3_78'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>retornaClienteByCpf<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteExist()]</span></span> removed call to com/example/waiterapp/repositories/ClienteRepository::findByCpf &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>retornaClienteByCpf<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteExist()]</span></span> removed call to java/util/Optional::orElse &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>retornaClienteByCpf<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteExist()]</span></span> replaced call to java/util/Optional::orElse with argument &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>retornaClienteByCpf<br/><b>Killed by : </b>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteExist()]</span></span> replaced return value with null for com/example/waiterapp/services/ClienteService::retornaClienteByCpf &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>EXPERIMENTAL_ARGUMENT_PROPAGATION</li>
+<li class='mutator'>EXPERIMENTAL_BIG_DECIMAL</li>
+<li class='mutator'>EXPERIMENTAL_BIG_INTEGER</li>
+<li class='mutator'>EXPERIMENTAL_MEMBER_VARIABLE</li>
+<li class='mutator'>EXPERIMENTAL_NAKED_RECEIVER</li>
+<li class='mutator'>EXPERIMENTAL_REMOVE_SWITCH_MUTATOR_[0-99]</li>
+<li class='mutator'>EXPERIMENTAL_SWITCH</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INLINE_CONSTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>NON_VOID_METHOD_CALLS</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_IF</li>
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_IF</li>
+<li class='mutator'>REMOVE_INCREMENTS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:AtualizaClienteTest]/[method:updateCliente()] (1 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteExist()] (0 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteExist()] (0 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:TransformarDTOTest]/[method:transformClienteDTOIntoCliente()] (162 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ApagaClienteTest]/[method:throwExceptionWhenCouldNotDeleteCliente()] (1 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaPedidosClienteTest]/[method:returnPedidosOfTheCliente()] (1 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ApagaClienteTest]/[method:deleteCliente()] (0 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByCpfTest]/[method:returnClienteWhenClienteDoesNotExist()] (1 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:InsereClienteTest]/[method:insertCliente()] (1 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:ListaClientesTest]/[method:returnListOfClientes()] (0 ms)</li><li>com.example.waiterapp.services.ClienteServiceTest.[engine:junit-jupiter]/[class:com.example.waiterapp.services.ClienteServiceTest]/[nested-class:RetornaClienteByIdTest]/[method:returnClienteWhenClienteDoesNotExist()] (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.9.5
+
+</body>
+</html>
