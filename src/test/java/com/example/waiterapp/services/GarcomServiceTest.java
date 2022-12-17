@@ -93,7 +93,6 @@ class GarcomServiceTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("should transform a GarcomDTO into a Garcom")
     public void transformGarcomDTOIntoGarcom() {
       when(garcomDTO.getPassword()).thenReturn("123456");
