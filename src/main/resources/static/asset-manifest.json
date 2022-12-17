@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.007943e2.css",
+    "main.js": "/static/js/main.28fd7e85.js",
+    "static/media/logo-waiterapp.png": "/static/media/logo-waiterapp.7e9c862d7d25091717af.png",
+    "static/media/add_cart.svg": "/static/media/add_cart.b19fa5aa3ab1b5c24d7847b3ad1024d5.svg",
+    "static/media/cart.svg": "/static/media/cart.947a9465d1e27e4eca8c9e2e8df96b87.svg",
+    "index.html": "/index.html",
+    "static/media/logout.svg": "/static/media/logout.802936a67144474903af7f7b42a4f8a5.svg",
+    "main.007943e2.css.map": "/static/css/main.007943e2.css.map",
+    "main.28fd7e85.js.map": "/static/js/main.28fd7e85.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.007943e2.css",
+    "static/js/main.28fd7e85.js"
+  ]
+}
