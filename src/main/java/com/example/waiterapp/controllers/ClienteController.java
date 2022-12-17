@@ -6,6 +6,7 @@ import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -64,6 +66,10 @@ public class ClienteController {
             if(cliente != null){
                 return ResponseEntity.ok().body(cliente);
             }
+        }
+
+        if(!clienteDTO.getEmail().contains("@")) {
+            return ResponseEntity.badRequest().body("email invalid");
         }
 
         Cliente cliente = clienteService.transformarDTO(clienteDTO);

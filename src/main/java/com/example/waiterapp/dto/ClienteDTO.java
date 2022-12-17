@@ -25,7 +25,6 @@ public class ClienteDTO implements Serializable {
     @NotBlank
     @Size(min=5, message="Email must be at least {min} characters")
     @Size(max=100, message="Email must be maximium {max} characters")
-	@Email(message = "email invalid")
     private String email;
 
     @NotBlank
