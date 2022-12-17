@@ -21,13 +21,26 @@ services:
     ports:
       - "5432:5432"
 
+  frontend:
+    container_name: frontend_react
+    build: ../frontend_react
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    depends_on:
+      - web
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
   e2e:
     build: ./e2e
     container_name: cypress
     depends_on:
-      - web
+      - frontend
     environment:
-      - CYPRESS_baseUrl=http://web:8080
+      - CYPRESS_baseUrl=http://frontend:3000
     command: npx cypress run
     volumes:
       - ./e2e/cypress:/app/cypress
