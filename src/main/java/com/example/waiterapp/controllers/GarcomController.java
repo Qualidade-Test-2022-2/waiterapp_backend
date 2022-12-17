@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Base64;
 import java.util.List;
 
@@ -64,27 +62,20 @@ public class GarcomController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Void> insereGarcom(@Valid @RequestBody GarcomDTO garcomDTO){
+    public ResponseEntity<Garcom> insereGarcom(@Valid @RequestBody GarcomDTO garcomDTO){
         Garcom garcom = garcomService.transformarDTO(garcomDTO);
         garcom = garcomService.insereGarcom(garcom);
-
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(garcom.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(null).body(garcom);
     }
 
     @PutMapping(value = "/{idGarcom}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaGarcom(@Valid @RequestBody GarcomDTO garcomDTO, @PathVariable Long idGarcom){
+    public ResponseEntity<Garcom> atualizaGarcom(@Valid @RequestBody GarcomDTO garcomDTO, @PathVariable Long idGarcom){
         Garcom garcom = garcomService.transformarDTO(garcomDTO);
 
         garcom.setId(idGarcom);
         try{
             garcomService.atualizaGarcom(garcom);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(garcom);
         }catch (ObjectNotFoundException e){
             return ResponseEntity.notFound().build();
         }

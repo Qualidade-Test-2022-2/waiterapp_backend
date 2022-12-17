@@ -118,27 +118,26 @@ public class GarcomControllerTest {
 
   @Nested
   @DisplayName("GarcomController#insereGarcom")
-  @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InsereGarcomTest {
     GarcomDTO garcomDTO;
 
     @BeforeEach
-    public void mockGarcomServiceInsereGarcom() {
+    void mockGarcomServiceInsereGarcom() {
       garcomDTO = mock(GarcomDTO.class);
+      when(garcomService.transformarDTO(any(GarcomDTO.class))).thenReturn(garcom1);
       when(garcomService.insereGarcom(any(Garcom.class))).thenReturn(garcom1);
-      // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
     }
 
     @Test
     @DisplayName("should return 201")
-    public void statusCode201() {
-      assertEquals(garcomController.insereGarcom(garcomDTO).getStatusCode().value(), 201);
+    void statusCode201() {
+      assertEquals(201, garcomController.insereGarcom(garcomDTO).getStatusCode().value());
     }
 
     @Test
-    @DisplayName("should return the garcom - method must be refactored to pass this test")
-    public void returnGarcom() {
-      assertEquals(garcomController.insereGarcom(garcomDTO).getBody(), garcom1);
+    @DisplayName("should return the garcom")
+    void returnGarcom() {
+      assertEquals(garcom1, garcomController.insereGarcom(garcomDTO).getBody());
     }
   }
 
@@ -160,7 +159,6 @@ public class GarcomControllerTest {
     }
 
     @Test
-    @Disabled("Disabled until garcom be returned on update")
     @DisplayName("should return the garcom")
     public void returnGarcom_WhenGarconsExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenReturn(garcom1);
