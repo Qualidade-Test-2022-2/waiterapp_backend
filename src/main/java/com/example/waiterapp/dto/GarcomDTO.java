@@ -3,6 +3,9 @@ package com.example.waiterapp.dto;
 import com.example.waiterapp.models.Garcom;
 import com.example.waiterapp.models.Pedido;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +14,9 @@ import java.util.List;
 public class GarcomDTO implements Serializable {
 
     private Long id;
+    @NotBlank
+    @Size(min=3, message="Name must be at least {min} characters")
+    @Size(max=100, message="Name must be maximium {max} characters")
     private String nome;
     private LocalDateTime dataCriacao;
     private String cpf;
@@ -27,12 +33,14 @@ public class GarcomDTO implements Serializable {
         this.pedidos = garcom.getPedidos();
     }
 
-    public Long getId() {
-        return id;
-    }
+    public String getCpf() { return cpf; }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -49,10 +57,6 @@ public class GarcomDTO implements Serializable {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
-    }
-
-    public String getCpf() {
-        return cpf;
     }
 
     public void setCpf(String cpf) {

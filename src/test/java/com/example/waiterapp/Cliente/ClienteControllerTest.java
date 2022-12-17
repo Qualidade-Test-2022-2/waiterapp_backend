@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Headers;
 import org.mockito.Mock;
 
 import com.example.waiterapp.models.Cliente;
@@ -26,6 +27,8 @@ import com.example.waiterapp.controllers.ClienteController;
 import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import springfox.documentation.service.Header;
 
 @DisplayName("ClienteController's tests")
 public class ClienteControllerTest {

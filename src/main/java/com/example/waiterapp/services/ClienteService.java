@@ -4,6 +4,10 @@ import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.models.Cliente;
 import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.repositories.ClienteRepository;
+
+import br.com.caelum.stella.ValidationMessage;
+import br.com.caelum.stella.validation.CPFValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -81,5 +85,12 @@ public class ClienteService {
 
     public Cliente retornaClienteByCpf(String cpf) {
         return clienteRepository.findByCpf(cpf).orElse(null);
+    }
+    
+    public static boolean valida(String cpf) { 
+        CPFValidator cpfValidator = new CPFValidator(); 
+        List<ValidationMessage> erros = cpfValidator.invalidMessagesFor(cpf); 
+        if(erros.size() > 0) return false;
+        return true;
     }
 }
