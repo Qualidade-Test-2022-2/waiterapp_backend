@@ -20,6 +20,7 @@ public class GarcomDTO implements Serializable {
     private String nome;
     private LocalDateTime dataCriacao;
     private String cpf;
+    private String password;
     private List<Pedido> pedidos = new ArrayList<>();
 
     public GarcomDTO() {
@@ -30,10 +31,9 @@ public class GarcomDTO implements Serializable {
         this.nome = garcom.getNome();
         this.dataCriacao = garcom.getDataCriacao();
         this.cpf = garcom.getCpf();
+        this.password = garcom.getPassword();
         this.pedidos = garcom.getPedidos();
     }
-
-    public String getCpf() { return cpf; }
 
     public void setId(Long id) {
         this.id = id;
@@ -57,6 +57,18 @@ public class GarcomDTO implements Serializable {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public void setCpf(String cpf) {

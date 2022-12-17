@@ -1,12 +1,8 @@
 import { api } from "./Api.service";
 
 async function postLogin (cpf, password) {
-  return api.post('/clientes/auth', {}, {
-    headers: {
-      "Authorization": btoa(`${cpf.replace(/[.-]/g, '')}:${password}`)
-    }
-  })
-  .then(() => api.defaults.headers.common['Authorization'] = btoa(cpf))
+  api.defaults.headers.common['Authorization'] = btoa(`${cpf}:${password}`)
+  return api.post('/clientes/auth', {})
 }
 
 async function postRegister (data) {

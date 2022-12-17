@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuthentication } from '../../context/AuthContext'
 import logo from '../../images/logo-waiterapp.png'
 import logout from '../../images/logout.svg'
@@ -13,12 +14,12 @@ export default function Header() {
         <div className="header__logo">
           <img src={logo} alt="WaiterApp Logo" />
         </div>
-        <h1>WaiterApp</h1>
+        <Link to='/' className='header__title'> WaiterApp </Link>
       </div>
 
       {authenticated && (
         <div className="header__menu">
-          <CartShow />
+          {user.type === 'waiter' ? <Link to='/signup/waiter' >Criar garçom</Link> : <CartShow />}
           <div className='header__logout-button' onClick={handleLogout}>
             <p>{user.nome}</p>
             <img src={logout} alt="Sair" />

@@ -23,33 +23,45 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Autowired
     ClienteService clienteService;
+    GarcomService garcomService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        try {
+            final RequireAuthentication requireAuthentication = ((HandlerMethod)handler).getMethod().getAnnotation((RequireAuthentication.class));
 
-        final RequireAuthentication requireAuthentication = ((HandlerMethod)handler).getMethod().getAnnotation((RequireAuthentication.class));
+            if(requireAuthentication == null){
+                return true;
+            }
 
-        if(requireAuthentication == null){
-            return true;
-        }
+            var basicAuth = request.getHeader("Authorization");
 
-        var basicAuth = request.getHeader("Authorization");
+            byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
+            String decodedString = new String(decodedBytes);
+            String cpf = decodedString.split(":")[0];
+            String password = decodedString.split(":")[1];
 
-        byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
-        String decodedString = new String(decodedBytes);
-        String cpf = decodedString.split(":")[0];
-        String password = decodedString.split(":")[1];
+            Cliente cliente = clienteService.retornaClienteByCpf(cpf);
 
-        Cliente cliente = clienteService.retornaClienteByCpf(cpf);
+            if(isNull(cliente)) {
+                Garcom garcom = garcomService.retornaGarcomByCpf(cpf);
+                if (garcom != null) {
+                    if (garcomService.isWaiterAuthorized(garcom, password, cpf)) {
+                        return true;
+                    }
+                }
 
-        if(isNull(cliente)) {
+                response.setStatus(403);
+                return false;
+            } else if(clienteService.isClientAuthorized(cliente, password, cpf)) {
+                return true;
+            }
+
             response.setStatus(403);
             return false;
-        } else if(clienteService.isClientAuthorized(cliente, password, cpf)) {
+        } catch (Exception e) {
+            logger.error("Error on AuthInterceptor: ", e);
             return true;
         }
-
-        response.setStatus(403);
-        return false;
     }
 }

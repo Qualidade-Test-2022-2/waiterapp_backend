@@ -25,7 +25,8 @@ export default function SignupForm ({ handleSubmit }) {
   const userData = {
     nome: name,
     email: email,
-    cpf: cpf
+    cpf: cpf,
+    password
   }
 
   return (

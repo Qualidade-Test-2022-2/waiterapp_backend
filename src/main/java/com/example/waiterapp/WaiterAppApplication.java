@@ -115,10 +115,10 @@ public class WaiterAppApplication implements CommandLineRunner {
         cliente1.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
         cliente2.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
 
-        Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), null);
-        Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), null);
-        garcom1.setPassword("12345678");
-        garcom2.setPassword("12345678");
+        Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), "11111111111");
+        Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), "22222222222");
+        garcom1.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
+        garcom2.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
 
         Pedido pedido1 = new Pedido(null, LocalDateTime.now(), Estado.FECHADO, null, 10, 10, null);
         pedido1.setCliente(cliente1);

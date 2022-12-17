@@ -33,6 +33,7 @@ public class GarcomService {
     public Garcom transformarDTO(GarcomDTO garcomDTO){
         Garcom garcom = new Garcom(garcomDTO.getId(), garcomDTO.getNome(), garcomDTO.getDataCriacao(), garcomDTO.getCpf());
         garcom.setPedidos(garcomDTO.getPedidos());
+        garcom.setPassword(BCrypt.hashpw(garcomDTO.getPassword(), BCrypt.gensalt()));
         return garcom;
     }
 

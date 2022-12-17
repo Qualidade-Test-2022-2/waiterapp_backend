@@ -24,12 +24,13 @@ export default function AuthProvider({ children }) {
     }
   }
 
-  const handleSignup = (userData) => {
-    return Client.postRegister(userData)
-      .then((response) => {
-        setUser(response.data);
-        setAuthenticated(true);
-      });
+  const handleSignup = (userData, type) => {
+    if (type === 'client') {
+      return Client.postRegister(userData)
+    } else {
+      return Waiter.postRegister(userData)
+    }
+
   }
 
   const handleLogout = () => {

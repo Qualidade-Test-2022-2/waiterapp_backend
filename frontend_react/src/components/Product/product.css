@@ -33,6 +33,9 @@
           line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.product__blocked {
+  cursor: not-allowed;
+}
 .product__container {
   position: absolute;
   bottom: 10px;

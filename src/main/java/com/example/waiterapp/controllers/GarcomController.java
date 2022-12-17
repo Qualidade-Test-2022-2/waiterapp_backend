@@ -45,7 +45,7 @@ public class GarcomController {
         }
     }
 
-    // @RequireAuthentication
+    @RequireAuthentication
     @PostMapping(value = "/auth")
     public ResponseEntity<Garcom> authenticate(@RequestHeader("Authorization") String basicAuth) {
         byte[] decodedBytes = Base64.getDecoder().decode(basicAuth);
