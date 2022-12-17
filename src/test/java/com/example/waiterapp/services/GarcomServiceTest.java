@@ -14,11 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -83,6 +79,7 @@ class GarcomServiceTest {
     GarcomDTO garcomDTO = mock(GarcomDTO.class);
 
     @Test
+    @Disabled
     @DisplayName("should transform a GarcomDTO into a Garcom")
     public void transformGarcomDTOIntoGarcom() {
 
