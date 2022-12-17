@@ -36,7 +36,7 @@ class GarcomServiceTest {
   static GarcomRepository garcomRepository = mock(GarcomRepository.class);
 
   @BeforeAll
-  public static void inicializaGarcomService() {
+  static void inicializaGarcomService() {
     garcomService = new GarcomService(garcomRepository);
   }
 
@@ -44,14 +44,14 @@ class GarcomServiceTest {
   @DisplayName("GarcomService#listaGarcons")
   class ListaGarconsTest {
     @BeforeEach
-    public void mockGarcomRepositoryFindAll() {
+    void mockGarcomRepositoryFindAll() {
       ArrayList<Garcom> garcons = new ArrayList<Garcom>(List.of(garcom1, garcom2));
       when(garcomRepository.findAll()).thenReturn(garcons);
     }
 
     @Test
     @DisplayName("should return a list of garcons")
-    public void returnListOfGarcons() {
+    void returnListOfGarcons() {
       assertEquals(garcomService.listaGarcons().get(0), garcom1);
       assertEquals(garcomService.listaGarcons().get(1), garcom2);
     }
@@ -62,14 +62,14 @@ class GarcomServiceTest {
   class RetornaGarcomByCpfTest {
     @Test
     @DisplayName("should return a garcom by id when it exists")
-    public void returnGarcomWhenGarcomExist() {
+    void returnGarcomWhenGarcomExist() {
       when(garcomRepository.findByCpf(any(String.class))).thenReturn(java.util.Optional.of(garcom1));
       assertEquals(garcomService.retornaGarcomByCpf("11111111111"), garcom1);
     }
 
     @Test
     @DisplayName("should return a null when does not exists")
-    public void returnNullWhenGarcomDoesNotExists() {
+    void returnNullWhenGarcomDoesNotExists() {
       when(garcomRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
       assertEquals(garcomService.retornaGarcomByCpf("11111111111"), null);
     }
@@ -82,7 +82,7 @@ class GarcomServiceTest {
     GarcomDTO garcomDTO = mock(GarcomDTO.class);
 
     @BeforeEach
-    public void mockGarcomDTO() {
+    void mockGarcomDTO() {
       when(garcomDTO.getId()).thenReturn(1L);
       when(garcomDTO.getNome()).thenReturn("Garcom 1");
       when(garcomDTO.getDataCriacao()).thenReturn(LocalDateTime.of(2022, 01, 01, 00, 00));
@@ -94,7 +94,7 @@ class GarcomServiceTest {
 
     @Test
     @DisplayName("should transform a GarcomDTO into a Garcom")
-    public void transformGarcomDTOIntoGarcom() {
+    void transformGarcomDTOIntoGarcom() {
       when(garcomDTO.getPassword()).thenReturn("123456");
       Garcom garcomTransformado = garcomService.transformarDTO(garcomDTO);
       assertEquals(garcomDTO.getId(), garcomTransformado.getId());
@@ -111,14 +111,14 @@ class GarcomServiceTest {
   class RetornaGarcomByIdTest {
     @Test
     @DisplayName("should return a garcom by id when it exists")
-    public void returnGarcomWhenGarcomExist() {
+    void returnGarcomWhenGarcomExist() {
       when(garcomRepository.findById(anyLong())).thenReturn(java.util.Optional.of(garcom1));
       assertEquals(garcomService.retornaGarcomById(1L), garcom1);
     }
 
     @Test
     @DisplayName("should throw an exception when the garcom does not exist")
-    public void throwExceptionWhenGarcomDoesNotExist() {
+    void throwExceptionWhenGarcomDoesNotExist() {
       when(garcomRepository.findById(anyLong())).thenReturn(java.util.Optional.empty());
       assertThrows(ObjectNotFoundException.class, () -> garcomService.retornaGarcomById(1L));
     }
@@ -129,7 +129,7 @@ class GarcomServiceTest {
   class InsereGarcomTest {
     @Test
     @DisplayName("should insert a garcom")
-    public void insertGarcom() {
+    void insertGarcom() {
       when(garcomRepository.save(garcom1)).thenReturn(garcom1);
       assertEquals(garcomService.insereGarcom(garcom1), garcom1);
     }
@@ -139,14 +139,14 @@ class GarcomServiceTest {
   @DisplayName("GarcomService#atualizaGarcom")
   class AtualizaGarcomTest {
     @BeforeEach
-    public void mockGarcomRepositoryFindById() {
+    void mockGarcomRepositoryFindById() {
       when(garcomRepository.findById(anyLong())).thenReturn(java.util.Optional.of(garcom1));
       when(garcomRepository.save(garcom1)).thenReturn(garcom1);
     }
 
     @Test
     @DisplayName("should update a garcom")
-    public void updateGarcom() {
+    void updateGarcom() {
       assertEquals(garcomService.atualizaGarcom(garcom1), garcom1);
     }
   }
@@ -155,20 +155,20 @@ class GarcomServiceTest {
   @DisplayName("GarcomService#apagaGarcom")
   class ApagaGarcomTest {
     @BeforeEach
-    public void mockGarcomRepositoryFindById() {
+    void mockGarcomRepositoryFindById() {
       when(garcomRepository.findById(anyLong())).thenReturn(java.util.Optional.of(garcom1));
     }
 
     @Test
     @DisplayName("should delete a garcom")
-    public void deleteGarcom() {
+    void deleteGarcom() {
       doNothing().when(garcomRepository).deleteById(anyLong());
       garcomService.apagaGarcom(1L);
     }
 
     @Test
     @DisplayName("should delete a garcom")
-    public void throwExceptionWhenCouldNotDeleteGarcom() {
+    void throwExceptionWhenCouldNotDeleteGarcom() {
       doThrow(DataIntegrityViolationException.class).when(garcomRepository).deleteById(anyLong());
 
       assertThrows(DataIntegrityViolationException.class, () -> garcomService.apagaGarcom(1L));

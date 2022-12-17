@@ -25,7 +25,7 @@ import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("ItemController's tests")
-public class ItemControllerTest {
+class ItemControllerTest {
   static ItemController itemController;
 
   @Mock
@@ -34,7 +34,7 @@ public class ItemControllerTest {
   static ItemService itemService = mock(ItemService.class);
 
   @BeforeAll
-  public static void inicializaItemController() {
+  static void inicializaItemController() {
     itemController = new ItemController(itemService);
   }
 
@@ -42,20 +42,20 @@ public class ItemControllerTest {
   @DisplayName("ItemController#listaItens")
   class ListaItensTest {
     @BeforeEach
-    public void mockItemServiceListaItens() {
+    void mockItemServiceListaItens() {
       List<Item> items = new ArrayList<Item>(List.of(item1, item2));
       when(itemService.listaItens()).thenReturn(items);
     }
 
     @Test
     @DisplayName("should return 200")
-    public void statusCode200() {
+    void statusCode200() {
       assertEquals(itemController.listaItens().getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return a list of items")
-    public void returnListOfItens() {
+    void returnListOfItens() {
       List<Item> items = itemController.listaItens().getBody();
       if(items != null) {
         assertAll(
@@ -73,21 +73,21 @@ public class ItemControllerTest {
   class RetornaItemByIdTest {
     @Test
     @DisplayName("should return 200 when item exists")
-    public void statusCode200_WhenItensExists() {
+    void statusCode200_WhenItensExists() {
       when(itemService.retornaItemById(1L)).thenReturn(item1);
       assertEquals(itemController.retornaItemById(1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return 404 when item doesn't exists")
-    public void statusCode404_WhenItensDoesntExists() {
+    void statusCode404_WhenItensDoesntExists() {
       when(itemService.retornaItemById(1L)).thenThrow(ObjectNotFoundException.class);
       assertEquals(itemController.retornaItemById(1L).getStatusCode().value(), 404);
     }
 
     @Test
     @DisplayName("should return the item when item exists")
-    public void returnItem_WhenItensExists() {
+    void returnItem_WhenItensExists() {
       when(itemService.retornaItemById(any(long.class))).thenReturn(item1);
       assertEquals(itemController.retornaItemById(1L).getBody(), item1);
     }
@@ -99,7 +99,7 @@ public class ItemControllerTest {
     ItemDTO itemDTO;
 
     @BeforeEach
-    public void mockItemServiceInsereItem() {
+    void mockItemServiceInsereItem() {
       itemDTO = mock(ItemDTO.class);
       when(itemService.transformarDTO(any(ItemDTO.class))).thenReturn(item1);
       when(itemService.insereItem(any(Item.class))).thenReturn(item1);
@@ -107,13 +107,13 @@ public class ItemControllerTest {
 
     @Test
     @DisplayName("should return 201")
-    public void statusCode201() {
+    void statusCode201() {
       assertEquals(itemController.insereItem(itemDTO).getStatusCode().value(), 201);
     }
 
     @Test
     @DisplayName("should return the item")
-    public void returnItem() {
+    void returnItem() {
       assertEquals(item1, itemController.insereItem(itemDTO).getBody());
     }
   }
@@ -124,27 +124,27 @@ public class ItemControllerTest {
     ItemDTO itemDTO = mock(ItemDTO.class);
 
     @BeforeEach
-    public void mockItemServiceAtualizaItem() {
+    void mockItemServiceAtualizaItem() {
       when(itemService.transformarDTO(any(ItemDTO.class))).thenReturn(item1);
     }
 
     @Test
     @DisplayName("should return 200 when item exists")
-    public void statusCode200_WhenItensExists() {
+    void statusCode200_WhenItensExists() {
       when(itemService.atualizaItem(any(Item.class))).thenReturn(item1);
       assertEquals(itemController.atualizaItem(itemDTO, 1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return the item")
-    public void returnItem_WhenItensExists() {
+    void returnItem_WhenItensExists() {
       when(itemService.atualizaItem(any(Item.class))).thenReturn(item1);
       assertEquals(itemController.atualizaItem(itemDTO, 1L).getBody(), item1);
     }
 
     @Test
     @DisplayName("should return 404")
-    public void statusCode404_WhenItensDoesntExists() {
+    void statusCode404_WhenItensDoesntExists() {
       when(itemService.atualizaItem(any(Item.class))).thenThrow(ObjectNotFoundException.class);
       assertEquals(itemController.atualizaItem(itemDTO, 1L).getStatusCode().value(), 404);
     }
@@ -155,14 +155,14 @@ public class ItemControllerTest {
   class DeleteItemTest {
     @Test
     @DisplayName("should return 204 when item exists")
-    public void statusCode204_WhenItemExists() {
+    void statusCode204_WhenItemExists() {
       doNothing().when(itemService).apagaItem(any(long.class));
       assertEquals(itemController.deleteItem(1L).getStatusCode().value(), 204);
     }
 
     @Test
     @DisplayName("should return 404 when item doesn't exists")
-    public void statusCode204_WhenItemDoesntExists() {
+    void statusCode204_WhenItemDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(itemService).apagaItem(any(long.class));
       assertEquals(itemController.deleteItem(1L).getStatusCode().value(), 404);
     }

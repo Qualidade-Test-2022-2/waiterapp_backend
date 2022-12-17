@@ -25,7 +25,7 @@ import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 @DisplayName("ClienteController's tests")
-public class ClienteControllerTest {
+class ClienteControllerTest {
   static ClienteController clienteController;
 
   @Mock
@@ -35,7 +35,7 @@ public class ClienteControllerTest {
   static ClienteService clienteService = mock(ClienteService.class);
 
   @BeforeAll
-  public static void inicializaClienteController() {
+  static void inicializaClienteController() {
     clienteController = new ClienteController(clienteService);
   }
 
@@ -43,20 +43,20 @@ public class ClienteControllerTest {
   @DisplayName("ClienteController#listaClientes")
   class ListaClientesTest {
     @BeforeEach
-    public void mockClienteServiceListaClientes() {
+    void mockClienteServiceListaClientes() {
       List<Cliente> clients = new ArrayList<Cliente>(List.of(cliente1, cliente2));
       when(clienteService.listaClientes()).thenReturn(clients);
     }
 
     @Test
     @DisplayName("should return 200")
-    public void statusCode200() {
+    void statusCode200() {
       assertEquals(clienteController.listaClientes().getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return a list of clients")
-    public void returnListOfClientes() {
+    void returnListOfClientes() {
       List<Cliente> clients = clienteController.listaClientes().getBody();
       if(clients != null) {
         assertAll(
@@ -104,14 +104,14 @@ public class ClienteControllerTest {
   class RetornaClienteByIdTest {
     @Test
     @DisplayName("should return 200 when cliente exists")
-    public void statusCode200_WhenClientesExists() {
+    void statusCode200_WhenClientesExists() {
       when(clienteService.retornaClienteById(1L)).thenReturn(cliente1);
       assertEquals(clienteController.retornaClienteById(1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return the cliente when cliente exists")
-    public void returnCliente_WhenClientesExists() {
+    void returnCliente_WhenClientesExists() {
       when(clienteService.retornaClienteById(any(long.class))).thenReturn(cliente1);
       assertEquals(clienteController.retornaClienteById(1L).getBody(), cliente1);
     }
@@ -121,20 +121,20 @@ public class ClienteControllerTest {
   @DisplayName("ClienteController#retornaClienteByCpf")
   class RetornaClienteByCpfTest {
     @BeforeEach
-    public void mockClienteServiceRetornaClienteByCpf() {
+    void mockClienteServiceRetornaClienteByCpf() {
       when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
     }
 
     @Test
     @DisplayName("should return 200 when cliente exists")
-    public void statusCode200() {
+    void statusCode200() {
       assertEquals(clienteController.retornaClienteByCpf(clienteDTO).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return the cliente when cliente exists")
-    public void returnCliente() {
+    void returnCliente() {
       assertEquals(cliente1, clienteController.retornaClienteByCpf(clienteDTO).getBody());
     }
   }
@@ -143,14 +143,14 @@ public class ClienteControllerTest {
   @DisplayName("ClienteController#insereCliente")
   class InsereClienteTest {
     @BeforeEach
-    public void mockClienteServiceInsereCliente() {
+    void mockClienteServiceInsereCliente() {
       when(clienteService.transformarDTO(any(ClienteDTO.class))).thenReturn(cliente1);
       when(clienteService.insereCliente(any(Cliente.class))).thenReturn(cliente1);
     }
 
     @Test
     @DisplayName("should return status code 200 when already exists")
-    public void statusCode200_WhenAlreadyExists() {
+    void statusCode200_WhenAlreadyExists() {
       when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
       assertEquals(200, clienteController.insereCliente(clienteDTO).getStatusCode().value());
@@ -158,7 +158,7 @@ public class ClienteControllerTest {
 
     @Test
     @DisplayName("should return cliente when already exists")
-    public void returnCliente_WhenAlreadyExists() {
+    void returnCliente_WhenAlreadyExists() {
       when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
       assertEquals(cliente1, clienteController.insereCliente(clienteDTO).getBody());
@@ -166,13 +166,13 @@ public class ClienteControllerTest {
 
     @Test
     @DisplayName("should return 201")
-    public void statusCode201_WhenDoesNotExists() {
+    void statusCode201_WhenDoesNotExists() {
       assertEquals(201, clienteController.insereCliente(clienteDTO).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return created cliente")
-    public void returnCliente_WhenDoesNotExists() {
+    void returnCliente_WhenDoesNotExists() {
       assertEquals(cliente1, clienteController.insereCliente(clienteDTO).getBody());
     }
   }
@@ -181,20 +181,20 @@ public class ClienteControllerTest {
   @DisplayName("ClienteController#atualizaCliente")
   class AtualizaClienteTest {
     @BeforeEach
-    public void mockClienteServiceAtualizaCliente() {
+    void mockClienteServiceAtualizaCliente() {
       when(clienteService.transformarDTO(any(ClienteDTO.class))).thenReturn(cliente1);
     }
 
     @Test
     @DisplayName("should return 200 when cliente exists")
-    public void statusCode200_WhenClientesExists() {
+    void statusCode200_WhenClientesExists() {
       when(clienteService.atualizaCliente(any(Cliente.class))).thenReturn(cliente1);
       assertEquals(clienteController.atualizaCliente(clienteDTO, 1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return the cliente")
-    public void returnCliente_WhenClientesExists() {
+    void returnCliente_WhenClientesExists() {
       when(clienteService.atualizaCliente(any(Cliente.class))).thenReturn(cliente1);
       assertEquals(clienteController.atualizaCliente(clienteDTO, 1L).getBody(), cliente1);
     }
@@ -205,14 +205,14 @@ public class ClienteControllerTest {
   class DeleteClienteTest {
     @Test
     @DisplayName("should return 204 when cliente exists")
-    public void statusCode204_WhenClienteExists() {
+    void statusCode204_WhenClienteExists() {
       doNothing().when(clienteService).apagaCliente(any(long.class));
       assertEquals(clienteController.deleteCliente(1L).getStatusCode().value(), 204);
     }
 
     @Test
     @DisplayName("should return 404 when cliente doesn't exists")
-    public void statusCode204_WhenClienteDoesntExists() {
+    void statusCode204_WhenClienteDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(clienteService).apagaCliente(any(long.class));
       assertEquals(clienteController.deleteCliente(1L).getStatusCode().value(), 404);
     }

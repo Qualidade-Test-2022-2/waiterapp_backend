@@ -17,7 +17,7 @@ import com.example.waiterapp.enums.Estado;
 import org.mockito.Mock;
 
 @DisplayName("Testes dos métodos da classe Pedido")
-public class PedidoTest {
+class PedidoTest {
   private static Pedido pedido;
 
   @Mock
@@ -25,13 +25,13 @@ public class PedidoTest {
   static ItemPedido tomate = mock(ItemPedido.class);
   static ItemPedido guarana = mock(ItemPedido.class);
 
-  public static Pedido criaPedido(int id, String titulo, String descricao) {
+  static Pedido criaPedido(int id, String titulo, String descricao) {
     LocalDateTime dataCriacao = LocalDateTime.now();
     return new Pedido((long) id, dataCriacao, Estado.EM_PREPARACAO, 0.0, 1, 2, null);
   }
 
   @BeforeAll
-  public static void inicializaPedidoComItems() {
+  static void inicializaPedidoComItems() {
     pedido = criaPedido(1, "Pedido com itens 1", "Pedido de teste");
     Set<ItemPedido> items = new HashSet<ItemPedido>(Arrays.asList(batata, tomate));
     pedido.setItems(items);
@@ -39,7 +39,7 @@ public class PedidoTest {
 
   @DisplayName("Pedido#equals deve ser falso com pedidos diferentes")
   @Test
-  public void equals_PedidosDiferentes_False() {
+  void equals_PedidosDiferentes_False() {
     Pedido pedido2 = criaPedido(2, "Cardápio 2", "Pedido diferente");
 
     assertFalse(pedido.equals(pedido2));

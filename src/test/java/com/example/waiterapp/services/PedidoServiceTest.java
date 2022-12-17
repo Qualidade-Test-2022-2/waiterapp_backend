@@ -49,7 +49,7 @@ class PedidoServiceTest {
   static ItemService itemService = mock(ItemService.class);
 
   @BeforeAll
-  public static void inicializaPedidoService() {
+  static void inicializaPedidoService() {
     pedidoService = new PedidoService(pedidoRepository, pagamentoRepository, itemPedidoRepository, itemService);
   }
 
@@ -57,14 +57,14 @@ class PedidoServiceTest {
   @DisplayName("PedidoService#listaPedidos")
   class ListaPedidosTest {
     @BeforeEach
-    public void mockPedidoRepositoryFindAll() {
+    void mockPedidoRepositoryFindAll() {
       ArrayList<Pedido> pedidos = new ArrayList<Pedido>(List.of(pedido1, pedido2));
       when(pedidoRepository.findAll()).thenReturn(pedidos);
     }
 
     @Test
     @DisplayName("should return a list of pedidos")
-    public void returnListOfPedidos() {
+    void returnListOfPedidos() {
       assertEquals(pedidoService.listaPedidos().get(0), pedido1);
       assertEquals(pedidoService.listaPedidos().get(1), pedido2);
     }
@@ -75,7 +75,7 @@ class PedidoServiceTest {
   class ListaPedidoByIdClienteTest {
     @Test
     @DisplayName("should return a pedido by id when it exists")
-    public void returnPedidoWhenPedidoExist() {
+    void returnPedidoWhenPedidoExist() {
       when(pedidoRepository.findallByIdCliente(anyLong())).thenReturn(List.of(pedido1, pedido2));
       assertEquals(pedidoService.listaPedidosByIdCliente(1L).get(0), pedido1);
       assertEquals(pedidoService.listaPedidosByIdCliente(1L).get(1), pedido2);
@@ -90,7 +90,7 @@ class PedidoServiceTest {
 
     @Test
     @DisplayName("should transform a PedidoDTO into a Pedido")
-    public void transformPedidoDTOIntoPedido() {
+    void transformPedidoDTOIntoPedido() {
       Pedido pedidoTransformado = pedidoService.transformarDTO(pedidoDTO);
 
       assertAll(
@@ -108,14 +108,14 @@ class PedidoServiceTest {
   class RetornaPedidoByIdTest {
     @Test
     @DisplayName("should return a pedido by id when it exists")
-    public void returnPedidoWhenPedidoExist() {
+    void returnPedidoWhenPedidoExist() {
       when(pedidoRepository.findById(anyLong())).thenReturn(java.util.Optional.of(pedido1));
       assertEquals(pedidoService.retornaPedidoById(1L), pedido1);
     }
 
     @Test
     @DisplayName("should return null when does not exists")
-    public void returnPedidoWhenPedidoDoesNotExist() {
+    void returnPedidoWhenPedidoDoesNotExist() {
       when(pedidoRepository.findById(anyLong())).thenReturn(Optional.empty());
       assertEquals(pedidoService.retornaPedidoById(1L), null);
     }
@@ -133,7 +133,7 @@ class PedidoServiceTest {
     Set<ItemPedido> items = new HashSet<>(List.of(itemPedido1, itemPedido2));
 
     @BeforeEach
-    public void mockPedidoRepositorySave() {
+    void mockPedidoRepositorySave() {
       when(pedido1.getCliente()).thenReturn(cliente1);
       when(pedido1.getItems()).thenReturn(items);
       when(pedidoRepository.save(any(Pedido.class))).thenReturn(pedido1);
@@ -146,7 +146,7 @@ class PedidoServiceTest {
 
     @Test
     @DisplayName("should insert a pedido")
-    public void insertPedido() {
+    void insertPedido() {
       assertEquals(pedidoService.inserePedido(pedido1), pedido1);
     }
   }
@@ -155,14 +155,14 @@ class PedidoServiceTest {
   @DisplayName("PedidoService#atualizaPedido")
   class AtualizaPedidoTest {
     @BeforeEach
-    public void mockPedidoRepositoryFindById() {
+    void mockPedidoRepositoryFindById() {
       when(pedidoRepository.findById(anyLong())).thenReturn(java.util.Optional.of(pedido1));
       when(pedidoRepository.save(pedido1)).thenReturn(pedido1);
     }
 
     @Test
     @DisplayName("should update a pedido")
-    public void updatePedido() {
+    void updatePedido() {
       assertEquals(pedidoService.atualizaPedido(pedido1), pedido1);
     }
   }
@@ -171,20 +171,20 @@ class PedidoServiceTest {
   @DisplayName("PedidoService#apagaPedido")
   class ApagaPedidoTest {
     @BeforeEach
-    public void mockPedidoRepositoryFindById() {
+    void mockPedidoRepositoryFindById() {
       when(pedidoRepository.findById(anyLong())).thenReturn(java.util.Optional.of(pedido1));
     }
 
     @Test
     @DisplayName("should delete a pedido")
-    public void deletePedido() {
+    void deletePedido() {
       doNothing().when(pedidoRepository).deleteById(anyLong());
       pedidoService.apagaPedido(1L);
     }
 
     @Test
     @DisplayName("should delete a pedido")
-    public void throwExceptionWhenCouldNotDeletePedido() {
+    void throwExceptionWhenCouldNotDeletePedido() {
       doThrow(DataIntegrityViolationException.class).when(pedidoRepository).deleteById(anyLong());
 
       assertThrows(DataIntegrityViolationException.class, () -> pedidoService.apagaPedido(1L));

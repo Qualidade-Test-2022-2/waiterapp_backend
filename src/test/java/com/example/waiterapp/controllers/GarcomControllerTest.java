@@ -27,7 +27,7 @@ import com.example.waiterapp.services.GarcomService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("GarcomController's tests")
-public class GarcomControllerTest {
+class GarcomControllerTest {
   static GarcomController garcomController;
 
   @Mock
@@ -36,7 +36,7 @@ public class GarcomControllerTest {
   static GarcomService garcomService = mock(GarcomService.class);
 
   @BeforeAll
-  public static void inicializaGarcomController() {
+  static void inicializaGarcomController() {
     garcomController = new GarcomController(garcomService);
   }
 
@@ -44,20 +44,20 @@ public class GarcomControllerTest {
   @DisplayName("GarcomController#listaGarcons")
   class ListaGarconsTest {
     @BeforeEach
-    public void mockGarcomServiceListaGarcons() {
+    void mockGarcomServiceListaGarcons() {
       List<Garcom> garcoms = new ArrayList<Garcom>(List.of(garcom1, garcom2));
       when(garcomService.listaGarcons()).thenReturn(garcoms);
     }
 
     @Test
     @DisplayName("should return 200")
-    public void statusCode200() {
+    void statusCode200() {
       assertEquals(garcomController.listaGarcons().getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return a list of garcoms")
-    public void returnListOfGarcons() {
+    void returnListOfGarcons() {
       List<Garcom> garcoms = garcomController.listaGarcons().getBody();
       if(garcoms != null) {
         assertAll(
@@ -96,21 +96,21 @@ public class GarcomControllerTest {
     @Test
     @Disabled("must be fixed")
     @DisplayName("should return 200 when garcom exists")
-    public void statusCode200_WhenGarconsExists() {
+    void statusCode200_WhenGarconsExists() {
       when(garcomService.retornaGarcomById(1L)).thenReturn(garcom1);
       assertEquals(garcomController.retornaGarcomById(1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return 404 when garcom doesn't exists")
-    public void statusCode404_WhenGarconsDoesntExists() {
+    void statusCode404_WhenGarconsDoesntExists() {
       when(garcomService.retornaGarcomById(1L)).thenThrow(ObjectNotFoundException.class);
       assertEquals(garcomController.retornaGarcomById(1L).getStatusCode().value(), 404);
     }
 
     @Test
     @DisplayName("should return the garcom when garcom exists")
-    public void returnGarcom_WhenGarconsExists() {
+    void returnGarcom_WhenGarconsExists() {
       when(garcomService.retornaGarcomById(any(long.class))).thenReturn(garcom1);
       assertEquals(garcomController.retornaGarcomById(1L).getBody(), garcom1);
     }
@@ -147,27 +147,27 @@ public class GarcomControllerTest {
     GarcomDTO garcomDTO = mock(GarcomDTO.class);
 
     @BeforeEach
-    public void mockGarcomServiceAtualizaGarcom() {
+    void mockGarcomServiceAtualizaGarcom() {
       when(garcomService.transformarDTO(any(GarcomDTO.class))).thenReturn(garcom1);
     }
 
     @Test
     @DisplayName("should return 200 when garcom exists")
-    public void statusCode200_WhenGarconsExists() {
+    void statusCode200_WhenGarconsExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenReturn(garcom1);
       assertEquals(garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value(), 200);
     }
 
     @Test
     @DisplayName("should return the garcom")
-    public void returnGarcom_WhenGarconsExists() {
+    void returnGarcom_WhenGarconsExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenReturn(garcom1);
       assertEquals(garcomController.atualizaGarcom(garcomDTO, 1L).getBody(), garcom1);
     }
 
     @Test
     @DisplayName("should return 404")
-    public void statusCode404_WhenGarconsDoesntExists() {
+    void statusCode404_WhenGarconsDoesntExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenThrow(ObjectNotFoundException.class);
       assertEquals(garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value(), 404);
     }
@@ -178,14 +178,14 @@ public class GarcomControllerTest {
   class DeleteGarcomTest {
     @Test
     @DisplayName("should return 204 when garcom exists")
-    public void statusCode204_WhenGarcomExists() {
+    void statusCode204_WhenGarcomExists() {
       doNothing().when(garcomService).apagaGarcom(any(long.class));
       assertEquals(garcomController.deleteGarcom(1L).getStatusCode().value(), 204);
     }
 
     @Test
     @DisplayName("should return 404 when garcom doesn't exists")
-    public void statusCode204_WhenGarcomDoesntExists() {
+    void statusCode204_WhenGarcomDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(garcomService).apagaGarcom(any(long.class));
       assertEquals(garcomController.deleteGarcom(1L).getStatusCode().value(), 404);
     }

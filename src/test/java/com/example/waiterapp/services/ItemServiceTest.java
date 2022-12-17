@@ -35,7 +35,7 @@ class ItemServiceTest {
   static ItemRepository itemRepository = mock(ItemRepository.class);
 
   @BeforeAll
-  public static void inicializaItemService() {
+  static void inicializaItemService() {
     itemService = new ItemService(itemRepository);
   }
 
@@ -43,14 +43,14 @@ class ItemServiceTest {
   @DisplayName("ItemService#listaItens")
   class ListaItensTest {
     @BeforeEach
-    public void mockItemRepositoryFindAll() {
+    void mockItemRepositoryFindAll() {
       ArrayList<Item> items = new ArrayList<Item>(List.of(item1, item2));
       when(itemRepository.findAll()).thenReturn(items);
     }
 
     @Test
     @DisplayName("should return a list of Itens")
-    public void returnListOfItens() {
+    void returnListOfItens() {
       assertEquals(itemService.listaItens().get(0), item1);
       assertEquals(itemService.listaItens().get(1), item2);
     }
@@ -64,7 +64,7 @@ class ItemServiceTest {
 
     @Test
     @DisplayName("should transform a ItemDTO into a Item")
-    public void transformItemDTOIntoItem() {
+    void transformItemDTOIntoItem() {
       Item itemTransformado = itemService.transformarDTO(itemDTO);
 
       assertAll(
@@ -82,14 +82,14 @@ class ItemServiceTest {
   class RetornaItemByIdTest {
     @Test
     @DisplayName("should return a item by id when it exists")
-    public void returnItemWhenItemExist() {
+    void returnItemWhenItemExist() {
       when(itemRepository.findById(anyLong())).thenReturn(java.util.Optional.of(item1));
       assertEquals(itemService.retornaItemById(1L), item1);
     }
 
     @Test
     @DisplayName("should throw an exception when the item does not exist")
-    public void throwExceptionWhenItemDoesNotExist() {
+    void throwExceptionWhenItemDoesNotExist() {
       when(itemRepository.findById(anyLong())).thenReturn(java.util.Optional.empty());
       assertThrows(ObjectNotFoundException.class, () -> itemService.retornaItemById(1L));
     }
@@ -100,7 +100,7 @@ class ItemServiceTest {
   class InsereItemTest {
     @Test
     @DisplayName("should insert a item")
-    public void insertItem() {
+    void insertItem() {
       when(itemRepository.save(item1)).thenReturn(item1);
       assertEquals(itemService.insereItem(item1), item1);
     }
@@ -110,14 +110,14 @@ class ItemServiceTest {
   @DisplayName("ItemService#atualizaItem")
   class AtualizaItemTest {
     @BeforeEach
-    public void mockItemRepositoryFindById() {
+    void mockItemRepositoryFindById() {
       when(itemRepository.findById(anyLong())).thenReturn(java.util.Optional.of(item1));
       when(itemRepository.save(item1)).thenReturn(item1);
     }
 
     @Test
     @DisplayName("should update a item")
-    public void updateItem() {
+    void updateItem() {
       assertEquals(itemService.atualizaItem(item1), item1);
     }
   }
@@ -126,20 +126,20 @@ class ItemServiceTest {
   @DisplayName("ItemService#apagaItem")
   class ApagaItemTest {
     @BeforeEach
-    public void mockItemRepositoryFindById() {
+    void mockItemRepositoryFindById() {
       when(itemRepository.findById(anyLong())).thenReturn(java.util.Optional.of(item1));
     }
 
     @Test
     @DisplayName("should delete a item")
-    public void deleteItem() {
+    void deleteItem() {
       doNothing().when(itemRepository).deleteById(anyLong());
       itemService.apagaItem(1L);
     }
 
     @Test
     @DisplayName("should delete a item")
-    public void throwExceptionWhenCouldNotDeleteItem() {
+    void throwExceptionWhenCouldNotDeleteItem() {
       doThrow(DataIntegrityViolationException.class).when(itemRepository).deleteById(anyLong());
 
       assertThrows(DataIntegrityViolationException.class, () -> itemService.apagaItem(1L));

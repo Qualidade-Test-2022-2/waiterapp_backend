@@ -6,17 +6,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ValidCpfValidatorTest's tests")
-public class ValidCpfValidatorTest {
+class ValidCpfValidatorTest {
   ValidCpfValidator validCpfValidator = new ValidCpfValidator();
 
   @Test
-  public void isValid_True_ValidCpf() {
+  void isValid_True_ValidCpf() {
     String cpf = "71827073063";
     assertTrue(validCpfValidator.isValid(cpf, null));
   }
 
   @Test
-  public void isValid_False_InvalidCpf() {
+  void isValid_False_InvalidCpf() {
     String cpf = "71827073063";
     assertTrue(validCpfValidator.isValid(cpf, null));
   }

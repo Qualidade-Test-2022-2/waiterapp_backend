@@ -35,7 +35,7 @@ class CardapioServiceTest {
   static CardapioRepository cardapioRepository = mock(CardapioRepository.class);
 
   @BeforeAll
-  public static void inicializaCardapioService() {
+  static void inicializaCardapioService() {
     cardapioService = new CardapioService(cardapioRepository);
   }
 
@@ -43,14 +43,14 @@ class CardapioServiceTest {
   @DisplayName("CardapioService#listaCardapios")
   class ListaCardapiosTest {
     @BeforeEach
-    public void mockCardapioRepositoryFindAll() {
+    void mockCardapioRepositoryFindAll() {
       ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>(List.of(cardapio1, cardapio2));
       when(cardapioRepository.findAll()).thenReturn(cardapios);
     }
 
     @Test
     @DisplayName("should return a list of cardapios")
-    public void returnListOfCardapios() {
+    void returnListOfCardapios() {
       assertEquals(cardapioService.listaCardapios().get(0), cardapio1);
       assertEquals(cardapioService.listaCardapios().get(1), cardapio2);
     }
@@ -63,7 +63,7 @@ class CardapioServiceTest {
     CardapioDTO cardapioDTO = mock(CardapioDTO.class);
 
     @BeforeEach
-    public void mockCardapioDTO() {
+    void mockCardapioDTO() {
       when(cardapioDTO.getId()).thenReturn(1L);
       when(cardapioDTO.getTitulo()).thenReturn("Cardapio 1");
       when(cardapioDTO.getDataCriacao()).thenReturn(LocalDateTime.of(2022, 01, 01, 00, 00));
@@ -73,7 +73,7 @@ class CardapioServiceTest {
 
     @Test
     @DisplayName("should transform a CardapioDTO into a Cardapio")
-    public void transformCardapioDTOIntoCardapio() {
+    void transformCardapioDTOIntoCardapio() {
       Cardapio cardapioTransformado = cardapioService.transformarDTO(cardapioDTO);
 
       assertEquals(cardapioTransformado.getId(), cardapioDTO.getId());
@@ -89,14 +89,14 @@ class CardapioServiceTest {
   class RetornaCardapioByIdTest {
     @Test
     @DisplayName("should return a cardapio by id when it exists")
-    public void returnCardapioWhenCardapioExist() {
+    void returnCardapioWhenCardapioExist() {
       when(cardapioRepository.findById(anyLong())).thenReturn(java.util.Optional.of(cardapio1));
       assertEquals(cardapioService.retornaCardapioById(1L), cardapio1);
     }
 
     @Test
     @DisplayName("should throw an exception when the cardapio does not exist")
-    public void throwExceptionWhenCardapioDoesNotExist() {
+    void throwExceptionWhenCardapioDoesNotExist() {
       when(cardapioRepository.findById(anyLong())).thenReturn(java.util.Optional.empty());
       assertThrows(ObjectNotFoundException.class, () -> cardapioService.retornaCardapioById(1L));
     }
@@ -107,7 +107,7 @@ class CardapioServiceTest {
   class InsereCardapioTest {
     @Test
     @DisplayName("should insert a cardapio")
-    public void insertCardapio() {
+    void insertCardapio() {
       when(cardapioRepository.save(cardapio1)).thenReturn(cardapio1);
       assertEquals(cardapioService.insereCardapio(cardapio1), cardapio1);
     }
@@ -117,14 +117,14 @@ class CardapioServiceTest {
   @DisplayName("CardapioService#atualizaCardapio")
   class AtualizaCardapioTest {
     @BeforeEach
-    public void mockCardapioRepositoryFindById() {
+    void mockCardapioRepositoryFindById() {
       when(cardapioRepository.findById(anyLong())).thenReturn(java.util.Optional.of(cardapio1));
       when(cardapioRepository.save(cardapio1)).thenReturn(cardapio1);
     }
 
     @Test
     @DisplayName("should update a cardapio")
-    public void updateCardapio() {
+    void updateCardapio() {
       assertEquals(cardapioService.atualizaCardapio(cardapio1), cardapio1);
     }
   }
@@ -133,20 +133,20 @@ class CardapioServiceTest {
   @DisplayName("CardapioService#apagaCardapio")
   class ApagaCardapioTest {
     @BeforeEach
-    public void mockCardapioRepositoryFindById() {
+    void mockCardapioRepositoryFindById() {
       when(cardapioRepository.findById(anyLong())).thenReturn(java.util.Optional.of(cardapio1));
     }
 
     @Test
     @DisplayName("should delete a cardapio")
-    public void deleteCardapio() {
+    void deleteCardapio() {
       doNothing().when(cardapioRepository).deleteById(anyLong());
       cardapioService.apagaCardapio(1L);
     }
 
     @Test
     @DisplayName("should delete a cardapio")
-    public void throwExceptionWhenCouldNotDeleteCardapio() {
+    void throwExceptionWhenCouldNotDeleteCardapio() {
       doThrow(DataIntegrityViolationException.class).when(cardapioRepository).deleteById(anyLong());
 
       assertThrows(DataIntegrityViolationException.class, () -> cardapioService.apagaCardapio(1L));
