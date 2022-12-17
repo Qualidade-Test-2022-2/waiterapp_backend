@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -96,13 +95,13 @@ public class ItemControllerTest {
 
   @Nested
   @DisplayName("ItemController#insereItem")
-  @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InsereItemTest {
     ItemDTO itemDTO;
 
     @BeforeEach
     public void mockItemServiceInsereItem() {
       itemDTO = mock(ItemDTO.class);
+      when(itemService.transformarDTO(any(ItemDTO.class))).thenReturn(item1);
       when(itemService.insereItem(any(Item.class))).thenReturn(item1);
     }
 
@@ -115,7 +114,7 @@ public class ItemControllerTest {
     @Test
     @DisplayName("should return the item")
     public void returnItem() {
-      assertEquals(itemController.insereItem(itemDTO).getBody(), item1);
+      assertEquals(item1, itemController.insereItem(itemDTO).getBody());
     }
   }
 
@@ -137,7 +136,6 @@ public class ItemControllerTest {
     }
 
     @Test
-    @Disabled("Disabled until item be returned on update")
     @DisplayName("should return the item")
     public void returnItem_WhenItensExists() {
       when(itemService.atualizaItem(any(Item.class))).thenReturn(item1);
