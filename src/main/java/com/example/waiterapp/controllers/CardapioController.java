@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -44,18 +42,10 @@ public class CardapioController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Void> insereCardapio(@Valid @RequestBody CardapioDTO cardapioDTO){
+    public ResponseEntity<Cardapio> insereCardapio(@Valid @RequestBody CardapioDTO cardapioDTO){
         Cardapio cardapio = cardapioService.transformarDTO(cardapioDTO);
         cardapio = cardapioService.insereCardapio(cardapio);
-
-        System.out.println(cardapio);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(cardapio.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(null).body(cardapio);
     }
 
     @PutMapping(value = "/{idCardapio}", consumes = "application/json")
