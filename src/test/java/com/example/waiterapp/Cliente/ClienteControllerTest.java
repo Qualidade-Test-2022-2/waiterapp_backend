@@ -15,11 +15,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Headers;
 import org.mockito.Mock;
 
 import com.example.waiterapp.models.Cliente;
@@ -27,9 +25,6 @@ import com.example.waiterapp.controllers.ClienteController;
 import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.services.ClienteService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import springfox.documentation.service.Header;
-
 @DisplayName("ClienteController's tests")
 public class ClienteControllerTest {
   static ClienteController clienteController;
@@ -37,6 +32,7 @@ public class ClienteControllerTest {
   @Mock
   Cliente cliente1 = mock(Cliente.class);
   Cliente cliente2 = mock(Cliente.class);
+  ClienteDTO clienteDTO = mock(ClienteDTO.class);
   static ClienteService clienteService = mock(ClienteService.class);
 
   @BeforeAll
@@ -95,6 +91,13 @@ public class ClienteControllerTest {
       when(clienteService.isClientAuthorized(any(Cliente.class), any(String.class), any(String.class))).thenReturn(false);
       assertEquals(404, clienteController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
     }
+
+    @Test
+    @DisplayName("should return 400 when cliente does not exists")
+    void statusCode404_WhenClienteDoesNotExists() {
+      when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(null);
+      assertEquals(404, clienteController.authenticate("MTYyMTM0ODc3NjA6cmFkYQ==").getStatusCode().value());
+    }
   }
 
   @Nested
@@ -118,11 +121,9 @@ public class ClienteControllerTest {
   @Nested
   @DisplayName("ClienteController#retornaClienteByCpf")
   class RetornaClienteByCpfTest {
-    @Mock
-    ClienteDTO clienteDTO = mock(ClienteDTO.class);
-
     @BeforeEach
     public void mockClienteServiceRetornaClienteByCpf() {
+      when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
     }
 
@@ -133,58 +134,53 @@ public class ClienteControllerTest {
     }
 
     @Test
-    @Disabled("Must be fixed")
     @DisplayName("should return the cliente when cliente exists")
     public void returnCliente() {
-      assertEquals(clienteController.retornaClienteByCpf(clienteDTO).getBody(), cliente1);
+      assertEquals(cliente1, clienteController.retornaClienteByCpf(clienteDTO).getBody());
     }
   }
 
   @Nested
   @DisplayName("ClienteController#insereCliente")
-  @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InsereClienteTest {
-    @Mock
-    ClienteDTO clienteDTO = mock(ClienteDTO.class);
-
     @BeforeEach
     public void mockClienteServiceInsereCliente() {
-      when(clienteService.insereCliente(any(Cliente.class), "123")).thenReturn(cliente1);
-      // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
+      when(clienteService.transformarDTO(any(ClienteDTO.class))).thenReturn(cliente1);
+      when(clienteService.insereCliente(any(Cliente.class))).thenReturn(cliente1);
     }
 
     @Test
-    @DisplayName("should return 200")
+    @DisplayName("should return status code 200 when already exists")
     public void statusCode200_WhenAlreadyExists() {
+      when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
-      assertEquals(clienteController.insereCliente(clienteDTO).getStatusCode().value(), 201);
+      assertEquals(200, clienteController.insereCliente(clienteDTO).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return cliente when already exists")
     public void returnCliente_WhenAlreadyExists() {
+      when(clienteDTO.getCpf()).thenReturn("12312312312");
       when(clienteService.retornaClienteByCpf(any(String.class))).thenReturn(cliente1);
-      assertEquals(clienteController.insereCliente(clienteDTO).getBody(), cliente1);
+      assertEquals(cliente1, clienteController.insereCliente(clienteDTO).getBody());
     }
 
     @Test
     @DisplayName("should return 201")
     public void statusCode201_WhenDoesNotExists() {
-      assertEquals(clienteController.insereCliente(clienteDTO).getStatusCode().value(), 201);
+      assertEquals(201, clienteController.insereCliente(clienteDTO).getStatusCode().value());
     }
 
     @Test
-    @DisplayName("should return cliente")
+    @DisplayName("should return created cliente")
     public void returnCliente_WhenDoesNotExists() {
-      assertEquals(clienteController.insereCliente(clienteDTO).getBody(), cliente1);
+      assertEquals(cliente1, clienteController.insereCliente(clienteDTO).getBody());
     }
   }
 
   @Nested
   @DisplayName("ClienteController#atualizaCliente")
   class AtualizaClienteTest {
-    ClienteDTO clienteDTO = mock(ClienteDTO.class);
-
     @BeforeEach
     public void mockClienteServiceAtualizaCliente() {
       when(clienteService.transformarDTO(any(ClienteDTO.class))).thenReturn(cliente1);
