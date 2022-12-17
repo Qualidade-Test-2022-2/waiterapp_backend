@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -69,6 +68,33 @@ public class PedidoControllerTest {
       }
     }
   }
+  @Nested
+  @DisplayName("PedidoController#retornaPedidoByIdCliente")
+  class RetornaPedidoByIdClienteTest {
+
+    @BeforeEach
+    public void mockPedidoServiceRetornaPedidoByIdCliente() {
+      when(pedidoService.listaPedidosByIdCliente(1L)).thenReturn(List.of(pedido1, pedido2));
+    }
+
+    @Test
+    @DisplayName("should return 200 when pedido exists")
+    public void statusCode200_WhenPedidosExists() {
+      assertEquals(pedidoController.retornaPedidoByIdCliente(1L).getStatusCode().value(), 200);
+    }
+
+    @Test
+    @DisplayName("should return the pedido when pedido exists")
+    public void returnPedido_WhenPedidosExists() {
+      List<Pedido> pedidos = pedidoController.retornaPedidoByIdCliente(1L).getBody();
+      if (pedidos != null) {
+        assertEquals(pedidos.get(0), pedido1);
+        assertEquals(pedidos.get(1), pedido2);
+      }else {
+        fail("Pedidos is null");
+      }
+    }
+  }
 
   @Nested
   @DisplayName("PedidoController#retornaPedidoById")
@@ -81,13 +107,6 @@ public class PedidoControllerTest {
     }
 
     @Test
-    @DisplayName("should return 404 when pedido doesn't exists")
-    public void statusCode404_WhenPedidosDoesntExists() {
-      when(pedidoService.retornaPedidoById(1L)).thenThrow(ObjectNotFoundException.class);
-      assertEquals(pedidoController.retornaPedidoById(1L).getStatusCode().value(), 404);
-    }
-
-    @Test
     @DisplayName("should return the pedido when pedido exists")
     public void returnPedido_WhenPedidosExists() {
       when(pedidoService.retornaPedidoById(any(long.class))).thenReturn(pedido1);
@@ -97,15 +116,14 @@ public class PedidoControllerTest {
 
   @Nested
   @DisplayName("PedidoController#inserePedido")
-  @Disabled("Disabled until ServletUriComponentsBuilder mock be possible")
   class InserePedidoTest {
     PedidoDTO pedidoDTO;
 
     @BeforeEach
     public void mockPedidoServiceInserePedido() {
       pedidoDTO = mock(PedidoDTO.class);
+      when(pedidoService.transformarDTO(any(PedidoDTO.class))).thenReturn(pedido1);
       when(pedidoService.inserePedido(any(Pedido.class))).thenReturn(pedido1);
-      // when(ServletUriComponentsBuilder.fromCurrentRequest()).thenReturn(mock(ServletUriComponentsBuilder.class));
     }
 
     @Test
@@ -139,18 +157,10 @@ public class PedidoControllerTest {
     }
 
     @Test
-    @Disabled("Disabled until pedido be returned on update")
     @DisplayName("should return the pedido")
     public void returnPedido_WhenPedidosExists() {
       when(pedidoService.atualizaPedido(any(Pedido.class))).thenReturn(pedido1);
       assertEquals(pedidoController.atualizaPedido(pedidoDTO, 1L).getBody(), pedido1);
-    }
-
-    @Test
-    @DisplayName("should return 404")
-    public void statusCode404_WhenPedidosDoesntExists() {
-      when(pedidoService.atualizaPedido(any(Pedido.class))).thenThrow(ObjectNotFoundException.class);
-      assertEquals(pedidoController.atualizaPedido(pedidoDTO, 1L).getStatusCode().value(), 404);
     }
   }
 

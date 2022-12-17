@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,7 +18,6 @@ import java.util.logging.Level;
 public class PedidoController {
 
     private PedidoService pedidoService;
-    private Logger logger = Logger.getLogger(PedidoController.class.getName());
 
     @Autowired
     public PedidoController(PedidoService pedidoService){
@@ -55,12 +50,11 @@ public class PedidoController {
     }
 
     @PutMapping(value = "/{idPedido}", consumes = "application/json")
-    public ResponseEntity<Void> atualizaPedido(@Valid @RequestBody PedidoDTO pedidoDTO, @PathVariable Long idPedido){
+    public ResponseEntity<Pedido> atualizaPedido(@Valid @RequestBody PedidoDTO pedidoDTO, @PathVariable Long idPedido){
         Pedido pedido = pedidoService.transformarDTO(pedidoDTO);
-        pedido.setId(idPedido);
         pedidoService.atualizaPedido(pedido);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(pedido);
     }
 
     @DeleteMapping(value = "/{idPedido}")
