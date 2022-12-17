@@ -1,4 +1,5 @@
 package com.example.waiterapp.dto;
+import com.example.waiterapp.interfaces.CpfValidatorContraint;
 import com.example.waiterapp.models.Pedido;
 
 import javax.validation.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class ClienteDTO implements Serializable {
     @NotBlank
     @Size(min=11, message="CPF must be at least {min} characters")
     @Size(max=11, message="CPF field must be maximium {max} characters")
+    @CpfValidatorContraint
     private String cpf;
 
     @NotBlank

@@ -1,5 +1,6 @@
 package com.example.waiterapp.dto;
 
+import com.example.waiterapp.interfaces.CpfValidatorContraint;
 import com.example.waiterapp.models.Garcom;
 import com.example.waiterapp.models.Pedido;
 
@@ -19,6 +20,8 @@ public class GarcomDTO implements Serializable {
     @Size(max=100, message="Name must be maximium {max} characters")
     private String nome;
     private LocalDateTime dataCriacao;
+
+    @CpfValidatorContraint
     private String cpf;
     private String password;
     private List<Pedido> pedidos = new ArrayList<>();
