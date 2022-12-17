@@ -1,4 +1,4 @@
-package com.example.waiterapp.Pedido;
+package com.example.waiterapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,9 +24,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.dto.PedidoDTO;
 import com.example.waiterapp.repositories.PedidoRepository;
-import com.example.waiterapp.services.PedidoService;
-import com.example.waiterapp.services.ClienteService;
-import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.repositories.ItemPedidoRepository;
 import com.example.waiterapp.repositories.PagamentoRepository;
 

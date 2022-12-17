@@ -1,5 +1,5 @@
 
-package com.example.waiterapp.Cardapio;
+package com.example.waiterapp.models;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
@@ -13,8 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.example.waiterapp.models.Cardapio;
-import com.example.waiterapp.models.Item;
 import org.mockito.Mock;
 
 @DisplayName("Testes dos métodos da classe Cardapio")

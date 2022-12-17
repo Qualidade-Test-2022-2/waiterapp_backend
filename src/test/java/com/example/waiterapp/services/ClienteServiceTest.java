@@ -1,4 +1,4 @@
-package com.example.waiterapp.Cliente;
+package com.example.waiterapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +29,6 @@ import com.example.waiterapp.dto.ClienteDTO;
 import com.example.waiterapp.models.Cliente;
 import com.example.waiterapp.models.Pedido;
 import com.example.waiterapp.repositories.ClienteRepository;
-import com.example.waiterapp.services.ClienteService;
 
 @DisplayName("ClienteService's tests")
 class ClienteServiceTest {

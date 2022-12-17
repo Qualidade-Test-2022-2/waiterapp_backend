@@ -1,4 +1,4 @@
-package com.example.waiterapp.Item;
+package com.example.waiterapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +23,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.example.waiterapp.models.Item;
 import com.example.waiterapp.dto.ItemDTO;
 import com.example.waiterapp.repositories.ItemRepository;
-import com.example.waiterapp.services.ItemService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("ItemService's tests")

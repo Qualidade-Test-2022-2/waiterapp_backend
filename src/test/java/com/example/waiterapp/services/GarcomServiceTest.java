@@ -1,4 +1,4 @@
-package com.example.waiterapp.Garcom;
+package com.example.waiterapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +25,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.example.waiterapp.models.Garcom;
 import com.example.waiterapp.dto.GarcomDTO;
 import com.example.waiterapp.repositories.GarcomRepository;
-import com.example.waiterapp.services.GarcomService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 
 @DisplayName("GarcomService's tests")

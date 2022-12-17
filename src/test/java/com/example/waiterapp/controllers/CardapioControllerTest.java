@@ -1,4 +1,4 @@
-package com.example.waiterapp.Cardapio;
+package com.example.waiterapp.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +21,6 @@ import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
 
 import com.example.waiterapp.models.Cardapio;
-import com.example.waiterapp.controllers.CardapioController;
 import com.example.waiterapp.dto.CardapioDTO;
 import com.example.waiterapp.services.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
