@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
@@ -95,7 +96,7 @@ class GarcomControllerTest {
     @Test
     @DisplayName("should return 200 when garcom exists")
     void statusCode200_WhenGarconsExists() {
-      when(garcomService.retornaGarcomById(1L)).thenReturn(garcom1);
+      when(garcomService.retornaGarcomById(anyLong())).thenReturn(garcom1);
       assertEquals(garcomController.retornaGarcomById(1L).getStatusCode().value(), 200);
     }
 
