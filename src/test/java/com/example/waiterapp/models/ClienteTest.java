@@ -1,7 +1,7 @@
 
 package com.example.waiterapp.models;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
@@ -28,6 +28,6 @@ class ClienteTest {
   void equals_ClientesDiferentes_False() {
     Cliente cliente2 = criaCliente(2, "Tais", "tais@email.com", "11111111111");
 
-    assertFalse(cliente.equals(cliente2));
+    assertNotEquals(cliente, cliente2);
   }
 }

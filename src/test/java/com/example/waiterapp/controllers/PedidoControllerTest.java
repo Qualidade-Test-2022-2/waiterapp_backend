@@ -50,7 +50,7 @@ class PedidoControllerTest {
     @Test
     @DisplayName("should return 200")
     void statusCode200() {
-      assertEquals(pedidoController.listaPedidos().getStatusCode().value(), 200);
+      assertEquals(200, pedidoController.listaPedidos().getStatusCode().value());
     }
 
     @Test
@@ -79,7 +79,7 @@ class PedidoControllerTest {
     @Test
     @DisplayName("should return 200 when pedido exists")
     void statusCode200_WhenPedidosExists() {
-      assertEquals(pedidoController.retornaPedidoByIdCliente(1L).getStatusCode().value(), 200);
+      assertEquals(200, pedidoController.retornaPedidoByIdCliente(1L).getStatusCode().value());
     }
 
     @Test
@@ -102,7 +102,7 @@ class PedidoControllerTest {
     @DisplayName("should return 200 when pedido exists")
     void statusCode200_WhenPedidosExists() {
       when(pedidoService.retornaPedidoById(1L)).thenReturn(pedido1);
-      assertEquals(pedidoController.retornaPedidoById(1L).getStatusCode().value(), 200);
+      assertEquals(200, pedidoController.retornaPedidoById(1L).getStatusCode().value());
     }
 
     @Test
@@ -128,7 +128,7 @@ class PedidoControllerTest {
     @Test
     @DisplayName("should return 201")
     void statusCode201() {
-      assertEquals(pedidoController.inserePedido(pedidoDTO).getStatusCode().value(), 201);
+      assertEquals(201, pedidoController.inserePedido(pedidoDTO).getStatusCode().value());
     }
 
     @Test
@@ -152,7 +152,7 @@ class PedidoControllerTest {
     @DisplayName("should return 200 when pedido exists")
     void statusCode200_WhenPedidosExists() {
       when(pedidoService.atualizaPedido(any(Pedido.class))).thenReturn(pedido1);
-      assertEquals(pedidoController.atualizaPedido(pedidoDTO, 1L).getStatusCode().value(), 200);
+      assertEquals(200, pedidoController.atualizaPedido(pedidoDTO, 1L).getStatusCode().value());
     }
 
     @Test
@@ -170,14 +170,14 @@ class PedidoControllerTest {
     @DisplayName("should return 204 when pedido exists")
     void statusCode204_WhenPedidoExists() {
       doNothing().when(pedidoService).apagaPedido(any(long.class));
-      assertEquals(pedidoController.deletePedido(1L).getStatusCode().value(), 204);
+      assertEquals(204, pedidoController.deletePedido(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when pedido doesn't exist")
     void statusCode204_WhenPedidoDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(pedidoService).apagaPedido(any(long.class));
-      assertEquals(pedidoController.deletePedido(1L).getStatusCode().value(), 404);
+      assertEquals(404, pedidoController.deletePedido(1L).getStatusCode().value());
     }
   }
 }

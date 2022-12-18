@@ -1,7 +1,7 @@
 
 package com.example.waiterapp.models;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
@@ -42,6 +42,6 @@ class PedidoTest {
   void equals_PedidosDiferentes_False() {
     Pedido pedido2 = criaPedido(2, "Cardápio 2", "Pedido diferente");
 
-    assertFalse(pedido.equals(pedido2));
+    assertNotEquals(pedido, pedido2);
   }
 }

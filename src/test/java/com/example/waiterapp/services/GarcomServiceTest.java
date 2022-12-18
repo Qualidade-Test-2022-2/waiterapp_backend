@@ -9,6 +9,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ class GarcomServiceTest {
     @DisplayName("should return a null when does not exists")
     void returnNullWhenGarcomDoesNotExists() {
       when(garcomRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
-      assertEquals(garcomService.retornaGarcomByCpf("11111111111"), null);
+      assertEquals(null, garcomService.retornaGarcomByCpf("11111111111"));
     }
   }
 
@@ -164,6 +165,7 @@ class GarcomServiceTest {
     void deleteGarcom() {
       doNothing().when(garcomRepository).deleteById(anyLong());
       garcomService.apagaGarcom(1L);
+      verify(garcomRepository).findById(1L);
     }
 
     @Test

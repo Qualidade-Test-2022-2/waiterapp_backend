@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -142,6 +143,7 @@ class CardapioServiceTest {
     void deleteCardapio() {
       doNothing().when(cardapioRepository).deleteById(anyLong());
       cardapioService.apagaCardapio(1L);
+      verify(cardapioRepository).findById(1L);
     }
 
     @Test

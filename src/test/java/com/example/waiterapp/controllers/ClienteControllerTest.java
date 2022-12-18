@@ -51,7 +51,7 @@ class ClienteControllerTest {
     @Test
     @DisplayName("should return 200")
     void statusCode200() {
-      assertEquals(clienteController.listaClientes().getStatusCode().value(), 200);
+      assertEquals(200, clienteController.listaClientes().getStatusCode().value());
     }
 
     @Test
@@ -106,7 +106,7 @@ class ClienteControllerTest {
     @DisplayName("should return 200 when cliente exists")
     void statusCode200_WhenClientesExists() {
       when(clienteService.retornaClienteById(1L)).thenReturn(cliente1);
-      assertEquals(clienteController.retornaClienteById(1L).getStatusCode().value(), 200);
+      assertEquals(200, clienteController.retornaClienteById(1L).getStatusCode().value());
     }
 
     @Test
@@ -129,7 +129,7 @@ class ClienteControllerTest {
     @Test
     @DisplayName("should return 200 when cliente exists")
     void statusCode200() {
-      assertEquals(clienteController.retornaClienteByCpf(clienteDTO).getStatusCode().value(), 200);
+      assertEquals(200, clienteController.retornaClienteByCpf(clienteDTO).getStatusCode().value());
     }
 
     @Test
@@ -189,7 +189,7 @@ class ClienteControllerTest {
     @DisplayName("should return 200 when cliente exists")
     void statusCode200_WhenClientesExists() {
       when(clienteService.atualizaCliente(any(Cliente.class))).thenReturn(cliente1);
-      assertEquals(clienteController.atualizaCliente(clienteDTO, 1L).getStatusCode().value(), 200);
+      assertEquals(200, clienteController.atualizaCliente(clienteDTO, 1L).getStatusCode().value());
     }
 
     @Test
@@ -207,14 +207,14 @@ class ClienteControllerTest {
     @DisplayName("should return 204 when cliente exists")
     void statusCode204_WhenClienteExists() {
       doNothing().when(clienteService).apagaCliente(any(long.class));
-      assertEquals(clienteController.deleteCliente(1L).getStatusCode().value(), 204);
+      assertEquals(204, clienteController.deleteCliente(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when cliente doesn't exists")
     void statusCode204_WhenClienteDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(clienteService).apagaCliente(any(long.class));
-      assertEquals(clienteController.deleteCliente(1L).getStatusCode().value(), 404);
+      assertEquals(404, clienteController.deleteCliente(1L).getStatusCode().value());
     }
   }
 }

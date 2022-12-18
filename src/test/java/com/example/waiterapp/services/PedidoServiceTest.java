@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -117,7 +114,7 @@ class PedidoServiceTest {
     @DisplayName("should return null when does not exists")
     void returnPedidoWhenPedidoDoesNotExist() {
       when(pedidoRepository.findById(anyLong())).thenReturn(Optional.empty());
-      assertEquals(pedidoService.retornaPedidoById(1L), null);
+      assertEquals(null, pedidoService.retornaPedidoById(1L));
     }
   }
 
@@ -180,6 +177,7 @@ class PedidoServiceTest {
     void deletePedido() {
       doNothing().when(pedidoRepository).deleteById(anyLong());
       pedidoService.apagaPedido(1L);
+      verify(pedidoRepository).findById(1L);
     }
 
     @Test

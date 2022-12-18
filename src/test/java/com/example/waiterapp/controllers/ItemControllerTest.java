@@ -50,7 +50,7 @@ class ItemControllerTest {
     @Test
     @DisplayName("should return 200")
     void statusCode200() {
-      assertEquals(itemController.listaItens().getStatusCode().value(), 200);
+      assertEquals(200, itemController.listaItens().getStatusCode().value());
     }
 
     @Test
@@ -75,14 +75,14 @@ class ItemControllerTest {
     @DisplayName("should return 200 when item exists")
     void statusCode200_WhenItensExists() {
       when(itemService.retornaItemById(1L)).thenReturn(item1);
-      assertEquals(itemController.retornaItemById(1L).getStatusCode().value(), 200);
+      assertEquals(200, itemController.retornaItemById(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when item doesn't exists")
     void statusCode404_WhenItensDoesntExists() {
       when(itemService.retornaItemById(1L)).thenThrow(ObjectNotFoundException.class);
-      assertEquals(itemController.retornaItemById(1L).getStatusCode().value(), 404);
+      assertEquals(404, itemController.retornaItemById(1L).getStatusCode().value());
     }
 
     @Test
@@ -108,7 +108,7 @@ class ItemControllerTest {
     @Test
     @DisplayName("should return 201")
     void statusCode201() {
-      assertEquals(itemController.insereItem(itemDTO).getStatusCode().value(), 201);
+      assertEquals(201, itemController.insereItem(itemDTO).getStatusCode().value());
     }
 
     @Test
@@ -132,7 +132,7 @@ class ItemControllerTest {
     @DisplayName("should return 200 when item exists")
     void statusCode200_WhenItensExists() {
       when(itemService.atualizaItem(any(Item.class))).thenReturn(item1);
-      assertEquals(itemController.atualizaItem(itemDTO, 1L).getStatusCode().value(), 200);
+      assertEquals(200, itemController.atualizaItem(itemDTO, 1L).getStatusCode().value());
     }
 
     @Test
@@ -146,7 +146,7 @@ class ItemControllerTest {
     @DisplayName("should return 404")
     void statusCode404_WhenItensDoesntExists() {
       when(itemService.atualizaItem(any(Item.class))).thenThrow(ObjectNotFoundException.class);
-      assertEquals(itemController.atualizaItem(itemDTO, 1L).getStatusCode().value(), 404);
+      assertEquals(404, itemController.atualizaItem(itemDTO, 1L).getStatusCode().value());
     }
   }
 
@@ -157,14 +157,14 @@ class ItemControllerTest {
     @DisplayName("should return 204 when item exists")
     void statusCode204_WhenItemExists() {
       doNothing().when(itemService).apagaItem(any(long.class));
-      assertEquals(itemController.deleteItem(1L).getStatusCode().value(), 204);
+      assertEquals(204, itemController.deleteItem(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when item doesn't exists")
     void statusCode204_WhenItemDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(itemService).apagaItem(any(long.class));
-      assertEquals(itemController.deleteItem(1L).getStatusCode().value(), 404);
+      assertEquals(404, itemController.deleteItem(1L).getStatusCode().value());
     }
   }
 }

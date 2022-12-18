@@ -52,7 +52,7 @@ class GarcomControllerTest {
     @Test
     @DisplayName("should return 200")
     void statusCode200() {
-      assertEquals(garcomController.listaGarcons().getStatusCode().value(), 200);
+      assertEquals(200, garcomController.listaGarcons().getStatusCode().value());
     }
 
     @Test
@@ -97,14 +97,14 @@ class GarcomControllerTest {
     @DisplayName("should return 200 when garcom exists")
     void statusCode200_WhenGarconsExists() {
       when(garcomService.retornaGarcomById(anyLong())).thenReturn(garcom1);
-      assertEquals(garcomController.retornaGarcomById(1L).getStatusCode().value(), 200);
+      assertEquals(200, garcomController.retornaGarcomById(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when garcom doesn't exists")
     void statusCode404_WhenGarconsDoesntExists() {
       when(garcomService.retornaGarcomById(1L)).thenThrow(ObjectNotFoundException.class);
-      assertEquals(garcomController.retornaGarcomById(1L).getStatusCode().value(), 404);
+      assertEquals(404, garcomController.retornaGarcomById(1L).getStatusCode().value());
     }
 
     @Test
@@ -154,7 +154,7 @@ class GarcomControllerTest {
     @DisplayName("should return 200 when garcom exists")
     void statusCode200_WhenGarconsExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenReturn(garcom1);
-      assertEquals(garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value(), 200);
+      assertEquals(200, garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value());
     }
 
     @Test
@@ -168,7 +168,7 @@ class GarcomControllerTest {
     @DisplayName("should return 404")
     void statusCode404_WhenGarconsDoesntExists() {
       when(garcomService.atualizaGarcom(any(Garcom.class))).thenThrow(ObjectNotFoundException.class);
-      assertEquals(garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value(), 404);
+      assertEquals(404, garcomController.atualizaGarcom(garcomDTO, 1L).getStatusCode().value());
     }
   }
 
@@ -179,14 +179,14 @@ class GarcomControllerTest {
     @DisplayName("should return 204 when garcom exists")
     void statusCode204_WhenGarcomExists() {
       doNothing().when(garcomService).apagaGarcom(any(long.class));
-      assertEquals(garcomController.deleteGarcom(1L).getStatusCode().value(), 204);
+      assertEquals(204, garcomController.deleteGarcom(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when garcom doesn't exists")
     void statusCode204_WhenGarcomDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(garcomService).apagaGarcom(any(long.class));
-      assertEquals(garcomController.deleteGarcom(1L).getStatusCode().value(), 404);
+      assertEquals(404, garcomController.deleteGarcom(1L).getStatusCode().value());
     }
   }
 }

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +136,7 @@ class ItemServiceTest {
     void deleteItem() {
       doNothing().when(itemRepository).deleteById(anyLong());
       itemService.apagaItem(1L);
+      verify(itemRepository).findById(1L);
     }
 
     @Test

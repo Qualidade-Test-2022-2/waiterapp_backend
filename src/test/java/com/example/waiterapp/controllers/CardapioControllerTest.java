@@ -50,7 +50,7 @@ class CardapioControllerTest {
     @Test
     @DisplayName("should return 200")
     void statusCode200() {
-      assertEquals(cardapioController.listaCardapios().getStatusCode().value(), 200);
+      assertEquals(200, cardapioController.listaCardapios().getStatusCode().value());
     }
 
     @Test
@@ -75,14 +75,14 @@ class CardapioControllerTest {
     @DisplayName("should return 200 when cardapio exists")
     void statusCode200_WhenCardapiosExists() {
       when(cardapioService.retornaCardapioById(1L)).thenReturn(cardapio1);
-      assertEquals(cardapioController.retornaCardapioById(1L).getStatusCode().value(), 200);
+      assertEquals(200, cardapioController.retornaCardapioById(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when cardapio doesn't exists")
     void statusCode404_WhenCardapiosDoesntExists() {
       when(cardapioService.retornaCardapioById(1L)).thenThrow(ObjectNotFoundException.class);
-      assertEquals(cardapioController.retornaCardapioById(1L).getStatusCode().value(), 404);
+      assertEquals(404, cardapioController.retornaCardapioById(1L).getStatusCode().value());
     }
 
     @Test
@@ -133,7 +133,7 @@ class CardapioControllerTest {
     @DisplayName("should return 200 when cardapio exists")
     void statusCode200_WhenCardapiosExists() {
       when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenReturn(cardapio1);
-      assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 200);
+      assertEquals(200, cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value());
     }
 
     @Test
@@ -147,7 +147,7 @@ class CardapioControllerTest {
     @DisplayName("should return 404")
     void statusCode404_WhenCardapiosDoesntExists() {
       when(cardapioService.atualizaCardapio(any(Cardapio.class))).thenThrow(ObjectNotFoundException.class);
-      assertEquals(cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value(), 404);
+      assertEquals(404, cardapioController.atualizaCardapio(cardapioDTO, 1L).getStatusCode().value());
     }
   }
 
@@ -158,14 +158,14 @@ class CardapioControllerTest {
     @DisplayName("should return 204 when cardapio exists")
     void statusCode204_WhenCardapioExists() {
       doNothing().when(cardapioService).apagaCardapio(any(long.class));
-      assertEquals(cardapioController.deleteCardapio(1L).getStatusCode().value(), 204);
+      assertEquals(204, cardapioController.deleteCardapio(1L).getStatusCode().value());
     }
 
     @Test
     @DisplayName("should return 404 when cardapio doesn't exists")
     void statusCode204_WhenCardapioDoesntExists() {
       doThrow(ObjectNotFoundException.class).when(cardapioService).apagaCardapio(any(long.class));
-      assertEquals(cardapioController.deleteCardapio(1L).getStatusCode().value(), 404);
+      assertEquals(404, cardapioController.deleteCardapio(1L).getStatusCode().value());
     }
   }
 }

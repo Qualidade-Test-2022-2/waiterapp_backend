@@ -15,7 +15,7 @@ public class ValidCpfValidator implements ConstraintValidator<CpfValidatorContra
     public boolean isValid(String cpf, ConstraintValidatorContext context) {
       CPFValidator cpfValidator = new CPFValidator();
       List<ValidationMessage> erros = cpfValidator.invalidMessagesFor(cpf);
-      if(erros.size() > 0) return false;
+      if(!erros.isEmpty()) return false;
       return true;
     }
 }

@@ -1,7 +1,7 @@
 
 package com.example.waiterapp.models;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
@@ -28,6 +28,6 @@ class GarcomTest {
   void equals_GarconsDiferentes_False() {
     Garcom garcom2 = criaGarcom(2, "Tais", "11111111111", "tais@email.com");
 
-    assertFalse(garcom.equals(garcom2));
+    assertNotEquals(garcom, garcom2);
   }
 }

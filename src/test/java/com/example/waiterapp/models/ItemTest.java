@@ -1,7 +1,7 @@
 
 package com.example.waiterapp.models;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
@@ -28,6 +28,6 @@ class ItemTest {
   void equals_ItensDiferentes_False() {
     Item item2 = criaItem(2, "Abacaxi", "Abacaxi fatiado", 5.00);
 
-    assertFalse(item.equals(item2));
+    assertNotEquals(item, item2);
   }
 }
