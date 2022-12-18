@@ -22,7 +22,6 @@ public class GarcomDTO implements Serializable {
     private String email;
     private LocalDateTime dataCriacao;
 
-    @CpfValidatorContraint
     private String cpf;
     private String password;
     private List<Pedido> pedidos = new ArrayList<>();

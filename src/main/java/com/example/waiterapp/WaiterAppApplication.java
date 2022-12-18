@@ -111,8 +111,8 @@ public class WaiterAppApplication implements CommandLineRunner {
         itemRepository.saveAll(Arrays.asList(bebida1, bebida2, prato1, prato2));
         cardapioRepository.saveAll(Arrays.asList(cardapio1, cardapio2));
 
-        Cliente cliente1 = new Cliente(null, "Fernando", "fernando@email.com", "12312312312", LocalDateTime.now());
-        Cliente cliente2 = new Cliente(null, "Juliana", "juliana@email.com", "00000000001", LocalDateTime.now());
+        Cliente cliente1 = new Cliente(null, "Fernando", "fernando@email.com", "51756949018", LocalDateTime.now());
+        Cliente cliente2 = new Cliente(null, "Juliana", "juliana@email.com", "96101710017", LocalDateTime.now());
         cliente1.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         cliente2.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 
