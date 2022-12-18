@@ -66,6 +66,7 @@ public class WaiterAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        final String password = "12345678";
 
         Cardapio cardapio1 = new Cardapio(null, LocalDateTime.now(), "Promoção do dia", "Os pratos mais pedidos com desconto");
         Cardapio cardapio2 = new Cardapio(null, LocalDateTime.now(), "Comida brasileira", "Coletanea com os pratos mais tipicos do brasil");
@@ -112,13 +113,13 @@ public class WaiterAppApplication implements CommandLineRunner {
 
         Cliente cliente1 = new Cliente(null, "Fernando", "fernando@email.com", "12312312312", LocalDateTime.now());
         Cliente cliente2 = new Cliente(null, "Juliana", "juliana@email.com", "00000000001", LocalDateTime.now());
-        cliente1.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
-        cliente2.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
+        cliente1.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+        cliente2.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 
         Garcom garcom1 = new Garcom(null, "João", LocalDateTime.now(), "11111111111", "joao@email.com");
         Garcom garcom2 = new Garcom(null, "Pedro", LocalDateTime.now(), "22222222222", "pedro@email.com");
-        garcom1.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
-        garcom2.setPassword(BCrypt.hashpw("12345678", BCrypt.gensalt()));
+        garcom1.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+        garcom2.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 
         Pedido pedido1 = new Pedido(null, LocalDateTime.now(), Estado.FECHADO, null, 10, 10, null);
         pedido1.setCliente(cliente1);
