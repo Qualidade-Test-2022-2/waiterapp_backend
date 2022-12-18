@@ -7,6 +7,7 @@ import com.example.waiterapp.dto.GarcomDTO;
 import com.example.waiterapp.services.GarcomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,7 +66,8 @@ public class GarcomController {
     public ResponseEntity<Garcom> insereGarcom(@Valid @RequestBody GarcomDTO garcomDTO){
         Garcom garcom = garcomService.transformarDTO(garcomDTO);
         garcom = garcomService.insereGarcom(garcom);
-        return ResponseEntity.created(null).body(garcom);
+        return ResponseEntity.status(HttpStatus.CREATED).body(garcom);
+
     }
 
     @PutMapping(value = "/{idGarcom}", consumes = "application/json")

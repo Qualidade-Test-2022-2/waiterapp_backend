@@ -6,6 +6,7 @@ import com.example.waiterapp.dto.PedidoDTO;
 import com.example.waiterapp.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,7 @@ public class PedidoController {
     public ResponseEntity<Pedido> inserePedido(@Valid @RequestBody PedidoDTO pedidoDTO){
         Pedido pedido = pedidoService.transformarDTO(pedidoDTO);
         pedido = pedidoService.inserePedido(pedido);
-        return ResponseEntity.created(null).body(pedido);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
     }
 
     @PutMapping(value = "/{idPedido}", consumes = "application/json")

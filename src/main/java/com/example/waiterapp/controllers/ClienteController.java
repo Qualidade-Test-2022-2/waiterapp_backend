@@ -7,6 +7,7 @@ import com.example.waiterapp.config.RequireAuthentication;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +57,7 @@ public class ClienteController {
         cliente = clienteService.transformarDTO(clienteDTO);
         cliente = clienteService.insereCliente(cliente);
 
-        return ResponseEntity.created(null).body(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
 
     @RequireAuthentication

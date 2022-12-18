@@ -6,6 +6,7 @@ import com.example.waiterapp.services.CardapioService;
 import com.example.waiterapp.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class CardapioController {
     public ResponseEntity<Cardapio> insereCardapio(@Valid @RequestBody CardapioDTO cardapioDTO){
         Cardapio cardapio = cardapioService.transformarDTO(cardapioDTO);
         cardapio = cardapioService.insereCardapio(cardapio);
-        return ResponseEntity.created(null).body(cardapio);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cardapio);
     }
 
     @PutMapping(value = "/{idCardapio}", consumes = "application/json")

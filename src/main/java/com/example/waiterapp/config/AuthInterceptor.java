@@ -45,10 +45,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
             if(isNull(cliente)) {
                 Garcom garcom = garcomService.retornaGarcomByCpf(cpf);
-                if (garcom != null) {
-                    if (garcomService.isWaiterAuthorized(garcom, password, cpf)) {
-                        return true;
-                    }
+                if (garcom != null && garcomService.isWaiterAuthorized(garcom, password, cpf)) {
+                    return true;
                 }
 
                 response.setStatus(403);

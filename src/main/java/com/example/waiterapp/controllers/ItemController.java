@@ -6,6 +6,7 @@ import com.example.waiterapp.dto.ItemDTO;
 import com.example.waiterapp.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class ItemController {
     public ResponseEntity<Item> insereItem(@Valid @RequestBody ItemDTO itemDTO){
         Item item = itemService.transformarDTO(itemDTO);
         item = itemService.insereItem(item);
-        return ResponseEntity.created(null).body(item);
+        return ResponseEntity.status(HttpStatus.CREATED).body(item);
     }
 
     @PutMapping(value = "/{idItem}", consumes = "application/json")
