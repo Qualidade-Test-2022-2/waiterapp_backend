@@ -42,10 +42,11 @@ class PedidoServiceTest {
   static PagamentoRepository pagamentoRepository = mock(PagamentoRepository.class);
   static ItemPedidoRepository itemPedidoRepository = mock(ItemPedidoRepository.class);
   static ItemService itemService = mock(ItemService.class);
+  static ClienteService clienteService = mock(ClienteService.class);
 
   @BeforeAll
   static void inicializaPedidoService() {
-    pedidoService = new PedidoService(pedidoRepository, pagamentoRepository, itemPedidoRepository, itemService);
+    pedidoService = new PedidoService(pedidoRepository, pagamentoRepository, itemPedidoRepository, itemService, clienteService);
   }
 
   @Nested
