@@ -72,7 +72,7 @@ describe("Funcionalidade de cadastro (Garçom)", () => {
         .should('have.css', 'cursor','not-allowed');
   })
 
-  it("Deve ser possíve para o novo garçom realizar o logout", () => {
+  it("Deve ser possível para o novo garçom realizar o logout", () => {
     cy.get("div[class$='logout-button']").click();
     cy.contains("Faça login");
   })
@@ -85,7 +85,7 @@ describe("Funcionalidade de Login (Cliente)", () => {
   })
   it("Deve ser possível para o Cliente realizar o login", () => {
     cy.get("div[id$='login']").click();
-    cy.get("input[type='text']").type("12312312312");
+    cy.get("input[type='text']").type("51756949018");
     cy.get("input[type='password']").type("12345678");
     cy.get("input[type='submit']").click();
   })
@@ -131,14 +131,14 @@ describe("Funcionalidade de cadastro (Cliente)", () => {
     cy.get("html > body > div > div > div > form > fieldset:nth-of-type(4) > a").click();
     cy.get("html > body > div > div > div > form > fieldset:nth-of-type(1) > input").type("José Paulo");
     cy.get("html > body > div > div > div > form > fieldset:nth-of-type(2) > input").type("yag@gmail.com");
-    cy.get("html > body > div > div > div > form > fieldset:nth-of-type(3) > input").type("90291916007");
+    cy.get("html > body > div > div > div > form > fieldset:nth-of-type(3) > input").type("64617975055");
     cy.get("input[type='password']").type("12345678");
     cy.get("input[type='submit']").click();
     cy.contains("Faça login");
   })
   it("Deve ser possível para o NOVO Cliente realizar o login", () => {
     cy.get("div[id$='login']").click();
-    cy.get("input[type='text']").type("90291916007");
+    cy.get("input[type='text']").type("64617975055");
     cy.get("input[type='password']").type("12345678");
     cy.get("input[type='submit']").click();
     cy.contains("Menus");
